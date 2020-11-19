@@ -1,10 +1,7 @@
 @import '../../style-guide/index';
+
 .popup {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+  display: contents;
 
   &__header {
     width: auto;
@@ -27,6 +24,7 @@
     z-index: 100;
     background-color: map-get($monochrome, white);
     transform: translate(-50%, -50%);
+
     &--type {
       &--info {
         box-shadow: 0 -4px 0 0 map-get($primary-blue, default), 0 0 24px 0 rgba(0, 0, 0, 0.15);
