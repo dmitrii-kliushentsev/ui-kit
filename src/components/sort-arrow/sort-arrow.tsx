@@ -15,6 +15,6 @@ const sortArrow = BEM(styles);
 
 export const SortArrow = sortArrow(({ className, order }: Props) => (
   <div className={className}>
-    <Icons.SortingArrow rotate={order === 'ASC' ? 180 : 0} />
+    <Icons.SortingArrow rotate={order === 'DESC' ? 0 : 180} />
   </div>
 ));
