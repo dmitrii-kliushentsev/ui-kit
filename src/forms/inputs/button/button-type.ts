@@ -3,4 +3,5 @@ export interface ButtonType {
   size?: 'large' | 'small';
   disabled?: boolean;
   'data-test'?: string;
+  loading?: boolean;
 }

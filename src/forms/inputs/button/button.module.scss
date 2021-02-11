@@ -60,4 +60,41 @@
     opacity: 0.25;
     pointer-events: none;
   }
+
+  &--loading {
+    animation: rainbow 1s linear infinite;
+    background: linear-gradient(
+      105deg,
+      #fda085,
+      #fda085,
+      #f6d365,
+      #f6d365,
+      #1de840,
+      #1ddde8,
+      #1ddde8,
+      #dd00f3,
+      #dd00f3,
+      #ff00ff,
+      /* Repeat your base gradient stops */ #fda085,
+      #fda085,
+      #f6d365,
+      #f6d365,
+      #1de840,
+      #1ddde8,
+      #1ddde8,
+      #dd00f3,
+      #dd00f3,
+      #ff00ff,
+      /* Repeat your first gradient stop */ #fda085
+    );
+    background-size: 200% 200%;
+  }
+}
+@keyframes rainbow {
+  0% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
 }

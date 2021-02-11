@@ -7,7 +7,7 @@ import { NegativeActionButton } from './negative-action-button';
 
 storiesOf('Button', module).add('types of buttons', () => (
   <div style={{ display: 'grid', gridGap: '20px', placeItems: 'center' }}>
-    <Button type="primary" size="large">
+    <Button type="primary" size="large" loading>
       Primary large
     </Button>
     <Button type="primary" size="small">
