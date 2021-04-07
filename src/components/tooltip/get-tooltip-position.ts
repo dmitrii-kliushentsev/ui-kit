@@ -1,3 +1,5 @@
+export type TooltipPosition = 'top-center' | 'top-right' | 'top-left' | 'left' | 'right';
+
 interface Anchors {
   childrenTopPosition: number;
   childrenLeftPosition: number;
@@ -8,7 +10,7 @@ interface Anchors {
   offset: number;
 }
 
-export const getTooltipPosition = (tooltipPositionType: string, anchors: Anchors) => {
+export const getTooltipPosition = (tooltipPositionType: TooltipPosition, anchors: Anchors) => {
   const isInvalidAnchors = Object.values(anchors).some(anchor => Number.isNaN(anchor) || anchor === Infinity);
   const {
     childrenTopPosition, childrenLeftPosition, childrenWidth, childrenHeight, messageHeight, messageWidth, offset,

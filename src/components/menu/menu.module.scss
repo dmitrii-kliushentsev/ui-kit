@@ -4,7 +4,6 @@
   color: map-get($monochrome, black);
 
   &__menu-icon {
-    position: relative;
     display: flex;
     align-items: center;
     max-height: 32px;
@@ -22,8 +21,7 @@
   }
 
   &__items-list {
-    position: absolute;
-    right: calc(50% - 22px);
+    position: relative;
     display: flex;
     flex-direction: column;
     padding: 8px 0;

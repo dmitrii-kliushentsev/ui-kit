@@ -3,7 +3,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 
 import { useHover } from '../../hooks';
 import { Portal } from '../portal';
-import { getTooltipPosition } from './get-tooltip-position';
+import { getTooltipPosition, TooltipPosition } from './get-tooltip-position';
 
 import styles from './tooltip.module.scss';
 
@@ -11,7 +11,7 @@ export interface Props {
   className?: string;
   message: React.ReactNode;
   children: React.ReactNode | React.ReactNode[];
-  position?: 'top-center' | 'top-right' | 'top-left' | 'left' | 'right';
+  position?: TooltipPosition;
 }
 
 const tooltip = BEM(styles);
