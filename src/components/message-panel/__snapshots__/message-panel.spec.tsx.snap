@@ -2,31 +2,24 @@
 
 exports[`MessagePanel should match snapshot with the default text 1`] = `
 <div
-  className="message-panel"
+  className="sc-eCImvq cjVVLd"
 >
   <div
-    className="message-panel__content message-panel__content--type--success"
-    data-modifiers="type--SUCCESS"
+    className="sc-jRQAMF QcFmV"
     type="SUCCESS"
   >
     <div
-      className="panel panel--align--space-between"
-      data-test=""
-      onClick={[Function]}
+      className="sc-gsDJrp auDOD"
     >
       <div
-        className="panel"
-        data-test=""
-        onClick={[Function]}
+        className="sc-gsDJrp hxhahs"
       >
         <div
-          className="message-panel__message-icon-wrapper message-panel__message-icon-wrapper--type--success"
-          data-modifiers="type--SUCCESS"
+          className="sc-gKckTs jMOPlD"
           type="SUCCESS"
         >
           <svg
-            className="generic-icon"
-            data-modifiers=""
+            className="sc-bdvvaa eCjinC"
             fillRule="evenodd"
             height={16}
             style={
@@ -44,15 +37,13 @@ exports[`MessagePanel should match snapshot with the default text 1`] = `
           </svg>
         </div>
         <div
-          className="message-panel__message-text"
-          data-modifiers=""
+          className="sc-dkPtyc fJXMLW"
         >
           Succes! Congratz!
         </div>
       </div>
       <svg
-        className="generic-icon message-panel__close-icon"
-        data-modifiers=""
+        className="sc-bdvvaa eCjinC sc-hKwCoD iissVB"
         fillRule="evenodd"
         height={16}
         onClick={[Function]}

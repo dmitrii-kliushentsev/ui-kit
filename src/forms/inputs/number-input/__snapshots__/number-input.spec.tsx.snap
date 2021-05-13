@@ -2,43 +2,34 @@
 
 exports[`NumberInput Should render a NumberInput 1`] = `
 Array [
-  <div
-    className="number-input-wrapper"
-  >
+  <div>
     <div
-      className="input-wrapper number-input-wrapper__input-element"
+      className="sc-gsDJrp dyjsIK"
     >
       <input
-        className="input-wrapper__input-element"
+        className="sc-bdvvaa bVyvoG"
         placeholder="enter text..."
-        value=""
       />
     </div>
   </div>,
-  <div
-    className="number-input-wrapper"
-  >
+  <div>
     <div
-      className="input-wrapper input-wrapper--disabled number-input-wrapper__input-element"
+      className="sc-gsDJrp dyjsIK"
     >
       <input
-        className="input-wrapper__input-element input-wrapper__input-element--disabled"
+        className="sc-bdvvaa etdfVC"
         disabled={true}
         placeholder="enter text..."
-        value=""
       />
     </div>
   </div>,
-  <div
-    className="number-input-wrapper"
-  >
+  <div>
     <div
-      className="input-wrapper input-wrapper--error number-input-wrapper__input-element"
+      className="sc-gsDJrp dyjsIK"
     >
       <input
-        className="input-wrapper__input-element input-wrapper__input-element--error"
+        className="sc-bdvvaa bjAYhT"
         placeholder="enter text..."
-        value=""
       />
     </div>
   </div>,
