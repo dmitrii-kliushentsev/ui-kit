@@ -1,6 +1,4 @@
-import { BEM } from '@redneckz/react-bem-helper';
-
-import { path } from './path';
+import { BEM, div } from '@redneckz/react-bem-helper';
 
 import styles from './striped-progress-bar.module.scss';
 
@@ -10,26 +8,11 @@ interface Props {
   type: 'primary' | 'secondary';
 }
 
-const stripedProgressBar = BEM(styles);
+export const StripedProgressBar = ({ className, value = '', type }: Props) => {
+  console.log(value);
+  return (
+    <Bar className={className} type={type} style={{ width: value }} data-test={`striped-progress-bar:${type}`} />
+  );
+};
 
-export const StripedProgressBar = stripedProgressBar(({ className, value, type }: Props) => (
-  <svg className={className} type={type} width={value} height="12" data-test={`striped-progress-bar:${type}`}>
-    <path
-      d={path}
-      fillRule="nonzero"
-      stroke="none"
-      strokeWidth="1"
-      strokeDashoffset={value}
-    >
-      <animateTransform
-        attributeName="transform"
-        type="translate"
-        from="-100"
-        to="1"
-        additive="replace"
-        dur="5"
-        repeatCount="indefinite"
-      />
-    </path>
-  </svg>
-));
+const Bar = BEM(styles)(div({ type: 'primary', style: {}, 'data-test': '' } as {type: 'primary' | 'secondary'}));

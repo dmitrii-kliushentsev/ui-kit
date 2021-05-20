@@ -4,16 +4,47 @@
   display: block;
   border-radius: 0 4px 4px 0;
   transition: width 2000ms ease-in;
+  height: 12px;
+  animation: 1s linear infinite;
+  animation-name: progress-bar-stripes;
+  background-size: 10px 10px;
 
   &--type {
     &--primary {
-      fill: map-get($data-visualization, scope-cover);
+      background-image: linear-gradient(
+        135deg,
+        transparent 10%,
+        map-get($data-visualization, scope-cover) 10%,
+        map-get($data-visualization, scope-cover) 50%,
+        transparent 50%,
+        transparent 60%,
+        map-get($data-visualization, scope-cover) 60%,
+        map-get($data-visualization, scope-cover)
+      );
     }
 
     &--secondary {
-      fill: map-get($data-visualization, overlapping);
+      background-image: linear-gradient(
+        135deg,
+        transparent 10%,
+        map-get($data-visualization, overlapping) 10%,
+        map-get($data-visualization, overlapping) 50%,
+        transparent 50%,
+        transparent 60%,
+        map-get($data-visualization, overlapping) 60%,
+        map-get($data-visualization, overlapping)
+      );
       transform: rotate(180deg);
       border-radius: 4px 0 0 4px;
     }
+  }
+}
+
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 30px 0;
   }
 }
