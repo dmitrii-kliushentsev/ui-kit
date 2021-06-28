@@ -19,6 +19,7 @@ export {
   SortArrow,
   Legend,
   Status,
+  Stub,
 } from './components';
 export {
   FormGroup, Inputs, Button, LinkButton, CancelButton, NegativeActionButton, Checkbox, Fields,
