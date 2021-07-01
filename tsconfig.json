@@ -16,13 +16,12 @@
     "jsx": "react-jsx",
     "declaration": true
   },
-  "include": ["src", "declaration.d.ts"],
+  "include": ["src", "types"],
   "exclude": [
     "node_modules",
     "**/*.stories.tsx",
     "**/*.spec.ts",
     "**/*.spec.tsx",
-    "**/*.d.ts",
     "./.storybook"
   ]
 }

@@ -1,3 +1,4 @@
+import React from 'react';
 import { GenericIcon } from './generic-icon';
 import { IconProps } from './generic-icon-types';
 
