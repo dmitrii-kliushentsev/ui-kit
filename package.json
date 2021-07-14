@@ -7,7 +7,9 @@
   "description": "Drill4J UI components library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Drill4J/ui-kit"
@@ -50,8 +52,8 @@
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.17",
-    "@babel/preset-env": "^7.12.17",
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.12.17",
     "@rollup/plugin-commonjs": "^15.1.0",
@@ -67,11 +69,12 @@
     "@types/styled-components": "^5.1.7",
     "autoprefixer": "^10.2.4",
     "awesome-typescript-loader": "^5.2.1",
-    "babel-loader": "7.1.5",
+    "babel-loader": "^8.2.2",
     "babel-plugin-macros": "^3.1.0",
     "babel-plugin-styled-components": "^1.12.0",
     "babel-plugin-twin": "^1.0.2",
     "gh-pages": "^3.2.3",
+    "mini-css-extract-plugin": "^2.1.0",
     "postcss": "^8.2.7",
     "rollup": "^2.51.2",
     "rollup-plugin-babel": "^4.4.0",
@@ -81,10 +84,11 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.30.0",
+    "styled-components": "^5.2.3",
     "ts-node": "^10.0.0",
     "tslib": "^2.3.0",
     "twin.macro": "^2.5.0",
-    "styled-components": "^5.2.3",
-    "typescript": "^4.3.5"
+    "typescript": "^4.3.5",
+    "webpack-cli": "^4.7.2"
   }
 }
