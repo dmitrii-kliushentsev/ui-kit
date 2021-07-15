@@ -187,6 +187,10 @@ module.exports = {
       ...theme('colors'),
       'current-color': 'currentColor',
     }),
+    backgroundColor: theme => ({
+      ...theme('colors'),
+      'current-color': 'currentColor',
+    })
   },
   variants: {
     extend: {},
