@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "npm run storybook",
-    "build": "rollup -c && tsc",
+    "build": "rollup -c",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "deploy": "gh-pages -d storybook-static"

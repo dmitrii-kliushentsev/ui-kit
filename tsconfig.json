@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "emitDeclarationOnly": true,
+    "outDir": "dist",
     "baseUrl": "src",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -11,7 +13,6 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "noEmit": true,
     "allowJs": true,
     "jsx": "react-jsx",
     "declaration": true

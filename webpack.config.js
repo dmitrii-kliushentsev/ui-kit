@@ -13,7 +13,9 @@ module.exports = (env, options) => {
     resolve: {
       extensions: ['*', '.js', '.jsx', '.tsx', '.ts'],
     },
-    target: 'node',
+    node: {
+      fs: 'empty'
+    },
     module: {
       rules: [
         {
@@ -22,7 +24,7 @@ module.exports = (env, options) => {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-react', '@babel/preset-typescript', '@babel/preset-env'],
-              plugins: ['babel-plugin-styled-components'],
+              plugins: [  'babel-plugin-styled-components', 'babel-plugin-twin', 'babel-plugin-macros'],
             },
           },
           exclude: /(node_modules|bower_components)/,
