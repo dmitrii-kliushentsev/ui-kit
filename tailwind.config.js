@@ -1,5 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+/* eslint-disable max-len */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const plugin = require('tailwindcss/plugin');
+const svgToDataUri = require('mini-svg-data-uri');
 
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
@@ -18,6 +20,15 @@ module.exports = {
       none: 'none',
     },
     extend: {
+      backgroundImage: theme => ({
+        'check-mark': `url("${svgToDataUri(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16" version="1.1">
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <path d="M1.727 6.821a.935.935 0 0 0 .001 1.376l4.294 4.106a.99.99 0 0 0 1.417-.04l6.872-7.358c.38-.408.36-1.045-.038-1.417l.204.19a.982.982 0 0 0-1.398.057L7.42 9.932a.968.968 0 0 1-1.394.038L2.973 7.03a1.068 1.068 0 0 0-1.45-.018l.204-.19z" fill="#FFF" />
+            </g>
+          </svg>
+      `)}")`,
+      }),
       animation: {
         blinker: 'blinker 1.5s infinite cubic-bezier(1, 0, 0, 1)',
       },
@@ -197,7 +208,7 @@ module.exports = {
     extend: {
       backgroundColor: ['checked'],
       borderColor: ['checked'],
-    }
+    },
   },
   plugins: [
     plugin(({ addUtilities }) => {

@@ -1,15 +1,16 @@
-import { styled } from 'twin.macro';
-// @ts-ignore
-import icon from "./check.svg";
-
 export const Checkbox = ({ field, ...props }: any) => (
-    <Input type="checkbox" className={`
+  <input
+    type="checkbox"
+    tw="
       appearance-none
-      min-w-16px
-      min-h-16px
-      bg-monochrome-white 
+      min-w-[16px]
+      max-w-[16px]
+      min-h-[16px]
+      max-h-[16px]
+      bg-check-mark
+      bg-monochrome-white
       bg-no-repeat
-      border rounded 
+      border rounded
       border-current-color
       cursor-pointer
       hover:border-current-color
@@ -17,14 +18,8 @@ export const Checkbox = ({ field, ...props }: any) => (
       checked:hover:opacity-[0.8]
       checked:border-transparent
       disabled:opacity-50
-      `}
-      {...field}
-      {...props} 
-    />
+    "
+    {...field}
+    {...props}
+  />
 );
-const Input = styled.input`
-  background-image: url(${icon});
-  &:checked + svg {
-    display: block;
-  }
-`;
