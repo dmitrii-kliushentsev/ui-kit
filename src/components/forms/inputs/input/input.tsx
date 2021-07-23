@@ -6,7 +6,7 @@ export const Input = ({ className, ...restProps }: InputProps) => (
   <div className={className}>
     <InputElement {...restProps} />
   </div>
-)
+);
 
 const InputElement = styled.input<{disabled?: boolean; error?: boolean}>`
   ${tw`font-regular`};

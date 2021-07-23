@@ -61,17 +61,17 @@ export const fieldWrapper = (Input: React.ElementType) => ({
   });
 
   return (
-    <>
+    <div>
       <Input
         {...field}
         placeholder={placeholder}
         error={meta.error}
         disabled={disabled}
         ref={node}
-        onBlur={(event: React.ChangeEvent<HTMLInputElement>) => helper.setValue(event.target.value.trimEnd())}
+        onBlur={(event: React.ChangeEvent<HTMLInputElement>) => { field.onBlur(event); helper.setValue(event.target.value.trimEnd()); }}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleOnChange(helper.setValue, event)}
       />
       <ErrorMessage component={ErrorMessageWrapper} name={name} />
-    </>
+    </div>
   );
 };
