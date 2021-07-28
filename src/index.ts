@@ -4,7 +4,6 @@ export {
   Popup,
   Spinner,
   Tooltip,
-  TabsPanel,
   Tab,
   Menu,
   MessagePanel,

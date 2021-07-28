@@ -3,7 +3,7 @@ export { Icons } from './icon';
 export { Popup } from './popup';
 export { Spinner } from './spinner';
 export { Tooltip } from './tooltip';
-export { TabsPanel, Tab } from './tabs';
+export { Tab } from './tab';
 export { Menu } from './menu';
 export { MessagePanel } from './message-panel';
 export { Modal } from './modal';
