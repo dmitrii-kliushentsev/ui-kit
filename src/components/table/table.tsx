@@ -53,7 +53,7 @@ export const Table = withErrorBoundary(({
   stub = null,
   isDefaulToggleSortBy,
   columnsDependency = [],
-  withSearch
+  withSearch,
 }: Props) => {
   const {
     page,
@@ -101,12 +101,16 @@ export const Table = withErrorBoundary(({
         const active = column.id === sort?.field;
         return (
           <TableElements.TH
+            key={`table-th-${column.id}`}
             style={{ textAlign: column.textAlign || 'right', width: column.width }}
             data-test={`table-th-${column.id}`}
           >
             <div tw="relative inline-flex items-center">
               {!column.notSortable && (
-                <TableElements.SortArrow active={column.isSorted || active} onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => toggleSort(event, column)}>
+                <TableElements.SortArrow
+                  active={column.isSorted || active}
+                  onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => toggleSort(event, column)}
+                >
                   <Icons.SortingArrow rotate={column.isSortedDesc || (active && sort?.order === 'DESC') ? 0 : 180} />
                 </TableElements.SortArrow>
               )}
@@ -118,8 +122,8 @@ export const Table = withErrorBoundary(({
     </tr>
   );
 
-  const TableRow = ({ rowProps, row }: any) => (
-    <TableElements.TR {...rowProps} isExpanded={row.isExpanded}>
+  const TableRow = ({ row }: any) => (
+    <TableElements.TR isExpanded={row.isExpanded}>
       {row.cells.map((cell: any) => (
         <td
           {...cell.getCellProps()}
@@ -154,12 +158,13 @@ export const Table = withErrorBoundary(({
             searchResult={filteredCount}
             placeholder={placeholder}
           />
-      </div>)}
+        </div>
+      )}
+      <div tw="absolute top-0" ref={ref} />
       <table {...getTableProps()} tw="table-fixed relative w-full text-14 leading-16 text-monochrome-black">
-        <div tw="absolute top-0" ref={ref}/>
-        <TableElements.TableHead >
+        <TableElements.TableHead>
           {headerGroups.map((headerGroup: any) => (
-            <TableHeaderRow headerGroup={headerGroup} />
+            <TableHeaderRow {...headerGroup.getHeaderGroupProps()} headerGroup={headerGroup} />
           ))}
         </TableElements.TableHead>
         <tbody {...getTableBodyProps()}>
@@ -168,8 +173,8 @@ export const Table = withErrorBoundary(({
             prepareRow(row);
             const rowProps = row.getRowProps();
             return (
-              <React.Fragment key={row.original.id}>
-                <TableRow row={row} rowProps={rowProps} />
+              <React.Fragment key={row.id}>
+                <TableRow {...rowProps} row={row} />
                 {row.isExpanded && renderRowSubComponent?.({ row, rowProps })}
               </React.Fragment>
             );
@@ -182,21 +187,21 @@ export const Table = withErrorBoundary(({
         gotoPage={(value: number) => {
           gotoPage(value);
           ref && ref.current && ref.current.scrollIntoView({
-            behavior: "smooth"
-          })
+            behavior: 'smooth',
+          });
         }}
         pageIndex={pageIndex}
         previousPage={() => {
           previousPage();
           ref && ref.current && ref.current.scrollIntoView({
-            behavior: "smooth"
-          })
+            behavior: 'smooth',
+          });
         }}
         nextPage={() => {
           nextPage();
           ref && ref.current && ref.current.scrollIntoView({
-            behavior: "smooth"
-          })
+            behavior: 'smooth',
+          });
         }}
         canPreviousPage={canPreviousPage}
         canNextPage={canNextPage}

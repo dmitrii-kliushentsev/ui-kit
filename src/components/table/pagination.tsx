@@ -51,7 +51,7 @@ export const Pagination = ({
   const MAX_LEFT_OR_RIGHT_PAGES_COUNT = MAX_PAGES_WITH_ELLIPSIS_COUNT - FIRST_OR_LAST_NUMBER_WITH_ELIPSIS;
 
   const renderPage = (page: number) => (
-    <PaginationElements.PageNumber active={page === currentPage} onClick={() => gotoPageByPageNumber(page)}>
+    <PaginationElements.PageNumber key={page} active={page === currentPage} onClick={() => gotoPageByPageNumber(page)}>
       {page}
     </PaginationElements.PageNumber>
   );
@@ -100,28 +100,28 @@ export const Pagination = ({
     : renderPagesWithEllipsis());
 
   const gotoPageByPageNumber = (pageNumber: number) => gotoPage(pageNumber - 1);
-  
 
   const Tooltip = () => {
     const [number, setNumber] = useState<number | undefined>();
-  
+
     const handleSubmit = (evt: any) => {
       evt.preventDefault();
       typeof number === 'number' && gotoPage(number ? number - 1 : 0);
-    }
-    return(
-    <div tw="relative w-34 p-4 rounded-lg bg-monochrome-white shadow text-14 leading-32">
-      <div tw="flex items-center gap-x-2">
-        Go to
-        <form onSubmit={handleSubmit}>
-          <Inputs.Number type="number" value={number} onChange={e => setNumber(e.target.value ? Number(e.target.value) : undefined)} />
-        </form>
+    };
+    return (
+      <div tw="relative w-34 p-4 rounded-lg bg-monochrome-white shadow text-14 leading-32">
+        <div tw="flex items-center gap-x-2">
+          Go to
+          <form onSubmit={handleSubmit}>
+            <Inputs.Number type="number" value={number} onChange={e => setNumber(e.target.value ? Number(e.target.value) : undefined)} />
+          </form>
+        </div>
+        <div tw="absolute left-14 w-6 overflow-hidden inline-block" style={{ top: '72px' }}>
+          <div tw=" h-3 w-11 bg-monochrome-white transform origin-top-left" style={{ transform: 'rotate(-45deg)' }} />
+        </div>
       </div>
-      <div tw="absolute left-14 w-6 overflow-hidden inline-block" style={{ top: '72px' }}>
-        <div tw=" h-3 w-11 bg-monochrome-white transform origin-top-left" style={{ transform: 'rotate(-45deg)' }} />
-      </div>
-    </div>
-  )};
+    );
+  };
 
   const Ellipsis = () => {
     const [popupIsOpen, setPopupIsOpen] = useState(false);
