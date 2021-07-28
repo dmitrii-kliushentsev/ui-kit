@@ -1,14 +1,6 @@
 import tw, { styled, css } from 'twin.macro';
 
-import { InputProps } from '../input-types';
-
-export const Input = ({ className, ...restProps }: InputProps) => (
-  <div className={className}>
-    <InputElement {...restProps} />
-  </div>
-);
-
-const InputElement = styled.input<{disabled?: boolean; error?: boolean}>`
+export const Input = styled.input<{disabled?: boolean; error?: boolean}>`
   ${tw`font-regular`};
   box-sizing: border-box;
   width: 100%;

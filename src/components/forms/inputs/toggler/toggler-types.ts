@@ -1,6 +1,6 @@
 export interface TogglerProps {
   label?: React.ReactNode;
-  value?: string | boolean;
+  value?: any;
   disabled?: boolean;
   onChange?: () => void;
 }
