@@ -27,7 +27,6 @@ const InputElement = styled(Input)`
   &:focus {
     border: 0;
     border-bottom: solid 1px #e3e6e8;
-    outline: none;
   }
 `;
 
