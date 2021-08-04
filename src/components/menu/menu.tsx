@@ -4,9 +4,9 @@ import {
 import { nanoid } from 'nanoid';
 import tw, { styled, css } from 'twin.macro';
 
+import { spacesToDashes } from '@drill4j/common-utils';
 import { Icons } from '../icon';
 import { useClickOutside } from '../../hooks';
-import { spacesToDashes } from '@drill4j/common-utils';
 
 interface MenuItemType {
   label: string;
@@ -126,7 +126,7 @@ export const Menu = ({
             ref={menuRef}
             style={{
               position: 'absolute',
-              zIndex: 30,
+              zIndex: 50,
               top: position === 'bottom' ? 'calc(100% + 12px)' : undefined,
               bottom: position === 'top' ? 'calc(100% + 12px)' : undefined,
               right: 'calc(50% - 22px)',
