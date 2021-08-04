@@ -15,7 +15,7 @@
  */
 import { useEffect, useRef } from 'react';
 import {
-  ErrorMessage, useField, FieldInputProps, FormikProps,
+  ErrorMessage, useField, FieldInputProps, FormikProps, useFormikContext,
 } from 'formik';
 import tw, { styled } from 'twin.macro';
 import { convertToSingleSpaces } from '@drill4j/common-utils';
@@ -41,7 +41,7 @@ interface Props {
 export const fieldWrapper = (Input: React.ElementType) => ({
   field: { name }, form, placeholder, disabled, normalize = (value) => value,
 }: Props) => {
-  const [field, meta, helper] = useField(name);
+  const [field, meta, helper] = useField(name) || {};
   const { isSubmitting, dirty, handleSubmit } = form || {};
 
   const handleOnChange = usePreserveCaretPosition((value) => normalize(convertToSingleSpaces(value)));
