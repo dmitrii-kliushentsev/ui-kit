@@ -1,4 +1,6 @@
-export { Inputs, Button, LinkButton, CancelButton, NegativeActionButton, Checkbox } from './inputs';
+export {
+  Inputs, Button, LinkButton, CancelButton, NegativeActionButton, Checkbox, Dropdown,
+} from './inputs';
 export { FormGroup } from './form-group';
 export { Fields } from './fields';
 export {

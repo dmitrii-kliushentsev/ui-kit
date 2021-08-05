@@ -39,4 +39,5 @@ export {
   requiredArray,
   sizeLimit,
   toError,
+  Dropdown,
 } from './forms';
