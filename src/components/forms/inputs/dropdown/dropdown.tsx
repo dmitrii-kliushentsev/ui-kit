@@ -14,12 +14,12 @@ interface Item {
 
 interface Props {
   items: Item[];
-  action: (value: Value) => void;
-  selectedValue: Value;
+  onChange: (value: Value) => void;
+  value: Value;
 }
 
 export const Dropdown = ({
-  items, action, selectedValue,
+  items, onChange, value,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState<Position>('bottom');
@@ -48,11 +48,11 @@ export const Dropdown = ({
     );
     dropdownRef.current && observer.observe(dropdownRef.current);
   }, [isOpen]);
-
+  const selectedValue = items.find((item) => value === item.value);
   return (
     <div ref={node} tw="relative flex items-center gap-x-1 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
       <span ref={labelNode} data-test="dropdown:selected-value">
-        {selectedValue}
+        {selectedValue && selectedValue.label}
       </span>
       <Icons.Expander width={8} height={8} rotate={isOpen ? -90 : 90} />
       {isOpen && (
@@ -62,15 +62,15 @@ export const Dropdown = ({
             top: position === 'bottom' ? `${dropdownLabelHeight + listMargin}px` : `-${dropdownHeight + listMargin}px`,
           }}
         >
-          {items.map(({ label, value }) => (
+          {items.map(({ label, value: itemValue }) => (
             <div
               tw="flex items-center pl-2 pr-8 text-monochrome-black text-14 leading-32 hover:bg-monochrome-light-tint"
               data-test="dropdown:item"
-              onClick={(() => action(value))}
+              onClick={(() => onChange(itemValue))}
               key={value}
             >
-              {selectedValue === value && <Icons.Check width={14} height={10} viewBox="0 0 14 10" tw="absolute text-blue-default" />}
-              <span tw="ml-6">{label}</span>
+              {itemValue === value && <Icons.Check width={14} height={10} viewBox="0 0 14 10" tw="absolute text-blue-default" />}
+              <span tw="ml-6 whitespace-nowrap">{label}</span>
             </div>
           ))}
         </ScrollContainer>
@@ -80,7 +80,7 @@ export const Dropdown = ({
 };
 
 const ScrollContainer = styled.div`
-  ${tw`overflow-auto absolute shadow bg-monochrome-white max-h-56`};
+  ${tw`overflow-auto absolute shadow bg-monochrome-white max-h-56 z-50`};
     &::-webkit-scrollbar {
       ${tw`w-1 rounded bg-monochrome-light-tint`}
     };
