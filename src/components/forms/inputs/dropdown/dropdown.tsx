@@ -70,7 +70,7 @@ export const Dropdown = ({
               key={value}
             >
               {itemValue === value && <Icons.Check width={14} height={10} viewBox="0 0 14 10" tw="absolute text-blue-default" />}
-              <span tw="ml-6 whitespace-nowrap">{label}</span>
+              <span tw="ml-6 whitespace-nowrap font-regular">{label}</span>
             </div>
           ))}
         </ScrollContainer>
