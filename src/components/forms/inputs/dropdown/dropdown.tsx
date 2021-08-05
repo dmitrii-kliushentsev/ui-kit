@@ -51,7 +51,7 @@ export const Dropdown = ({
 
   return (
     <div ref={node} tw="relative flex items-center gap-x-1 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
-      <span ref={labelNode} tw="text-14 leading-20 font-bold" data-test="dropdown:selected-value">
+      <span ref={labelNode} data-test="dropdown:selected-value">
         {selectedValue}
       </span>
       <Icons.Expander width={8} height={8} rotate={isOpen ? -90 : 90} />
@@ -64,7 +64,7 @@ export const Dropdown = ({
         >
           {items.map(({ label, value }) => (
             <div
-              tw="flex items-center pl-2 pr-8 text-14 leading-32 hover:bg-monochrome-light-tint"
+              tw="flex items-center pl-2 pr-8 text-monochrome-black text-14 leading-32 hover:bg-monochrome-light-tint"
               data-test="dropdown:item"
               onClick={(() => action(value))}
               key={value}
