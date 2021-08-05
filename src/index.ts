@@ -44,6 +44,7 @@ export {
   setSort,
   useTableActionsState,
   useTableActionsDispatch,
+  Dropdown,
 } from './components';
 export {
   useClickOutside, useElementSize, useHover, usePreserveCaretPosition, useRunAfterUpdate,
