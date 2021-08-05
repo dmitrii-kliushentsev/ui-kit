@@ -1,10 +1,10 @@
+import { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import { Dropdown } from './dropdown';
-import { useState } from 'react';
 
 storiesOf('Dropdown', module).add('Dropdown', () => {
-  const [value, setValue] = useState('first item')
+  const [value, setValue] = useState('first item');
   return (
     <Dropdown
       items={[
@@ -14,11 +14,11 @@ storiesOf('Dropdown', module).add('Dropdown', () => {
         },
         {
           value: 'second item',
-          label: 'second item adasd asd asda sda sda sd',
+          label: 'second item with custom label',
         },
       ]}
       selectedValue={value}
-      action={(value) => setValue(value)}
+      action={(newValue) => setValue(newValue)}
     />
   );
 });

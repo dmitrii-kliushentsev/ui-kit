@@ -1,24 +1,26 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import 'twin.macro'
+import tw, { styled } from 'twin.macro';
 
 import { Icons } from '../../../icon/index';
 import { useClickOutside } from '../../../../hooks';
 
 type Position = 'top' | 'bottom';
+type Value = string | number;
 
 interface Item {
-  value: string;
+  value: Value;
   label: React.ReactNode;
 }
 
 interface Props {
   items: Item[];
-  action: (value: string) => void;
-  selectedValue: string;
-  className?: string;
+  action: (value: Value) => void;
+  selectedValue: Value;
 }
 
-export const Dropdown = ({ items, action, selectedValue, className }: Props) => {
+export const Dropdown = ({
+  items, action, selectedValue,
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState<Position>('bottom');
   const node = useClickOutside(() => setIsOpen(false));
@@ -32,7 +34,8 @@ export const Dropdown = ({ items, action, selectedValue, className }: Props) => 
   const listMargin = 4;
 
   useLayoutEffect(() => {
-    menuTopPosition && menuTopPosition + dropdownLabelHeight + dropdownHeight < document.documentElement.clientHeight ? setPosition('bottom'): setPosition("top")
+    menuTopPosition && menuTopPosition + dropdownLabelHeight + dropdownHeight < document.documentElement.clientHeight
+      ? setPosition('bottom') : setPosition('top');
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -44,26 +47,45 @@ export const Dropdown = ({ items, action, selectedValue, className }: Props) => 
       },
     );
     dropdownRef.current && observer.observe(dropdownRef.current);
-  }, [isOpen])
+  }, [isOpen]);
 
   return (
-    <div ref={node} tw="relative flex items-center gap-x-1 text-monochrome-black cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
-        <span ref={labelNode} tw="text-14 leading-20 font-bold" className={className} data-test="dropdown:selected-value">
-          {selectedValue}
-        </span>
+    <div ref={node} tw="relative flex items-center gap-x-1 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+      <span ref={labelNode} tw="text-14 leading-20 font-bold" data-test="dropdown:selected-value">
+        {selectedValue}
+      </span>
       <Icons.Expander width={8} height={8} rotate={isOpen ? -90 : 90} />
       {isOpen && (
-        <div ref={dropdownRef} tw="absolute shadow bg-monochrome-white" style={{
-          top: position === 'bottom' ? `${dropdownLabelHeight + listMargin}px` : `-${dropdownHeight + listMargin}px`
-        }}>
-          {items.map(({label, value}) => (
-            <div tw="flex items-center pl-2 pr-8 text-14 leading-32 hover:bg-monochrome-light-tint" data-test="dropdown:item" onClick={(() => action(value))} key={value}>
+        <ScrollContainer
+          ref={dropdownRef}
+          style={{
+            top: position === 'bottom' ? `${dropdownLabelHeight + listMargin}px` : `-${dropdownHeight + listMargin}px`,
+          }}
+        >
+          {items.map(({ label, value }) => (
+            <div
+              tw="flex items-center pl-2 pr-8 text-14 leading-32 hover:bg-monochrome-light-tint"
+              data-test="dropdown:item"
+              onClick={(() => action(value))}
+              key={value}
+            >
               {selectedValue === value && <Icons.Check width={14} height={10} viewBox="0 0 14 10" tw="absolute text-blue-default" />}
               <span tw="ml-6">{label}</span>
             </div>
           ))}
-        </div>
+        </ScrollContainer>
       )}
     </div>
   );
 };
+
+const ScrollContainer = styled.div`
+  ${tw`overflow-auto absolute shadow bg-monochrome-white max-h-56`};
+    &::-webkit-scrollbar {
+      ${tw`w-1 rounded bg-monochrome-light-tint`}
+    };
+
+    &::-webkit-scrollbar-thumb {
+      ${tw`w-1 rounded bg-monochrome-medium-tint`}
+    };
+`;
