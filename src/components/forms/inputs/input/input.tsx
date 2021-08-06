@@ -1,6 +1,6 @@
 import tw, { styled, css } from 'twin.macro';
 
-export const Input = styled.input<{disabled?: boolean; error?: boolean}>`
+export const Input = styled.input<{disabled?: boolean; error?: boolean; touched?: boolean}>`
   ${tw`font-regular`};
   box-sizing: border-box;
   width: 100%;
@@ -22,12 +22,14 @@ export const Input = styled.input<{disabled?: boolean; error?: boolean}>`
     color: #687481;
   }
 
-  ${({ disabled, error }) => [
+  ${({
+    disabled, error, touched,
+  }) => [
     disabled && css`
       border: 1px solid #e3e6e8;
       background-color: #f8f9fb;
       color: #687481;
     `,
-    error && css`border: 1px solid #ee0000`,
+    touched && error && css`border: 1px solid #ee0000`,
   ]}
 `;

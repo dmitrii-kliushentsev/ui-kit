@@ -66,6 +66,7 @@ export const fieldWrapper = (Input: React.ElementType) => ({
         {...field}
         placeholder={placeholder}
         error={meta.error}
+        touched={meta.touched}
         disabled={disabled}
         ref={node}
         onBlur={(event: React.ChangeEvent<HTMLInputElement>) => { field.onBlur(event); helper.setValue(event.target.value.trimEnd()); }}
