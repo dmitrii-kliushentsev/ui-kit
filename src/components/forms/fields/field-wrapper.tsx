@@ -15,7 +15,7 @@
  */
 import { useEffect, useRef } from 'react';
 import {
-  ErrorMessage, useField, FieldInputProps, FormikProps, useFormikContext,
+  ErrorMessage, useField, FieldInputProps, FormikProps,
 } from 'formik';
 import tw, { styled } from 'twin.macro';
 import { convertToSingleSpaces } from '@drill4j/common-utils';
