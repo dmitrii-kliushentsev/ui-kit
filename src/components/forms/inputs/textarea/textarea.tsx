@@ -9,8 +9,8 @@ export const Textarea = styled.textarea<TextareaProps>`
   `}
   padding: 10px 16px;
 
-  ${({ disabled, error }) => [
+  ${({ disabled, error, touched }) => [
     disabled && tw`border-monochrome-medium-tint bg-monochrome-light-tint text-monochrome-default`,
-    error && tw`border-red-default`,
+    touched && error && tw`border-red-default`,
   ]}
 `;
