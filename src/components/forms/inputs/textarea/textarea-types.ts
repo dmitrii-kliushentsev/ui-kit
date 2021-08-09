@@ -4,4 +4,5 @@ export interface TextareaProps {
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   disabled?: boolean;
   error?: boolean;
+  touched?: boolean;
 }

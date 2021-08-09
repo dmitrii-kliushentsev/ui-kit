@@ -109,15 +109,15 @@ export const Pagination = ({
       typeof number === 'number' && gotoPage(number ? number - 1 : 0);
     };
     return (
-      <div tw="relative w-34 p-4 rounded-lg bg-monochrome-white shadow text-14 leading-32">
-        <div tw="flex items-center gap-x-2">
+      <div tw="relative w-34 p-4 rounded-lg bg-monochrome-white shadow text-14 leading-32 z-50">
+        <div tw="flex items-center gap-x-2 whitespace-nowrap">
           Go to
           <form onSubmit={handleSubmit}>
             <Inputs.Number type="number" value={number} onChange={e => setNumber(e.target.value ? Number(e.target.value) : undefined)} />
           </form>
         </div>
         <div tw="absolute left-14 w-6 overflow-hidden inline-block" style={{ top: '72px' }}>
-          <div tw=" h-3 w-11 bg-monochrome-white transform origin-top-left" style={{ transform: 'rotate(-45deg)' }} />
+          <div tw="h-3 w-11 bg-monochrome-white transform origin-top-left" style={{ transform: 'rotate(-45deg)' }} />
         </div>
       </div>
     );
@@ -154,7 +154,7 @@ export const Pagination = ({
         </span>
         <Icons.Expander width={8} height={8} rotate={isOpen ? 90 : -90} />
         {isOpen && (
-          <div tw="absolute -top-24 shadow bg-monochrome-white">
+          <div tw="absolute -top-24 shadow bg-monochrome-white z-50">
             {values.map((value) => (
               <div tw="flex items-center px-2 w-36 hover:bg-monochrome-light-tint" onClick={(() => action(value))}>
                 {initialValue === value && <Icons.Check width={14} height={10} viewBox="0 0 14 10" tw="absolute text-blue-default" />}
