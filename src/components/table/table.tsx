@@ -160,8 +160,8 @@ export const Table = withErrorBoundary(({
           />
         </div>
       )}
-      <div tw="absolute top-0" ref={ref} />
       <table {...getTableProps()} tw="table-fixed relative w-full text-14 leading-16 text-monochrome-black">
+        <div tw="absolute top-0" ref={ref} />
         <TableElements.TableHead>
           {headerGroups.map((headerGroup: any) => (
             <TableHeaderRow {...headerGroup.getHeaderGroupProps()} headerGroup={headerGroup} />
@@ -173,10 +173,10 @@ export const Table = withErrorBoundary(({
             prepareRow(row);
             const rowProps = row.getRowProps();
             return (
-              <React.Fragment key={row.id}>
+              <>
                 <TableRow {...rowProps} row={row} />
                 {row.isExpanded && renderRowSubComponent?.({ row, rowProps })}
-              </React.Fragment>
+              </>
             );
           })}
         </tbody>
