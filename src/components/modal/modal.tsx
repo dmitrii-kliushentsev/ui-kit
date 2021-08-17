@@ -1,6 +1,4 @@
-import tw, { styled, css } from 'twin.macro';
-import { useEffect, useRef, useState } from 'react';
-
+import tw, { styled } from 'twin.macro';
 import { Icons } from '../icon';
 import { Portal } from '../portal';
 
@@ -11,71 +9,33 @@ interface Props {
   isDisableFadeClick?: boolean;
 }
 
-export const Modal = ({ children, onToggle, isOpen, isDisableFadeClick }: Props) => {
-  const borderRef = useRef(null);
-  const [modalWidth, setModalWidth] = useState(400);
+export const Modal = ({
+  children, onToggle, isOpen, isDisableFadeClick,
+}: Props) => (
+  <Portal rootElementId="modal">
+    {isOpen && (
+      <div tw="flex w-full h-full justify-center items-center">
+        <ModalCard>
+          <CloseButton tw="cursor-pointer" onClick={() => onToggle(!isOpen)} data-test="modal:close-button">
+            <Icons.Close />
+          </CloseButton>
+          {children}
+        </ModalCard>
+        <Fade onClick={() => !isDisableFadeClick && onToggle(!isOpen)} />
+      </div>
+    )}
+  </Portal>
+);
 
-  function handleMouseMove({ clientX }: MouseEvent) {
-    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
-    setModalWidth(window.innerWidth - clientX - scrollBarWidth);
-  }
-  function handleMouseDown({ target }: MouseEvent) {
-    if (target === borderRef.current) {
-      document.addEventListener('mousemove', handleMouseMove);
-    }
-  }
-  function handleMouseUp() {
-    document.removeEventListener('mousemove', handleMouseMove);
-  }
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp);
-    return () => {
-      document.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, []);
-  return (
-    <Portal rootElementId="modal">
-      {isOpen && (
-        <div tw="flex w-full h-full justify-center items-center">
-          <ModalCard width={modalWidth}>
-            <CloseButton tw="cursor-pointer" onClick={() => onToggle(!isOpen)} data-test="modal:close-button">
-              <Icons.Close />
-            </CloseButton>
-            <BorderLeft ref={borderRef} />
-            {children}
-          </ModalCard>
-          <Fade onClick={() => !isDisableFadeClick && onToggle(!isOpen)} />
-        </div>
-      )}
-    </Portal>
-  );
-};
-
-const BorderLeft = styled.div`
-  position: absolute;
-  z-index: 100;
-  width: 4px;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  box-shadow:  -20px 0 40px 0 rgba(15, 36, 52, 0.15);
-  ${tw`bg-blue-default`};
-  cursor: col-resize;
-`;
-
-const ModalCard = styled.div<{width: number}>`
+const ModalCard = styled.div` 
+  width: 400px;
   position: absolute;
   top: 0;
   right: 0;
   height: 100%;
   z-index: 100;
   ${tw`bg-monochrome-white`}
-  min-width: 400px;
-  max-width: calc(100% - 48px); // closeButton widths
-  ${({ width }) => css`width: ${width}px`}
+  box-shadow: -4px 0 0 0 #007fff, -20px 0 40px 0 rgba(15, 36, 52, 0.15);
 `;
 
 const CloseButton = styled.div`
