@@ -1,5 +1,5 @@
 export {
-  Field, Form, Formik, FieldInputProps, useFormikContext,
+  Field, Form, Formik, FieldInputProps, useFormikContext, FormikProps, ErrorMessage, useField,
 } from 'formik';
 
 export {
@@ -48,6 +48,7 @@ export {
   setSort,
   useTableActionsState,
   useTableActionsDispatch,
+  Dropdown,
 } from './components';
 export {
   useClickOutside, useElementSize, useHover, usePreserveCaretPosition, useRunAfterUpdate,
