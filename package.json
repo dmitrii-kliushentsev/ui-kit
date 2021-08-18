@@ -26,7 +26,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "tailwind:css": "tailwind build src/tailwind.css -c tailwind.config.js -o src/index.css",
-    "deploy": "gh-pages -d storybook-static"
+    "deploy": "gh-pages -d storybook-static",
+    "serve": "ws -d dist --port=8000"
   },
   "dependencies": {
     "@drill4j/common-utils": "^1.0.0",
@@ -80,6 +81,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "gh-pages": "^3.2.3",
+    "local-web-server": "^5.1.0",
     "mini-css-extract-plugin": "^2.1.0",
     "postcss": "^8.3.6",
     "styled-components": "^5.2.3",
