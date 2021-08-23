@@ -13,4 +13,5 @@ export {
   requiredArray,
   sizeLimit,
   toError,
+  FormValidator,
 } from './form-validators';

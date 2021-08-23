@@ -40,4 +40,5 @@ export {
   sizeLimit,
   toError,
   Dropdown,
+  FormValidator,
 } from './forms';
