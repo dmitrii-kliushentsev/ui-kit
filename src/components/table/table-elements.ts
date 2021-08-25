@@ -23,7 +23,7 @@ const Label = styled.span`
 `;
 
 const TH = styled.th`
-  ${tw`first:px-4 last:px-4`};  
+  ${tw`px-4`};  
 `;
 
 const TR = styled.tr`
