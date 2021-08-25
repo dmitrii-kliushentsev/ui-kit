@@ -19,7 +19,7 @@ import {
 } from 'react-table';
 import { withErrorBoundary } from 'react-error-boundary';
 import { Order } from '@drill4j/types-admin';
-import 'twin.macro';
+import tw from 'twin.macro';
 
 import { Icons } from '../icon';
 import { TableErrorFallback } from '../error-fallback';
@@ -127,7 +127,7 @@ export const Table = withErrorBoundary(({
       {row.cells.map((cell: any) => (
         <td
           {...cell.getCellProps()}
-          tw="first:px-4 last:px-4"
+          css={[tw`px-4`, renderRowSubComponent && tw`first:pr-0`]}
           style={{ textAlign: cell.column.textAlign || 'right' }}
           data-test={`td-row-${cell.column.id}`}
           key={cell.column.id}
