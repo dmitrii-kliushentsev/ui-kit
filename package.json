@@ -28,7 +28,8 @@
     "build-storybook": "build-storybook",
     "tailwind:css": "tailwind build src/tailwind.css -c tailwind.config.js -o src/index.css",
     "deploy": "gh-pages -d storybook-static",
-    "serve": "ws -d dist --port=8000"
+    "serve": "ws -d dist --port=8000",
+    "test": "jest"
   },
   "dependencies": {
     "@drill4j/common-utils": "^1.0.0",
@@ -56,6 +57,9 @@
     "@storybook/builder-webpack5": "^6.4.0-alpha.30",
     "@storybook/manager-webpack5": "^6.4.0-alpha.30",
     "@storybook/react": "^6.4.0-alpha.30",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@types/jest": "^27.0.1",
     "@types/lodash.debounce": "^4.0.6",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
@@ -82,6 +86,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "gh-pages": "^3.2.3",
+    "jest": "^27.0.6",
     "local-web-server": "^5.1.0",
     "mini-css-extract-plugin": "^2.1.0",
     "postcss": "^8.3.6",
@@ -94,5 +99,11 @@
     "webpack-cli": "^4.8.0",
     "webpack-config-single-spa-react-ts": "^4.0.0",
     "webpack-dev-server": "^3.11.2"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": [
+      "<rootDir>/setuptests.ts"
+    ]
   }
 }
