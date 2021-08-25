@@ -187,7 +187,7 @@ export const Table = withErrorBoundary(({
         pagesLength={pageOptions.length}
         gotoPage={async (value: number) => {
           gotoPage(value);
-          if (value <= pageOptions.length) {
+          if (value > 0 && value <= pageOptions.length - 1) {
             // need this code to be executed after rendering
             await ref && ref.current && ref.current.scrollIntoView({
               behavior: 'smooth',
