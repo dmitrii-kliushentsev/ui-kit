@@ -12,7 +12,7 @@ export const SearchInput = ({
     <div tw="flex w-full items-center">
       <SearchIcon />
       <InputElement {...restProps} />
-      {restProps.value && <ClearIcon width={8} height={8} onClick={reset} />}
+      {restProps.value && <ClearIcon width={8} height={8} onClick={reset} data-testid="search-input:clear-icon" />}
     </div>
   </div>
 );

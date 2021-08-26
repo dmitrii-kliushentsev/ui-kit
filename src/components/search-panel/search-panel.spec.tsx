@@ -1,15 +1,21 @@
 import React from 'react';
 import {
-  render, fireEvent, screen, logRoles,
+  render, fireEvent, screen,
 } from '@testing-library/react';
 import { SearchPanel } from './search-panel';
 
 const PLACEHOLDER = 'PLACEHOLDER';
 const SEARCH_RESULT = 8;
 const SEARCH_QUERY = 'SEARCH_QUERY';
-const VALUE_WAS_SET = 'VALUE  VALUE';
+const VALUE = 'VALUE  VALUE';
 const EXPECTED_VALUE = 'VALUE VALUE';
 const onSearch = jest.fn();
+
+beforeEach(() => {
+  jest.useFakeTimers();
+  jest.runOnlyPendingTimers();
+  onSearch.mockRestore();
+});
 
 describe('SearchPanel', () => {
   it('should set value with on space instead of two', () => {
@@ -22,7 +28,7 @@ describe('SearchPanel', () => {
       />,
     );
     const input = screen.getByPlaceholderText(PLACEHOLDER);
-    fireEvent.change(input, { target: { value: VALUE_WAS_SET } });
+    fireEvent.change(input, { target: { value: VALUE } });
     expect(screen.getByDisplayValue(EXPECTED_VALUE)).toBeInTheDocument();
   });
 
@@ -50,7 +56,7 @@ describe('SearchPanel', () => {
     expect(screen.getByText(`${SEARCH_RESULT} results`)).toBeInTheDocument();
   });
 
-  it('should show "1 result" if result is only one ', () => {
+  it('should show "1 result" if result is only one', () => {
     render(
       <SearchPanel
         onSearch={onSearch}
@@ -75,7 +81,7 @@ describe('SearchPanel', () => {
   });
 
   it('should reset value after the click to X', () => {
-    const { debug } = render(
+    render(
       <SearchPanel
         onSearch={onSearch}
         searchResult={SEARCH_RESULT}
@@ -83,6 +89,31 @@ describe('SearchPanel', () => {
         searchQuery={SEARCH_QUERY}
       />,
     );
-    debug();
+    const input = screen.getByPlaceholderText(PLACEHOLDER);
+    fireEvent.change(input, { target: { value: VALUE } });
+    const clearIcon = screen.getByTestId('search-input:clear-icon');
+    fireEvent.click(clearIcon);
+
+    expect(input.getAttribute('value')).toBe('');
+    expect(screen.queryByText('result')).toBe(null);
+  });
+
+  it('should call onSearch function after in timeout and trim value in the end', () => {
+    const VALUE_WITH_SPACES_IN_THE_END = 'value    ';
+    const TRIMMED_VALUE = 'value';
+    render(
+      <SearchPanel
+        onSearch={onSearch}
+        searchResult={SEARCH_RESULT}
+        placeholder={PLACEHOLDER}
+        searchQuery={SEARCH_QUERY}
+      />,
+    );
+    const input = screen.getByPlaceholderText(PLACEHOLDER);
+    fireEvent.change(input, { target: { value: VALUE_WITH_SPACES_IN_THE_END } });
+    expect(onSearch).toBeCalledTimes(0);
+    jest.runOnlyPendingTimers();
+    expect(onSearch).toBeCalledTimes(1);
+    expect(onSearch.mock.calls[0][0]).toBe(TRIMMED_VALUE);
   });
 });
