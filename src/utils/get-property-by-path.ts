@@ -13,22 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
-import { getDuration } from '../../../../utils';
-
-interface Props {
-  value?: number;
+export function getPropertyByPath<T>(obj?: any, path?: string): T {
+  if (!path || !path.length) {
+    return obj;
+  }
+  const [head, ...tail] = path.split('.');
+  return getPropertyByPath(obj && obj[head], tail.join('.'));
 }
-
-export const DurationCell = ({ value = 0 }: Props) => {
-  const {
-    hours, seconds, minutes, isLessThenOneSecond,
-  } = getDuration(value);
-
-  return (
-    <div tw="leading-16 text-monochrome-black">
-      {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
-      {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
-    </div>
-  );
-};

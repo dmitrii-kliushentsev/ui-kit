@@ -20,7 +20,10 @@ import 'twin.macro';
 export const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => (
   <div role="alert" tw="p-4">
     <h1 tw="text-24 font-bold">Something went wrong:</h1>
-    <pre>Message: {error.message}</pre>
+    <pre>
+      Message:
+      {error.message}
+    </pre>
     <pre>{error.stack}</pre>
     <LinkButton type="button" onClick={resetErrorBoundary}>Go to agents a page</LinkButton>
   </div>

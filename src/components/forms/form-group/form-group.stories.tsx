@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { FormGroup } from './form-group';
 import { Input } from '../inputs/input';
 import { Textarea } from '../inputs/textarea';
-import { Icons } from '../../../components/icon';
+import { Icons } from '../../icon';
 
 storiesOf('FormGroup with all props', module)
   .add('FormGroup', () => (

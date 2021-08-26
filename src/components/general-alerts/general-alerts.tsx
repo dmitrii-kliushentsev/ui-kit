@@ -1,6 +1,6 @@
 import tw, { styled } from 'twin.macro';
 
-import { Icons } from "../../components/icon";
+import { Icons } from '../icon';
 
 type Message = 'SUCCESS' | 'ERROR' | 'WARNING' | 'INFO'
 

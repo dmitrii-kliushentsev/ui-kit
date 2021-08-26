@@ -7,8 +7,7 @@ export default {
   title: 'Components/table',
 };
 
-
-const Template = (args: any) => <Table {...args}/>;
+const Template = (args: any) => <Table {...args} />;
 
 export const BuildsTable = Template.bind({});
 

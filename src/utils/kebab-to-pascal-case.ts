@@ -13,22 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
-import { getDuration } from '../../../../utils';
+import { capitalize } from './capitalize';
 
-interface Props {
-  value?: number;
+export function kebabToPascalCase(str?: string): string {
+  if (str === null || str === undefined || str === '') {
+    return '';
+  }
+  if (typeof str !== 'string') {
+    return kebabToPascalCase(String(str));
+  }
+  if (str.indexOf('-') === -1) {
+    // Not a kebab-case
+    return clean(str);
+  }
+  const arr = (str.match(/[^-]+/g) || []).map(clean);
+  return arr.map(capitalize).join('');
 }
 
-export const DurationCell = ({ value = 0 }: Props) => {
-  const {
-    hours, seconds, minutes, isLessThenOneSecond,
-  } = getDuration(value);
-
-  return (
-    <div tw="leading-16 text-monochrome-black">
-      {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
-      {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
-    </div>
-  );
-};
+function clean(str: string): string {
+  return str.replace(/^\W+/, '').replace(/\W+$/, '');
+}

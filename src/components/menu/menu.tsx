@@ -4,7 +4,7 @@ import {
 import { nanoid } from 'nanoid';
 import tw, { styled, css } from 'twin.macro';
 
-import { spacesToDashes } from '@drill4j/common-utils';
+import { spacesToDashes } from '../../utils';
 import { Icons } from '../icon';
 import { useClickOutside } from '../../hooks';
 

@@ -1,4 +1,4 @@
-import tw, { styled, css } from "twin.macro";
+import tw, { styled, css } from 'twin.macro';
 
 interface Props {
   value: string;

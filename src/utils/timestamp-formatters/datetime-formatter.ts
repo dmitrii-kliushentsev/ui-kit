@@ -13,22 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
-import { getDuration } from '../../../../utils';
+const MAX_TIMESTAMP = 8640000000000000;
 
-interface Props {
-  value?: number;
+export function dateTimeFormatter(timestamp?: number) {
+  if (
+    typeof timestamp === 'number' &&
+    timestamp >= 0 &&
+    timestamp < MAX_TIMESTAMP
+  ) {
+    const date = new Date(timestamp).toLocaleString('en-US', {
+      month: 'short',
+      year: 'numeric',
+      day: 'numeric',
+    });
+    const time = new Date(timestamp).toLocaleString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    });
+    return `${date} at ${time}`;
+  }
+  return '';
 }
-
-export const DurationCell = ({ value = 0 }: Props) => {
-  const {
-    hours, seconds, minutes, isLessThenOneSecond,
-  } = getDuration(value);
-
-  return (
-    <div tw="leading-16 text-monochrome-black">
-      {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
-      {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
-    </div>
-  );
-};

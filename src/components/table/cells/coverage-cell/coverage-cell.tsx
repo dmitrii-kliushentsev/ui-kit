@@ -16,7 +16,7 @@
 import { Icons } from '../../../icon';
 import 'twin.macro';
 
-import { percentFormatter } from '@drill4j/common-utils';
+import { percentFormatter } from '../../../../utils';
 import { ClickableCell } from '../clickable-cell';
 
 interface Props {

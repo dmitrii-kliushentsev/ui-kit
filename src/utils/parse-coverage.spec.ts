@@ -13,22 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
-import { getDuration } from '../../../../utils';
+import { parseCoverage } from './parse-coverage';
 
-interface Props {
-  value?: number;
-}
-
-export const DurationCell = ({ value = 0 }: Props) => {
-  const {
-    hours, seconds, minutes, isLessThenOneSecond,
-  } = getDuration(value);
-
-  return (
-    <div tw="leading-16 text-monochrome-black">
-      {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
-      {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
-    </div>
-  );
-};
+describe('parseCoverage', () => {
+  it('should return the value without the hundredth part', () => {
+    expect(parseCoverage('1.1111111111111')).toEqual('1.1');
+    expect(parseCoverage('10.1111111111111')).toEqual('10.1');
+    expect(parseCoverage('100')).toEqual('100');
+  });
+});

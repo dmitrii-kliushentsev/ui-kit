@@ -13,22 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
-import { getDuration } from '../../../../utils';
+import { useState, useEffect, useRef } from 'react';
 
-interface Props {
-  value?: number;
+export function useIntersection<N extends HTMLElement>(threshold = 1.0) {
+  const [visible, setVisible] = useState(true);
+  const ref = useRef<N>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      {
+        root: null,
+        threshold,
+      },
+    );
+    ref && ref.current && observer.observe(ref.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  });
+
+  return { visible, ref };
 }
-
-export const DurationCell = ({ value = 0 }: Props) => {
-  const {
-    hours, seconds, minutes, isLessThenOneSecond,
-  } = getDuration(value);
-
-  return (
-    <div tw="leading-16 text-monochrome-black">
-      {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
-      {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
-    </div>
-  );
-};

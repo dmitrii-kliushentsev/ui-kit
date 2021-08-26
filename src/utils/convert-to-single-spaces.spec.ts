@@ -13,22 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
-import { getDuration } from '../../../../utils';
+import { convertToSingleSpaces } from './convert-to-single-spaces';
 
-interface Props {
-  value?: number;
-}
+describe('convertToSingleSpaces', () => {
+  it('should trim left the string', () => {
+    expect(convertToSingleSpaces('   foobarbuzz')).toBe('foobarbuzz');
+  });
 
-export const DurationCell = ({ value = 0 }: Props) => {
-  const {
-    hours, seconds, minutes, isLessThenOneSecond,
-  } = getDuration(value);
+  it('should leave only one space between words', () => {
+    expect(convertToSingleSpaces('foo    bar')).toBe('foo bar');
+  });
 
-  return (
-    <div tw="leading-16 text-monochrome-black">
-      {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
-      {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
-    </div>
-  );
-};
+  it('should leave only one space after words', () => {
+    expect(convertToSingleSpaces('foo    ')).toBe('foo ');
+  });
+});

@@ -13,22 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
-import { getDuration } from '../../../../utils';
+import { camelToSpaces } from './camel-to-spaces';
 
-interface Props {
-  value?: number;
-}
+describe('camelToSpaces', () => {
+  it('should transform provided camelCase string to spaces', () => {
+    expect(camelToSpaces('fooBarBuzz')).toBe('foo bar buzz');
+    expect(camelToSpaces('foo')).toBe('foo');
+  });
 
-export const DurationCell = ({ value = 0 }: Props) => {
-  const {
-    hours, seconds, minutes, isLessThenOneSecond,
-  } = getDuration(value);
+  it('should trim string after transormation', () => {
+    expect(camelToSpaces('fooBarBuzz   ')).toBe('foo bar buzz');
+    expect(camelToSpaces('foo ')).toBe('foo');
+  });
 
-  return (
-    <div tw="leading-16 text-monochrome-black">
-      {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
-      {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
-    </div>
-  );
-};
+  it('should return empty string if empty string privoded', () => {
+    expect(camelToSpaces('')).toBe('');
+  });
+});

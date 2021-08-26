@@ -13,22 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
-import { getDuration } from '../../../../utils';
+export const isPristine = (
+  initial: Record<string, any>,
+  current: Record<string, any>,
+): boolean =>
+  !Object.entries(current).find(([key, value]) => {
+    if (typeof initial[key] === 'object') {
+      return !isPristine(initial[key], value);
+    }
 
-interface Props {
-  value?: number;
-}
-
-export const DurationCell = ({ value = 0 }: Props) => {
-  const {
-    hours, seconds, minutes, isLessThenOneSecond,
-  } = getDuration(value);
-
-  return (
-    <div tw="leading-16 text-monochrome-black">
-      {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
-      {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
-    </div>
-  );
-};
+    return initial[key] !== value;
+  });
