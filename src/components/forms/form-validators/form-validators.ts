@@ -1,4 +1,4 @@
-import { camelToSpaces, getPropertyByPath } from '@drill4j/common-utils';
+import { camelToSpaces, getPropertyByPath } from '../../../utils';
 
 type FormValidationResult = Record<string, string> | undefined;
 export type FormValidator = <T extends Record<string, unknown>>(formValues: T) => FormValidationResult;

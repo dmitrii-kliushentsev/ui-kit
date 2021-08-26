@@ -13,22 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
-import { getDuration } from '../../../../utils';
+import { parsePackages } from './parse-packages';
 
-interface Props {
-  value?: number;
-}
-
-export const DurationCell = ({ value = 0 }: Props) => {
-  const {
-    hours, seconds, minutes, isLessThenOneSecond,
-  } = getDuration(value);
-
-  return (
-    <div tw="leading-16 text-monochrome-black">
-      {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
-      {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
-    </div>
-  );
-};
+describe('parsePackages', () => {
+  it('should transform to an array containing strings without spaces', () => {
+    expect(parsePackages('foo bar   buzz   bizz  ')).toStrictEqual([
+      'foobarbuzzbizz',
+    ]);
+    expect(parsePackages('                       ')).toStrictEqual(['']);
+    expect(parsePackages('')).toStrictEqual(['']);
+  });
+});

@@ -13,22 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
-import { getDuration } from '../../../../utils';
+import { isPristine } from './is-pristine';
 
-interface Props {
-  value?: number;
-}
+describe('isPristine', () => {
+  const initial = {
+    foo: 'foo',
+    bar: 'bar',
+    baz: {
+      foo: 'foo',
+    },
+  };
+  const changed = {
+    foo: 'foofoo',
+    bar: 'bar',
+    baz: {
+      foo: 'foo',
+    },
+  };
 
-export const DurationCell = ({ value = 0 }: Props) => {
-  const {
-    hours, seconds, minutes, isLessThenOneSecond,
-  } = getDuration(value);
+  it('should return true when both args is equal', () => {
+    expect(isPristine(initial, initial)).toBe(true);
+  });
 
-  return (
-    <div tw="leading-16 text-monochrome-black">
-      {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
-      {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
-    </div>
-  );
-};
+  it('should return false when both args is not equal', () => {
+    expect(isPristine(initial, changed)).toBe(false);
+  });
+});

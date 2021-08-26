@@ -8,7 +8,7 @@ export const Button = styled.button<ButtonType>`
   ${({
     primary, secondary, size, disabled,
   }) => [
-    primary && 
+    primary &&
     tw`border border-blue-default bg-blue-default text-monochrome-white font-bold
       hover:border-blue-medium-tint hover:bg-blue-medium-tint
       active:border-blue-shade active:bg-blue-shade 

@@ -13,22 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
-import { getDuration } from '../../../../utils';
-
-interface Props {
-  value?: number;
-}
-
-export const DurationCell = ({ value = 0 }: Props) => {
-  const {
-    hours, seconds, minutes, isLessThenOneSecond,
-  } = getDuration(value);
-
-  return (
-    <div tw="leading-16 text-monochrome-black">
-      {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
-      {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
-    </div>
-  );
+export const parseCoverage = (value: string) => {
+  if (typeof value !== 'string') {
+    return '';
+  }
+  return value.indexOf('.') === 1 ? value.slice(0, 3) : value.slice(0, 4);
 };

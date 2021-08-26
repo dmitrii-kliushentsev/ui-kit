@@ -13,22 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
-import { getDuration } from '../../../../utils';
-
-interface Props {
-  value?: number;
-}
-
-export const DurationCell = ({ value = 0 }: Props) => {
-  const {
-    hours, seconds, minutes, isLessThenOneSecond,
-  } = getDuration(value);
-
-  return (
-    <div tw="leading-16 text-monochrome-black">
-      {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
-      {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
-    </div>
+export function formatMsToDate(duration: number) {
+  if (Number.isNaN(duration) || !Number.isFinite(duration)) {
+    return {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    };
+  }
+  const days = Math.floor(duration / 86400000);
+  const hours = Math.floor((duration - days * 86400000) / 3600000);
+  const minutes = Math.floor(
+    (duration - days * 86400000 - hours * 3600000) / 60000,
   );
-};
+  const seconds = Math.floor(
+    (duration - days * 86400000 - hours * 3600000 - minutes * 60000) / 1000,
+  );
+
+  return {
+    days,
+    hours,
+    minutes,
+    seconds,
+  };
+}

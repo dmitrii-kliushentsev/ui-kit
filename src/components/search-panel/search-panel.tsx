@@ -15,6 +15,7 @@
  */
 import { useCallback, useEffect, useState } from 'react';
 import debounce from 'lodash.debounce';
+import { convertToSingleSpaces } from '../../utils';
 import { Inputs } from '../forms/inputs';
 
 interface Props {
@@ -48,7 +49,7 @@ export const SearchPanel = ({
         <div className="py-2 h-10">
           <Inputs.Search
             value={searchValue}
-            onChange={({ target: { value = '' } }) => setValue((value))}
+            onChange={({ target: { value = '' } }) => setValue(convertToSingleSpaces(value))}
             placeholder={placeholder}
             reset={() => setValue('')}
           />

@@ -3,7 +3,7 @@ import { styled } from 'twin.macro';
 import { Input } from '../input';
 import { InputProps } from '../input-types';
 
-export const NumberInput = ({ ...restProps }: InputProps) =>  <InputElement {...restProps} />;
+export const NumberInput = ({ ...restProps }: InputProps) => <InputElement {...restProps} />;
 
 const InputElement = styled(Input)`
   input {

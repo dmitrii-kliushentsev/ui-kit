@@ -13,22 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
-import { getDuration } from '../../../../utils';
+import { capitalize } from './capitalize';
 
-interface Props {
-  value?: number;
-}
+describe('capitalize', () => {
+  it('should transform provided uppercase string to capitalize', () => {
+    expect(capitalize('FOO')).toBe('Foo');
+  });
 
-export const DurationCell = ({ value = 0 }: Props) => {
-  const {
-    hours, seconds, minutes, isLessThenOneSecond,
-  } = getDuration(value);
+  it('should transform provided lowercase string to capitalize', () => {
+    expect(capitalize('foo')).toBe('Foo');
+  });
 
-  return (
-    <div tw="leading-16 text-monochrome-black">
-      {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
-      {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
-    </div>
-  );
-};
+  it('should return empty string if provide value is empty string', () => {
+    expect(capitalize('')).toBe('');
+  });
+});

@@ -13,22 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
-import { getDuration } from '../../../../utils';
+export const percentFormatter = (value: number): number => {
+  if (
+    Number.isNaN(value) ||
+    value === Infinity ||
+    !value ||
+    Math.sign(value) === -1
+  ) {
+    return 0;
+  }
 
-interface Props {
-  value?: number;
-}
+  if (value < 0.1 && value > 0) {
+    return 0.1;
+  }
 
-export const DurationCell = ({ value = 0 }: Props) => {
-  const {
-    hours, seconds, minutes, isLessThenOneSecond,
-  } = getDuration(value);
-
-  return (
-    <div tw="leading-16 text-monochrome-black">
-      {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
-      {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
-    </div>
+  return Number(
+    new Intl.NumberFormat('en-US', { maximumFractionDigits: 1 }).format(value),
   );
 };

@@ -13,22 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
-import { getDuration } from '../../../../utils';
+import { useState } from 'react';
+import { Message } from '@drill4j/types-admin';
 
-interface Props {
-  value?: number;
+export function useGeneralAlertMessage() {
+  const [generalAlertMessage, setGeneralAlertMessage] = useState<Message | null>(null);
+  const showGeneralAlertMessage = (incommingMessage: Message | null) => {
+    setGeneralAlertMessage(incommingMessage);
+    incommingMessage?.type === 'SUCCESS' && setTimeout(() => setGeneralAlertMessage(null), 3000);
+  };
+
+  return { generalAlertMessage, showGeneralAlertMessage };
 }
-
-export const DurationCell = ({ value = 0 }: Props) => {
-  const {
-    hours, seconds, minutes, isLessThenOneSecond,
-  } = getDuration(value);
-
-  return (
-    <div tw="leading-16 text-monochrome-black">
-      {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
-      {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
-    </div>
-  );
-};

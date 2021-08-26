@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
-import { getDuration } from '../../../../utils';
+export function copyToClipboard(text: string) {
+  const span = document.createElement('span');
+  span.textContent = text;
 
-interface Props {
-  value?: number;
+  span.style.whiteSpace = 'pre';
+
+  document.body.appendChild(span);
+
+  const selection = window.getSelection();
+  const range = window.document.createRange();
+  selection && selection.removeAllRanges();
+  range.selectNode(span);
+  selection && selection.addRange(range);
+
+  window.document.execCommand('copy');
+
+  selection && selection.removeAllRanges();
+  window.document.body.removeChild(span);
 }
-
-export const DurationCell = ({ value = 0 }: Props) => {
-  const {
-    hours, seconds, minutes, isLessThenOneSecond,
-  } = getDuration(value);
-
-  return (
-    <div tw="leading-16 text-monochrome-black">
-      {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
-      {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
-    </div>
-  );
-};
