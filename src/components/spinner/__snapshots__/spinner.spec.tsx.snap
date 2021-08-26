@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge renders correctly 1`] = `
+<div
+  className="spinner__Wrapper-sc-gvv5fx-0 hnGMMU"
+>
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+</div>
+`;
