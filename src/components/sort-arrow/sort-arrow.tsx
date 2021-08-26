@@ -8,8 +8,8 @@ interface Props {
 }
 
 export const SortArrow = ({ order, active }: Props) => (
-  <Wrapper active={active}>
-    <Icons.SortingArrow rotate={order === 'DESC' ? 0 : 180} />
+  <Wrapper active={active} data-testid="sort-arrow:wrapper">
+    <Icons.SortingArrow rotate={order === 'DESC' ? 0 : 180} data-testid="sort-arrow:icon" />
   </Wrapper>
 );
 
