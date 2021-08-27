@@ -31,7 +31,7 @@ export const Popup = ({
             </Header>
             {children}
           </Content>
-          <Fade onClick={() => closeOnFadeClick && onToggle(!isOpen)} />
+          <Fade onClick={() => closeOnFadeClick && onToggle(!isOpen)} data-test="popup:fade" />
         </div>
       )}
     </Portal>
