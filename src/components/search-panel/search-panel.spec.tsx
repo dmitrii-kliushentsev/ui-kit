@@ -98,7 +98,7 @@ describe('SearchPanel', () => {
     expect(screen.queryByText('result')).toBe(null);
   });
 
-  it('should call onSearch function after in timeout and trim value in the end', () => {
+  it('should call onSearch function after timeout and trim value in the end', () => {
     const VALUE_WITH_SPACES_IN_THE_END = 'value    ';
     const TRIMMED_VALUE = 'value';
     render(
