@@ -39,18 +39,24 @@ interface SelectRowsCountDropdownProps {
   initialValue: number
 }
 
+export const MAX_PAGES_WITH_ELLIPSIS_COUNT = 7;
+export const FIRST_OR_LAST_NUMBER_WITH_ELIPSIS = 2;
+export const MAX_LEFT_OR_RIGHT_PAGES_COUNT = MAX_PAGES_WITH_ELLIPSIS_COUNT - FIRST_OR_LAST_NUMBER_WITH_ELIPSIS;
+
 export const Pagination = ({
   pagesLength, gotoPage, pageIndex, previousPage, nextPage, canPreviousPage, canNextPage, pageSize, setPageSize, rowsCount,
 }: Props) => {
   const createArray = (from: number, to: number) => Array.from({ length: to - from + 1 }, (_, i) => from + i);
 
   const currentPage = pageIndex + 1;
-  const MAX_PAGES_WITH_ELLIPSIS_COUNT = 7;
-  const FIRST_OR_LAST_NUMBER_WITH_ELIPSIS = 2;
-  const MAX_LEFT_OR_RIGHT_PAGES_COUNT = MAX_PAGES_WITH_ELLIPSIS_COUNT - FIRST_OR_LAST_NUMBER_WITH_ELIPSIS;
 
   const renderPage = (page: number) => (
-    <PaginationElements.PageNumber key={page} active={page === currentPage} onClick={() => gotoPageByPageNumber(page)}>
+    <PaginationElements.PageNumber
+      key={page}
+      active={page === currentPage}
+      onClick={() => gotoPageByPageNumber(page)}
+      data-test="pagination:element"
+    >
       {page}
     </PaginationElements.PageNumber>
   );
@@ -111,8 +117,13 @@ export const Pagination = ({
       <div tw="relative w-34 p-4 rounded-lg bg-monochrome-white shadow text-14 leading-32 z-50">
         <div tw="flex items-center gap-x-2 whitespace-nowrap">
           Go to
-          <form onSubmit={handleSubmit}>
-            <PaginationElements.NumberInput type="number" value={number || ''} onChange={e => setNumber(Number(e.target.value))} />
+          <form onSubmit={handleSubmit} data-test="pagination:tooltip:form">
+            <PaginationElements.NumberInput
+              type="number"
+              value={number || ''}
+              onChange={e => setNumber(Number(e.target.value))}
+              data-test="pagination:tooltip:input"
+            />
           </form>
         </div>
         <div tw="absolute left-14 w-6 overflow-hidden inline-block" style={{ top: '72px' }}>
@@ -147,7 +158,12 @@ export const Pagination = ({
     const [isOpen, setIsOpen] = useState(false);
     const node = useClickOutside(() => setIsOpen(false));
     return (
-      <div ref={node} tw="relative flex items-center gap-x-1 text-monochrome-black cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+      <div
+        ref={node}
+        tw="relative flex items-center gap-x-1 text-monochrome-black cursor-pointer"
+        onClick={() => setIsOpen(!isOpen)}
+        data-test="table-pagination:select-rows-dropdown"
+      >
         <span tw="font-bold" data-test="table-pagination:page-rows">
           {`${initialValue * (currentPage) - initialValue}-${pagesLength === pageIndex + 1 ? rowsCount : (initialValue * (currentPage))}`}
         </span>
@@ -155,7 +171,12 @@ export const Pagination = ({
         {isOpen && (
           <div tw="absolute -top-24 shadow bg-monochrome-white z-50">
             {values.map((value) => (
-              <div tw="flex items-center px-2 w-36 hover:bg-monochrome-light-tint" onClick={(() => action(value))} key={value}>
+              <div
+                tw="flex items-center px-2 w-36 hover:bg-monochrome-light-tint"
+                onClick={(() => action(value))}
+                key={value}
+                data-test="table-pagination:select-rows-dropdown:item"
+              >
                 {initialValue === value && <Icons.Check width={14} height={10} viewBox="0 0 14 10" tw="absolute text-blue-default" />}
                 <span tw="ml-6">{`${value} per page`}</span>
               </div>
@@ -185,7 +206,7 @@ export const Pagination = ({
         <div tw="flex text-monochrome-default">
           <PaginationElements.PaginationArrow
             disabled={!canPreviousPage}
-            onClick={() => previousPage()}
+            onClick={() => canPreviousPage && previousPage()}
             data-test="table-pagination:pagination-arrow-left"
           >
             <Icons.Expander width={6} height={8} rotate={180} />
@@ -193,7 +214,7 @@ export const Pagination = ({
           <Pages />
           <PaginationElements.PaginationArrow
             disabled={!canNextPage}
-            onClick={() => nextPage()}
+            onClick={() => canNextPage && nextPage()}
             data-test="table-pagination:pagination-arrow-right"
           >
             <Icons.Expander width={6} height={8} />

@@ -20,7 +20,7 @@ const PaginationArrow = styled.div`
   ${tw`flex items-center justify-center w-8 h-8 cursor-pointer hover:text-blue-medium-tint`};
 
   ${({ disabled }: { disabled?: boolean }) =>
-    disabled && tw`text-monochrome-medium-tint cursor-default hover:text-monochrome-medium-tint`};
+    disabled && tw`text-monochrome-medium-tint cursor-default hover:text-monochrome-medium-tint pointer-events-none`};
 `;
 
 const PageNumber = styled.div`
