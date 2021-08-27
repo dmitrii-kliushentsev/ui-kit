@@ -1,6 +1,6 @@
 import 'twin.macro';
 
-interface LegendItem {
+export interface LegendItem {
   color: string;
   borderColor?: string;
   label: React.ReactNode;
@@ -15,7 +15,7 @@ export const Legend = ({ legendItems }: Props) => (
     {legendItems.map(({ color, label, borderColor }) => (
       <div tw="flex items-center gap-x-2" key={color}>
         <svg width={10} height={10}>
-          <circle cx="5" cy="5" r="4.5" fill={color} stroke={borderColor} />
+          <circle cx="5" cy="5" r="4.5" fill={color} stroke={borderColor} data-test={`legend:circle:${label}`} />
         </svg>
         {label}
       </div>
