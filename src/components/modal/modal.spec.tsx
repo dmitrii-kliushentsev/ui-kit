@@ -7,9 +7,8 @@ const onToggle = jest.fn();
 const children = <div>children</div>;
 const portalRootElement = document.createElement('div');
 portalRootElement.setAttribute('id', 'modal');
+
 beforeEach(() => {
-  jest.useFakeTimers();
-  jest.runOnlyPendingTimers();
   onToggle.mockRestore();
 });
 
