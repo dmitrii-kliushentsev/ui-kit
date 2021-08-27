@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdditionalProgressBar should match snapshot 1`] = `
+<div
+  className="additional-progress-bar___StyledDiv-sc-a3qgq5-1 dXWjai"
+  data-test="additional-progress-bar:snapshot"
+>
+  <div
+    className="additional-progress-bar__Progress-sc-a3qgq5-0 bMXpvf"
+    style={
+      Object {
+        "width": "50%",
+      }
+    }
+    type="primary"
+  />
+</div>
+`;
