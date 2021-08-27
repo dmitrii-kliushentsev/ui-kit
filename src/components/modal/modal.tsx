@@ -1,3 +1,4 @@
+import React from 'react';
 import tw, { styled } from 'twin.macro';
 import { Icons } from '../icon';
 import { Portal } from '../portal';
@@ -21,7 +22,7 @@ export const Modal = ({
           </CloseButton>
           {children}
         </ModalCard>
-        <Fade onClick={() => !isDisableFadeClick && onToggle(!isOpen)} />
+        <Fade onClick={() => !isDisableFadeClick && onToggle(!isOpen)} data-test="modal:fade" />
       </div>
     )}
   </Portal>
