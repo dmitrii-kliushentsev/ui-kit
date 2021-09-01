@@ -54,9 +54,11 @@ export {
   FormValidator,
 } from './components';
 export {
-  useClickOutside, useElementSize, useHover, usePreserveCaretPosition, useRunAfterUpdate,
+  useClickOutside, useElementSize, useHover, usePreserveCaretPosition,
+  useRunAfterUpdate, useQueryParams, useIntersection, useGeneralAlertMessage, useCloseModal,
 } from './hooks';
 
 export const Typography = {
   MiddleEllipsis,
 };
+export * from './utils';

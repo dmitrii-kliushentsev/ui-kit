@@ -3,3 +3,7 @@ export { useElementSize } from './use-element-size';
 export { useHover } from './use-hover';
 export { usePreserveCaretPosition } from './use-preserve-caret-position';
 export { useRunAfterUpdate } from './use-run-after-update';
+export { useCloseModal } from './use-close-modal';
+export { useGeneralAlertMessage } from './use-general-alert-message';
+export { useIntersection } from './use-intersection';
+export { useQueryParams } from './use-query-params';
