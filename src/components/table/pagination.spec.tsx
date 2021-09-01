@@ -93,15 +93,14 @@ describe('Pagination', () => {
     const { container } = render(<Pagination {...DEFAULT_PROPS} />);
     fireEvent.click(getAllByDataTest(container, 'pagination:element')[1]);
     expect(goToPage).toBeCalledTimes(1);
-    expect(goToPage.mock.calls[0][0]).toBe(1);
+    expect(goToPage.mock.calls[0][0]).toBe(2);
   });
 
   it('should close/open tooltip after click to dots', () => {
     const { container } = render(<Pagination {...DEFAULT_PROPS} />);
     fireEvent.click(getByText(container, '...'));
     expect(getByText(container, 'Go to')).toBeInTheDocument();
-    fireEvent.change(getByDataTest(container, 'pagination:tooltip:input'), { target: { value: 2 } });
-    fireEvent.submit(getByDataTest(container, 'pagination:tooltip:form'));
+    fireEvent.click(getByText(container, '...'));
     expect(queryByText(container, 'Go to')).toBeNull();
   });
 
@@ -112,6 +111,6 @@ describe('Pagination', () => {
     fireEvent.change(getByDataTest(container, 'pagination:tooltip:input'), { target: { value: 2 } });
     fireEvent.submit(getByDataTest(container, 'pagination:tooltip:form'));
     expect(goToPage).toBeCalledTimes(1);
-    expect(goToPage.mock.calls[0][0]).toBe(1);
+    expect(goToPage.mock.calls[0][0]).toBe(2);
   });
 });

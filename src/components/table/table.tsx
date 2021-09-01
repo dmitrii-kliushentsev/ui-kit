@@ -189,8 +189,9 @@ export const Table = withErrorBoundary(({
       <Pagination
         pagesLength={pageOptions.length}
         gotoPage={async (value: number) => {
-          gotoPage(value);
-          if (value > 0 && value < pageOptions.length) {
+          const newPage = value - 1; // in the react-table pages start from 0
+          if (value > 0 && newPage < pageOptions.length && newPage !== pageIndex) {
+            gotoPage(newPage);
             // need this code to be executed after rendering
             await ref && ref.current && ref.current.scrollIntoView({
               behavior: 'smooth',

@@ -54,7 +54,7 @@ export const Pagination = ({
     <PaginationElements.PageNumber
       key={page}
       active={page === currentPage}
-      onClick={() => gotoPageByPageNumber(page)}
+      onClick={() => gotoPage(page)}
       data-test="pagination:element"
     >
       {page}
@@ -104,14 +104,12 @@ export const Pagination = ({
     ? renderPages(1, pagesLength)
     : renderPagesWithEllipsis());
 
-  const gotoPageByPageNumber = (pageNumber: number) => gotoPage(pageNumber - 1);
-
   const Tooltip = () => {
     const [number, setNumber] = useState<number>(0);
 
     const handleSubmit = (evt: any) => {
       evt.preventDefault();
-      typeof number === 'number' && gotoPage(number ? number - 1 : 0);
+      typeof number === 'number' && gotoPage(number);
     };
     return (
       <div tw="relative w-34 p-4 rounded-lg bg-monochrome-white shadow text-14 leading-32 z-50">
