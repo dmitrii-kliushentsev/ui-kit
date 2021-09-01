@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  fireEvent, getByRole, getByText, queryByText, render, screen,
+  fireEvent, getByText, queryByText, render,
 } from '@testing-library/react';
 import { MAX_PAGES_WITH_ELLIPSIS_COUNT, Pagination } from './pagination';
 import {
-  getAllByDataTest, getByDataTest, queryAllByDataTest, queryByDataTest,
+  getAllByDataTest, getByDataTest, queryByDataTest,
 } from '../../../test-utils';
 
 const PAGE_LENGTH = 8;
