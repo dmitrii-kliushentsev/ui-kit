@@ -7,8 +7,7 @@ export default {
   title: 'Components/table',
 };
 
-
-const Template = (args: any) => <Table {...args}/>;
+const Template = (args: any) => <Table {...args} />;
 
 export const BuildsTable = Template.bind({});
 
@@ -30,7 +29,6 @@ BuildsTable.args = {
     {
       Header: 'Added',
       accessor: 'detectedAt',
-      Cell: ({ value }: any) => <span>{value}</span>,
       textAlign: 'left',
       width: '20%',
     },
