@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import 'twin.macro';
-import { getDuration } from '@drill4j/common-utils';
+import { getDuration } from '../../../../utils';
 
 interface Props {
   value?: number;

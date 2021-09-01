@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Status should match snapshot 1`] = `
+<div
+  className="status__Wrapper-sc-13rorco-0 gOoxXr"
+  data-test="status:data-test"
+/>
+`;

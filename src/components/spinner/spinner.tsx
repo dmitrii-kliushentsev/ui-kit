@@ -4,7 +4,7 @@ interface Props {
   disabled?: boolean;
 }
 
-export const Spinner = ({disabled}: Props) => (
+export const Spinner = ({ disabled }: Props) => (
   <Wrapper disabled={disabled}>
     <div />
     <div />

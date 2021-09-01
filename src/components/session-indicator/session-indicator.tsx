@@ -12,8 +12,8 @@ export const SessionIndicator = ({ active }: Props) => (
     <g fillRule="nonzero" stroke="none" strokeWidth="1" fill="none">
       <CirclePath d={circlePath} />
       {active
-        ? <EyePath d={eyePath} active tw="animate-blinker" />
-        : <EyePath d={eyePath} />}
+        ? <EyePath d={eyePath} active tw="animate-blinker" data-test="session-indicator:active" />
+        : <EyePath d={eyePath} data-test="session-indicator:inactive" />}
     </g>
   </Wrapper>
 );

@@ -24,7 +24,7 @@ storiesOf('GeneralAlerts', module)
       Warning message example. Something affects product usage.
     </GeneralAlerts>
   ))
-  .add('WARNING alert with component', () => (
+  .add('Info alert with component', () => (
     <GeneralAlerts type="INFO">
       please wait...
     </GeneralAlerts>

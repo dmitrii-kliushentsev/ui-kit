@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Inputs } from '../forms/inputs';
 import { useCallback, useEffect, useState } from 'react';
 import debounce from 'lodash.debounce';
-import { convertToSingleSpaces } from '@drill4j/common-utils';
+import { convertToSingleSpaces } from '../../utils';
+import { Inputs } from '../forms/inputs';
 
 interface Props {
   onSearch: (search: string) => void;
@@ -61,11 +61,14 @@ export const SearchPanel = ({
         >
           {searchQuery && (
             <span data-test="search-panel:search-result">
-              {searchResult} result{searchResult > 1 ? 's' : ''}
+              {searchResult}
+              {' '}
+              result
+              {searchResult > 1 ? 's' : ''}
             </span>
           )}
         </div>
       </div>
     </div>
   );
-}
+};

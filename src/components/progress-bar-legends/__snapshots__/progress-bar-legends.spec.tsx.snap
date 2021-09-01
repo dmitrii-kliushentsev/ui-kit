@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgressBarLegends should match snapshot 1`] = `
+<div>
+  <div
+    className="progress-bar-legends__Panel-sc-9uzeyp-0 kuTFXc"
+  >
+    <div
+      className="progress-bar-legends__Legend-sc-9uzeyp-1 bkMnrW"
+    >
+      <div
+        className="progress-bar-legends__Percentage-sc-9uzeyp-2 gKjXXj"
+        type="start"
+      >
+        0
+      </div>
+    </div>
+    <div
+      className="progress-bar-legends__Legend-sc-9uzeyp-1 bkMnrW"
+    >
+      <div
+        className="progress-bar-legends__Percentage-sc-9uzeyp-2 jwPEgy"
+      >
+        25
+      </div>
+    </div>
+    <div
+      className="progress-bar-legends__Legend-sc-9uzeyp-1 bkMnrW"
+    >
+      <div
+        className="progress-bar-legends__Percentage-sc-9uzeyp-2 jwPEgy"
+      >
+        50
+      </div>
+    </div>
+    <div
+      className="progress-bar-legends__Legend-sc-9uzeyp-1 bkMnrW"
+    >
+      <div
+        className="progress-bar-legends__Percentage-sc-9uzeyp-2 jwPEgy"
+      >
+        75
+      </div>
+    </div>
+    <div
+      className="progress-bar-legends__Legend-sc-9uzeyp-1 bkMnrW"
+    >
+      <div
+        className="progress-bar-legends__Percentage-sc-9uzeyp-2 lipODO"
+        type="end"
+      >
+        100
+      </div>
+    </div>
+  </div>
+</div>
+`;
