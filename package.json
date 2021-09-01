@@ -1,6 +1,6 @@
 {
   "name": "@drill4j/ui-kit",
-  "version": "0.1.141",
+  "version": "0.1.142",
   "homepage": "http://drill4j.github.io/ui-kit",
   "author": "Drill4J",
   "license": "Apache-2.0",
@@ -48,6 +48,7 @@
     "react-middle-ellipsis": "^1.2.1",
     "react-router-dom": "^5.2.0",
     "react-table": "^7.7.0",
+    "regenerator-runtime": "^0.13.9",
     "styled-components": "^5.2.3",
     "tailwindcss": "^2.2.6",
     "twin.macro": "^2.5.0"
