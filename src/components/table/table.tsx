@@ -131,13 +131,16 @@ export const Table = withErrorBoundary(({
           style={{ textAlign: cell.column.textAlign || 'right' }}
           data-test={`td-row-${cell.column.id}`}
           key={cell.column.id}
+          tw="text-ellipsis"
         >
           <div
+            title={cell?.value}
+            tw="inline"
             data-test={`td-row-cell-${cell.column.id}`}
             onClick={() => cell.column.id === 'expander' &&
-              setExpandedRows(row.isExpanded
-                ? expandedRows.filter((id) => id !== row.original.id)
-                : [...expandedRows, row.original.id])}
+                          setExpandedRows(row.isExpanded
+                            ? expandedRows.filter((id) => id !== row.original.id)
+                            : [...expandedRows, row.original.id])}
           >
             {cell.render('Cell')}
           </div>
