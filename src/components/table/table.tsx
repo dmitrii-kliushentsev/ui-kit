@@ -32,6 +32,11 @@ import { Pagination } from './pagination';
 
 type CustomColumn = Column & { textAlign?: string; width?: string; notSortable?: boolean; }
 
+interface SortBy {
+  id: string;
+  desc: boolean;
+}
+
 interface Props {
   columns: Array<CustomColumn>;
   data: Array<any>;
@@ -42,6 +47,7 @@ interface Props {
   isDefaulToggleSortBy?: boolean;
   columnsDependency?: Array<string | number | boolean | null | undefined>;
   withSearch?: boolean;
+  defaultSortBy?: SortBy[];
 }
 
 export const Table = withErrorBoundary(({
@@ -54,6 +60,7 @@ export const Table = withErrorBoundary(({
   isDefaulToggleSortBy,
   columnsDependency = [],
   withSearch,
+  defaultSortBy = [],
 }: Props) => {
   const {
     page,
@@ -70,7 +77,7 @@ export const Table = withErrorBoundary(({
     {
       columns: useMemo(() => columns, [...columnsDependency]),
       data: useMemo(() => data, [data]),
-      initialState: { pageSize: 25 },
+      initialState: { pageSize: 25, sortBy: defaultSortBy },
       autoResetPage: false,
     } as any,
     useSortBy,
