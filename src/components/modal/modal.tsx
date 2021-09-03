@@ -34,7 +34,7 @@ const ModalCard = styled.div`
   top: 0;
   right: 0;
   height: 100%;
-  z-index: 100;
+  z-index: 40;
   ${tw`bg-monochrome-white`}
   box-shadow: -4px 0 0 0 #007fff, -20px 0 40px 0 rgba(15, 36, 52, 0.15);
 `;
@@ -48,5 +48,5 @@ const CloseButton = styled.div`
 const Fade = styled.div`
   ${tw`absolute w-full h-full top-0 left-0 bg-monochrome-white`};
   opacity: 0.75;
-  z-index: 90;
+  z-index: 39;
 `;
