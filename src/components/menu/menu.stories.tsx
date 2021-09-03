@@ -1,9 +1,9 @@
 import { storiesOf } from '@storybook/react';
-
+import 'twin.macro';
 import { Menu } from './menu';
 
 storiesOf('Menu', module).add('Menu', () => (
-  <div style={{ display: 'flex', justifyContent: 'center' }}>
+  <div tw="flex justify-center w-full h-full">
     <Menu
       items={[
         {
@@ -30,9 +30,8 @@ storiesOf('Menu', module).add('Menu', () => (
     />
   </div>
 )).add('Menu with border', () => (
-  <div style={{ display: 'flex', justifyContent: 'center' }}>
+  <div tw="flex items-end justify-center w-full h-full">
     <Menu
-      bordered
       items={[
         {
           label: 'Rename',
