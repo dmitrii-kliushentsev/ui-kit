@@ -30,7 +30,7 @@ import { SearchPanel } from '../search-panel';
 import { TableElements } from './table-elements';
 import { Pagination } from './pagination';
 
-type CustomColumn = Column & { textAlign?: string; width?: string; notSortable?: boolean; }
+type CustomColumn = Column & { textAlign?: string; width?: string; notSortable?: boolean; disableEllipsis?: boolean}
 
 interface SortBy {
   id: string;
@@ -138,11 +138,10 @@ export const Table = withErrorBoundary(({
           style={{ textAlign: cell.column.textAlign || 'right' }}
           data-test={`td-row-${cell.column.id}`}
           key={cell.column.id}
-          tw="text-ellipsis"
         >
           <div
+            css={[!cell.column.disableEllipsis && tw`text-ellipsis`]}
             title={cell?.value}
-            tw="inline"
             data-test={`td-row-cell-${cell.column.id}`}
             onClick={() => cell.column.id === 'expander' &&
                           setExpandedRows(row.isExpanded
