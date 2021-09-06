@@ -117,6 +117,7 @@ export const Table = withErrorBoundary(({
                 <TableElements.SortArrow
                   active={column.isSorted || active}
                   onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => toggleSort(event, column)}
+                  data-test="table-th-sort-arrow"
                 >
                   <Icons.SortingArrow rotate={column.isSortedDesc || (active && sort?.order === 'DESC') ? 0 : 180} />
                 </TableElements.SortArrow>
