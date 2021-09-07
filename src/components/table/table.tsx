@@ -141,7 +141,7 @@ export const Table = withErrorBoundary(({
         >
           <div
             css={[!cell.column.disableEllipsis && tw`text-ellipsis`]}
-            title={cell?.value}
+            title={`${row?.key} ${cell?.value}`}
             data-test={`td-row-cell-${cell.column.id}`}
             onClick={() => cell.column.id === 'expander' &&
                           setExpandedRows(row.isExpanded
