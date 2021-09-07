@@ -103,7 +103,7 @@ export const Table = withErrorBoundary(({
   };
 
   const TableHeaderRow = ({ headerGroup }: any) => (
-    <tr {...headerGroup.getHeaderGroupProps()} tw="h-13 px-4">
+    <tr tw="h-13 px-4">
       {headerGroup.headers.map((column: any) => {
         const active = column.id === sort?.field;
         return (
@@ -112,16 +112,18 @@ export const Table = withErrorBoundary(({
             style={{ textAlign: column.textAlign || 'right', width: column.width }}
             data-test={`table-th-${column.id}`}
           >
-            <TableElements.Label>
+            <TableElements.Label key={`table-label-${column.id}`}>
               {!column.notSortable && (
                 <TableElements.SortArrow
                   active={column.isSorted || active}
                   onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => toggleSort(event, column)}
                 >
-                  <Icons.SortingArrow rotate={column.isSortedDesc || (active && sort?.order === 'DESC') ? 0 : 180} />
+                  <Icons.SortingArrow
+                    rotate={column.isSortedDesc || (active && sort?.order === 'DESC') ? 0 : 180}
+                  />
                 </TableElements.SortArrow>
               )}
-              {column.render('Header')}
+              <React.Fragment key={`table-header-cell-${column.id}`}>{column.render('Header')}</React.Fragment>
             </TableElements.Label>
           </TableElements.TH>
         );
@@ -141,7 +143,7 @@ export const Table = withErrorBoundary(({
         >
           <div
             css={[!cell.column.disableEllipsis && tw`text-ellipsis`]}
-            title={`${row?.key} ${cell?.value}`}
+            title={cell?.value}
             data-test={`td-row-cell-${cell.column.id}`}
             onClick={() => cell.column.id === 'expander' &&
                           setExpandedRows(row.isExpanded
@@ -191,7 +193,7 @@ export const Table = withErrorBoundary(({
           })}
         </tbody>
       </table>
-      {stub}
+      <React.Fragment key="table-stub">{stub}</React.Fragment>
       <Pagination
         pagesLength={pageOptions.length}
         gotoPage={async (value: number) => {
