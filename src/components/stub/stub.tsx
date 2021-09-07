@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import React from 'react';
 import tw, { styled } from 'twin.macro';
 
 interface Props {
@@ -23,7 +24,7 @@ interface Props {
 
 export const Stub = ({ icon, title, message }: Props) => (
   <Content>
-    { icon }
+    <React.Fragment key="stub-icon">{ icon }</React.Fragment>
     <Title data-test="stub:title">
       { title }
     </Title>
