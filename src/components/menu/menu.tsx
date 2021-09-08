@@ -1,14 +1,13 @@
 import {
   useLayoutEffect, useRef, useState,
 } from 'react';
-import { nanoid } from 'nanoid';
 import tw, { styled, css } from 'twin.macro';
 
 import { spacesToDashes } from '../../utils';
 import { Icons } from '../icon';
 import { useClickOutside } from '../../hooks';
 
-interface MenuItemType {
+export interface MenuItemType {
   label: string;
   icon: keyof typeof Icons;
   onClick: () => void;
@@ -132,7 +131,7 @@ export const Menu = ({
               right: 'calc(50% - 22px)',
             }}
           >
-            <ItemsList position={position}>
+            <ItemsList position={position} data-test={`menu:list:${testContext}`}>
               {items.map(({
                 icon,
                 label,
@@ -141,10 +140,9 @@ export const Menu = ({
               }) => {
                 const ItemIcon = Icons[icon];
                 return (
-                  <Content>
+                  <Content key={`menu:item:${spacesToDashes(label)}`}>
                     <Item
                       onClick={onClick}
-                      key={nanoid()}
                       data-test={`menu:item:${spacesToDashes(label)}`}
                     >
                       <ItemIcon width={16} height={16} />
