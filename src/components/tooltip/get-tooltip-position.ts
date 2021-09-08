@@ -1,4 +1,4 @@
-interface Anchors {
+export interface Anchors {
   childrenTopPosition: number;
   childrenLeftPosition: number;
   childrenWidth: number;
@@ -9,7 +9,7 @@ interface Anchors {
 }
 
 export const getTooltipPosition = (tooltipPositionType: string, anchors: Anchors) => {
-  const isInvalidAnchors = Object.values(anchors).some(anchor => Number.isNaN(anchor) || anchor === Infinity);
+  const isInvalidAnchors = Object.values(anchors).some(anchor => Number.isNaN(anchor) || anchor === Infinity || typeof anchor !== 'number');
   const {
     childrenTopPosition, childrenLeftPosition, childrenWidth, childrenHeight, messageHeight, messageWidth, offset,
   } = anchors;
@@ -43,8 +43,8 @@ export const getTooltipPosition = (tooltipPositionType: string, anchors: Anchors
       };
     default:
       return {
-        top: `${0}px`,
-        left: `${0}px`,
+        top: '0px',
+        left: '0px',
       };
   }
 };
