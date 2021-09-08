@@ -120,12 +120,4 @@ describe('Table', () => {
     render(<TableActionsProvider><Table {...props} data="" /></TableActionsProvider>);
     expect(screen.getByText('Table load failed')).toBeInTheDocument();
   });
-
-  // it('should sort table after click to table cell', () => {
-  //   const { container } = render(<TableActionsProvider><Table {...props} isDefaulToggleSortBy /></TableActionsProvider>);
-  //   const headerCell = getByDataTest(container, 'table-th-buildVersion');
-  //   expect(screen.getAllByText(/0./)[0].textContent).toBe('0.0.0');
-  //   fireEvent.click(getByDataTest(headerCell, 'table-th-sort-arrow'));
-  //   expect(screen.getAllByText(/0./)[0].textContent).toBe('0.24.0');
-  // });
 });
