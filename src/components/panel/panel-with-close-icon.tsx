@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 import React from 'react';
-import tw, { styled } from 'twin.macro';
+import 'twin.macro';
+import { Icons, Panel } from '..';
 
 interface Props {
   header: React.ReactNode;
@@ -24,22 +25,11 @@ interface Props {
   onClosePanel: () => void;
 }
 
-export const Panel = ({
-  children, header, isOpen, onClosePanel, footer,
-}: Props) => (isOpen
-  ? (
-    <Wrapper>
-      <div tw="h-full flex flex-col text-monochrome-light-tint text-24">
-        <div tw="px-6 py-7 leading-32 bg-monochrome-black">{header}</div>
-        <div tw="bg-monochrome-black flex-grow bg-opacity-[0.97]">{children}</div>
-        {footer && <div tw="h-18 bg-monochrome-black">{footer}</div>}
-      </div>
-      <div onClick={onClosePanel} style={{ background: 'rgba(0, 0, 0, 0.4)' }} />
-    </Wrapper>
-  ) : null
-);
-
-const Wrapper = styled.div`
-  ${tw`absolute inset-0 left-12 z-40 grid w-auto h-auto`}
-  grid-template-columns: auto 1fr;
-`;
+export const PanelWithCloseIcon = ({ isOpen, onClosePanel, ...rest }: Props) => (isOpen ? (
+  <>
+    <div tw="absolute left-0 top-0 h-full w-12 bg-monochrome-black text-monochrome-white pt-8 px-4">
+      <Icons.Close onClick={onClosePanel} tw="cursor-pointer" />
+    </div>
+    <Panel isOpen={isOpen} onClosePanel={onClosePanel} {...rest} />
+  </>
+) : null);
