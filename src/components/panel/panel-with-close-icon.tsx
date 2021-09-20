@@ -16,14 +16,7 @@
 import React from 'react';
 import 'twin.macro';
 import { Icons, Panel } from '..';
-
-interface Props {
-  header: React.ReactNode;
-  footer?: React.ReactNode;
-  children: React.ReactNode;
-  isOpen: boolean;
-  onClosePanel: () => void;
-}
+import { Props } from './panel';
 
 export const PanelWithCloseIcon = ({ isOpen, onClosePanel, ...rest }: Props) => (isOpen ? (
   <>

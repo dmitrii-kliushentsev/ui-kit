@@ -16,7 +16,7 @@
 import React from 'react';
 import tw, { styled } from 'twin.macro';
 
-interface Props {
+export interface Props {
   header: React.ReactNode;
   footer?: React.ReactNode;
   children: React.ReactNode;
