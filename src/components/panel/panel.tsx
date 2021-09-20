@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import React from 'react';
-import tw, { styled } from 'twin.macro';
+import 'twin.macro';
 
 export interface Props {
   header: React.ReactNode;
@@ -28,18 +28,13 @@ export const Panel = ({
   children, header, isOpen, onClosePanel, footer,
 }: Props) => (isOpen
   ? (
-    <Wrapper>
+    <div tw="absolute inset-0 left-12 z-40 grid w-auto h-auto grid-cols-[auto 1fr]">
       <div tw="h-full flex flex-col text-monochrome-light-tint text-24">
         <div tw="px-6 py-7 leading-32 bg-monochrome-black">{header}</div>
         <div tw="bg-monochrome-black flex-grow bg-opacity-[0.97]">{children}</div>
         {footer && <div tw="h-18 bg-monochrome-black">{footer}</div>}
       </div>
       <div onClick={onClosePanel} style={{ background: 'rgba(0, 0, 0, 0.4)' }} />
-    </Wrapper>
+    </div>
   ) : null
 );
-
-const Wrapper = styled.div`
-  ${tw`absolute inset-0 left-12 z-40 grid w-auto h-auto`}
-  grid-template-columns: auto 1fr;
-`;
