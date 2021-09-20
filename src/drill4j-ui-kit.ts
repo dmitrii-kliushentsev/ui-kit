@@ -52,6 +52,7 @@ export {
   useTableActionsDispatch,
   Dropdown,
   FormValidator,
+  Panel,
 } from './components';
 export {
   useClickOutside, useElementSize, useHover, usePreserveCaretPosition,

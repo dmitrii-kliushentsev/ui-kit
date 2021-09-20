@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 import React from 'react';
-import 'twin.macro';
+import tw, { styled } from 'twin.macro';
+import { Icons } from '..';
 
 interface Props {
   header: React.ReactNode;
@@ -22,19 +23,31 @@ interface Props {
   children: React.ReactNode;
   isOpen: boolean;
   onClosePanel: () => void;
+  hasAdditionalCloseButton?: boolean;
 }
 
 export const Panel = ({
-  children, header, isOpen, onClosePanel, footer,
+  children, header, isOpen, onClosePanel, footer, hasAdditionalCloseButton,
 }: Props) => (isOpen
   ? (
-    <>
-      <div tw="absolute top-0 left-12 z-20 text-monochrome-light-tint text-24 h-full left-12 flex flex-col">
+    <Wrapper hasAdditionalCloseButton={hasAdditionalCloseButton}>
+      {hasAdditionalCloseButton && (
+        <div tw="bg-monochrome-black text-monochrome-white pt-8 px-4">
+          <Icons.Close onClick={onClosePanel} tw="cursor-pointer" />
+        </div>
+      )}
+      <div tw="h-full flex flex-col text-monochrome-light-tint text-24">
         <div tw="px-6 py-7 leading-32 bg-monochrome-black">{header}</div>
-        <div tw="bg-monochrome-black flex-grow" style={{ opacity: '0.97' }}>{children}</div>
+        <div tw="bg-monochrome-black flex-grow bg-opacity-[0.97]">{children}</div>
         {footer && <div tw="h-18 bg-monochrome-black">{footer}</div>}
       </div>
-      <div onClick={onClosePanel} tw="absolute z-10 inset-0 left-12" style={{ background: 'rgba(0, 0, 0, 0.4)' }} />
-    </>
+      <div onClick={onClosePanel} style={{ background: 'rgba(0, 0, 0, 0.4)' }} />
+    </Wrapper>
   ) : null
 );
+
+const Wrapper = styled.div<{ hasAdditionalCloseButton?: boolean; }>(({ hasAdditionalCloseButton }) => [
+  tw`absolute inset-0 z-40 grid w-auto h-auto`,
+  !hasAdditionalCloseButton && tw`left-12`,
+  hasAdditionalCloseButton ? 'grid-template-columns: 48px auto 1fr;' : 'grid-template-columns: auto 1fr;',
+]);
