@@ -74,6 +74,8 @@ import { path as stateWatcher } from './path/state-watcher.path';
 import { path as data } from './path/data.path';
 import { path as play } from './path/play.path';
 import { declareIcon } from './declare-icon';
+import { path as transparentLogo } from './path/transparent-logo.path';
+import { path as logout } from './path/logout.path';
 
 export const Icons = {
   Arrow: declareIcon(arrowPath),
@@ -167,4 +169,6 @@ export const Icons = {
   Data: declareIcon(data, { defaultWidth: 32, defaultHeight: 32 }),
   Play: declareIcon(play),
   Pause: declareIcon(pause),
+  TransparentLogo: declareIcon(transparentLogo),
+  Logout: declareIcon(logout, { defaultWidth: 24, defaultHeight: 24, viewBox: '0 0 24 24' }),
 };
