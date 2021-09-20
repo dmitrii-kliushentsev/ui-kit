@@ -23,15 +23,15 @@ interface Props {
   children: React.ReactNode;
   isOpen: boolean;
   onClosePanel: () => void;
-  hasAdditionalCloseButton?: boolean;
+  hasCloseIcon?: boolean;
 }
 
 export const Panel = ({
-  children, header, isOpen, onClosePanel, footer, hasAdditionalCloseButton,
+  children, header, isOpen, onClosePanel, footer, hasCloseIcon,
 }: Props) => (isOpen
   ? (
-    <Wrapper hasAdditionalCloseButton={hasAdditionalCloseButton}>
-      {hasAdditionalCloseButton && (
+    <Wrapper hasCloseIcon={hasCloseIcon}>
+      {hasCloseIcon && (
         <div tw="bg-monochrome-black text-monochrome-white pt-8 px-4">
           <Icons.Close onClick={onClosePanel} tw="cursor-pointer" />
         </div>
@@ -46,8 +46,8 @@ export const Panel = ({
   ) : null
 );
 
-const Wrapper = styled.div<{ hasAdditionalCloseButton?: boolean; }>(({ hasAdditionalCloseButton }) => [
+const Wrapper = styled.div<{ hasCloseIcon?: boolean; }>(({ hasCloseIcon }) => [
   tw`absolute inset-0 z-40 grid w-auto h-auto`,
-  !hasAdditionalCloseButton && tw`left-12`,
-  hasAdditionalCloseButton ? 'grid-template-columns: 48px auto 1fr;' : 'grid-template-columns: auto 1fr;',
+  !hasCloseIcon && tw`left-12`,
+  hasCloseIcon ? 'grid-template-columns: 48px auto 1fr;' : 'grid-template-columns: auto 1fr;',
 ]);
