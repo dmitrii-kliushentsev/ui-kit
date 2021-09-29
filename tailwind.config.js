@@ -112,6 +112,7 @@ module.exports = {
       monochrome: {
         gray: '#81868B',
         dark: '#444244',
+        dark100: '#282728',
         black: '#1b191b',
         white: '#ffffff',
         default: '#687481',

@@ -41,4 +41,5 @@ export {
   toError,
   Dropdown,
   FormValidator,
+  idValidator,
 } from './forms';

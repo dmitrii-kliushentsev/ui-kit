@@ -21,14 +21,6 @@ import tw, { styled } from 'twin.macro';
 import { convertToSingleSpaces } from '../../../utils';
 import { usePreserveCaretPosition } from '../../../hooks/use-preserve-caret-position';
 
-const ErrorMessageWrapper = styled.div`
-  ${tw`text-12 leading-24 whitespace-nowrap text-red-default`};
-
-  &::first-letter {
-    text-transform: uppercase;
-  }
-`;
-
 interface Props {
   field: FieldInputProps<any>;
   form?: FormikProps<any>;
@@ -76,3 +68,11 @@ export const fieldWrapper = (Input: React.ElementType) => ({
     </div>
   );
 };
+
+const ErrorMessageWrapper = styled.div`
+  ${tw`absolute text-12 leading-24 whitespace-nowrap text-red-default`};
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+`;

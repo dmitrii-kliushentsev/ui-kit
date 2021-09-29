@@ -4,7 +4,7 @@ import 'twin.macro';
 import { Checkbox } from './checkbox';
 
 storiesOf('Checkbox', module).add('Checkbox', () => (
-  <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto' }}>
+  <div tw="flex gap-4 p-4 bg-monochrome-dark">
     <label tw="text-blue-default">
       <Checkbox />
     </label>

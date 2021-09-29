@@ -7,14 +7,26 @@ export const DarkTextarea = styled.textarea<{
 }>`
   ${tw`
     appearance-none
-    w-[400px] h-20 px-4 py-2
+    w-[400px] h-19 px-4 py-2
     box-border outline-none
     font-regular text-14 leading-24 text-monochrome-medium-tint
     bg-monochrome-black border rounded border-monochrome-dark
     placeholder-monochrome-dark
     focus:border-monochrome-white
-    resize-none
+    hover:border-monochrome-gray
+    resize-y
   `}
+  
+    &::-webkit-scrollbar {
+      ${tw`w-1 rounded bg-monochrome-light-tint`}
+    };
 
-  ${({ disabled, error, touched }) => [touched && error && tw`border-red-default`]}
+    &::-webkit-scrollbar-thumb {
+      ${tw`w-1 rounded bg-monochrome-dark`}
+    };
+
+  ${({ disabled, error, touched }) => [
+    touched && error && tw`border-red-default`,
+    disabled && tw`bg-monochrome-dark100 text-monochrome-dark`,
+  ]}
 `;

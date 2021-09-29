@@ -9,9 +9,11 @@ export const DarkInput = styled.input<{ disabled?: boolean; error?: boolean; tou
     bg-monochrome-black border rounded border-monochrome-dark
     placeholder-monochrome-dark
     focus:border-monochrome-white
+    hover:border-monochrome-gray
   `}
 
   ${({ disabled, error, touched }) => [
     touched && error && tw`border-red-default`,
+    disabled && tw`bg-monochrome-dark100 text-monochrome-dark`,
   ]}
 `;

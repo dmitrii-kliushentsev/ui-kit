@@ -14,4 +14,5 @@ export {
   sizeLimit,
   toError,
   FormValidator,
+  idValidator,
 } from './form-validators';

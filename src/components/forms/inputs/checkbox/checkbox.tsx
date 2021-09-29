@@ -7,8 +7,7 @@ export const Checkbox = ({ field, ...props }: any) => (
       max-w-[16px]
       min-h-[16px]
       max-h-[16px]
-      bg-check-mark
-      bg-monochrome-white
+      bg-transparent
       bg-no-repeat
       border rounded
       border-current-color
@@ -17,6 +16,7 @@ export const Checkbox = ({ field, ...props }: any) => (
       checked:bg-current-color
       checked:hover:opacity-[0.8]
       checked:border-transparent
+      checked:bg-check-mark
       disabled:opacity-50
     "
     {...field}

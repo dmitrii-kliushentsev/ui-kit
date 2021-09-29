@@ -6,6 +6,7 @@ import { Checkbox } from './checkbox';
 import { Toggler } from './toggler';
 import { DarkInput } from './dark-input';
 import { DarkTextarea } from './dark-textarea';
+import { Select } from './select';
 
 export {
   Button, LinkButton, CancelButton, NegativeActionButton,
@@ -20,5 +21,7 @@ export const Inputs = {
   Toggler,
   DarkInput,
   DarkTextarea,
+  Select,
 };
+
 export { Dropdown } from './dropdown';

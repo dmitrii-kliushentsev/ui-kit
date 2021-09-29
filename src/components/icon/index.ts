@@ -76,6 +76,8 @@ import { path as play } from './path/play.path';
 import { declareIcon } from './declare-icon';
 import { path as transparentLogo } from './path/transparent-logo.path';
 import { path as logout } from './path/logout.path';
+import { path as stepperArrow } from './path/stepper-arrow.path';
+import { path as danger } from './path/danger.path';
 
 export const Icons = {
   Arrow: declareIcon(arrowPath),
@@ -171,4 +173,6 @@ export const Icons = {
   Pause: declareIcon(pause),
   TransparentLogo: declareIcon(transparentLogo),
   Logout: declareIcon(logout, { defaultWidth: 24, defaultHeight: 24, viewBox: '0 0 24 24' }),
+  StepperArrow: declareIcon(stepperArrow),
+  Danger: declareIcon(danger),
 };
