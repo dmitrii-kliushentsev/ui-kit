@@ -16,14 +16,26 @@ export const DarkTextarea = styled.textarea<{
     hover:border-monochrome-gray
     resize-y
   `}
-  
-    &::-webkit-scrollbar {
-      ${tw`w-1 rounded bg-monochrome-light-tint`}
-    };
 
-    &::-webkit-scrollbar-thumb {
-      ${tw`w-1 rounded bg-monochrome-dark`}
-    };
+  ::-webkit-scrollbar {
+    ${tw`w-[17px] rounded`}
+  }
+
+  ::-webkit-scrollbar-track {
+    ${tw`bg-monochrome-black rounded`}
+  }
+
+  ::-webkit-scrollbar-thumb {
+    ${tw`bg-monochrome-gray border-[6px] border-solid rounded-full border-monochrome-black`}
+  }
+
+  ::-webkit-resizer {
+    ${tw`bg-monochrome-black bg-resize bg-no-repeat`}
+  }
+
+  :disabled::-webkit-resizer {
+    ${tw`bg-transparent`}
+  }
 
   ${({ disabled, error, touched }) => [
     touched && error && tw`border-red-default`,

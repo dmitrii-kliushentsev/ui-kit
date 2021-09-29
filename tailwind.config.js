@@ -20,13 +20,18 @@ module.exports = {
       none: 'none',
     },
     extend: {
-      backgroundImage: theme => ({
+      backgroundImage: (theme) => ({
         'check-mark': `url("${svgToDataUri(`
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16" version="1.1">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
               <path d="M1.727 6.821a.935.935 0 0 0 .001 1.376l4.294 4.106a.99.99 0 0 0 1.417-.04l6.872-7.358c.38-.408.36-1.045-.038-1.417l.204.19a.982.982 0 0 0-1.398.057L7.42 9.932a.968.968 0 0 1-1.394.038L2.973 7.03a1.068 1.068 0 0 0-1.45-.018l.204-.19z" fill="#FFF" />
             </g>
           </svg>
+      `)}")`,
+        resize: `url("${svgToDataUri(`
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M8.84722 3.14798C8.65007 2.95067 8.33042 2.95067 8.13327 3.14798L3.14786 8.13748C2.95071 8.3348 2.95071 8.6547 3.14786 8.85202C3.34501 9.04933 3.66466 9.04933 3.86181 8.85202L8.84722 3.86252C9.04437 3.6652 9.04437 3.3453 8.84722 3.14798ZM8.85204 5.98975C8.65489 5.79244 8.33524 5.79244 8.13809 5.98975L5.99625 8.13335C5.7991 8.33066 5.7991 8.65057 5.99625 8.84788C6.1934 9.0452 6.51305 9.0452 6.7102 8.84788L8.85204 6.70428C9.04919 6.50697 9.04919 6.18706 8.85204 5.98975Z" fill="#81868B"/>
+        </svg>
       `)}")`,
       }),
       animation: {
@@ -200,11 +205,11 @@ module.exports = {
       64: '64px',
       86: '86px',
     },
-    borderColor: theme => ({
+    borderColor: (theme) => ({
       ...theme('colors'),
       'current-color': 'currentColor',
     }),
-    backgroundColor: theme => ({
+    backgroundColor: (theme) => ({
       ...theme('colors'),
       'current-color': 'currentColor',
     }),
