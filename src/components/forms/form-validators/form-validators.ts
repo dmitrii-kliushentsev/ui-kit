@@ -83,7 +83,7 @@ export function numericLimits({
 export function positiveInteger(fieldName: string, fieldAlias?: string): FormValidator {
   return (valitationItem) => {
     const value = getPropertyByPath(valitationItem, fieldName);
-    return !Number.isInteger(Number(value)) || Number(value) < 0
+    return !Number.isInteger(Number(value)) || Number(value) < 0 || value === ''
       ? toError(fieldName, `${fieldAlias || camelToSpaces(fieldName)} value should be a positive integer or 0`)
       : undefined;
   };
