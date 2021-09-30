@@ -1,44 +1,61 @@
 import tw, { styled } from 'twin.macro';
 
-export const DarkTextarea = styled.textarea<{
+export const DarkTextarea = (props: any) => (
+  <TextareaWrapper {...props}>
+    <StyledTextarea {...props} />
+  </TextareaWrapper>
+);
+
+const TextareaWrapper = styled.span<{
   disabled?: boolean;
   error?: boolean;
   touched?: boolean;
 }>`
-  ${tw`
-    appearance-none
-    w-[400px] h-19 px-4 py-2
+${tw`
+    flex flex-grow py-2
+    w-[400px] h-full
     box-border outline-none
     font-regular text-14 leading-24 text-monochrome-medium-tint
     bg-monochrome-black border rounded border-monochrome-dark
     placeholder-monochrome-dark
     focus:border-monochrome-white
     hover:border-monochrome-gray
+    overflow-hidden
     resize-y
   `}
 
+${({ disabled, error, touched }) => [
+    touched && error && tw`border-red-default`,
+    disabled && tw`bg-monochrome-dark100 text-monochrome-dark resize-none`,
+  ]}
+
+`;
+
+const StyledTextarea = styled.textarea<{
+  disabled?: boolean;
+  error?: boolean;
+  touched?: boolean;
+}>`
+  ${tw`
+    appearance-none
+    w-full min-h-[70px] h-full pl-4
+    box-border outline-none
+    font-regular text-14 leading-24 text-monochrome-medium-tint
+    bg-transparent
+    placeholder-monochrome-dark
+    resize-none
+  `}
+  
+
   ::-webkit-scrollbar {
-    ${tw`w-[17px] rounded`}
+    ${tw`w-[6px] rounded`}
   }
 
   ::-webkit-scrollbar-track {
-    ${tw`bg-monochrome-black rounded`}
+    ${tw`bg-transparent rounded`}
   }
 
   ::-webkit-scrollbar-thumb {
-    ${tw`bg-monochrome-gray border-[6px] border-solid rounded-full border-monochrome-black`}
+    ${tw`bg-monochrome-gray border border-solid rounded-full border-monochrome-black hover:bg-blue-medium-tint`}
   }
-
-  ::-webkit-resizer {
-    ${tw`bg-monochrome-black bg-resize bg-no-repeat`}
-  }
-
-  :disabled::-webkit-resizer {
-    ${tw`bg-transparent`}
-  }
-
-  ${({ disabled, error, touched }) => [
-    touched && error && tw`border-red-default`,
-    disabled && tw`bg-monochrome-dark100 text-monochrome-dark`,
-  ]}
 `;

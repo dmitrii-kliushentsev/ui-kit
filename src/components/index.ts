@@ -23,6 +23,7 @@ export {
 } from './table';
 export {
   FormGroup,
+  DarkFormGroup,
   Inputs,
   Button,
   LinkButton,
