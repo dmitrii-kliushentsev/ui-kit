@@ -62,7 +62,7 @@ const Header = styled.div`
 `;
 
 const Fade = styled.div`
-  opacity: 0.75;
+  opacity: 0.4;
   z-index: 90;
-  ${tw`absolute w-full h-full top-0 left-0 bg-monochrome-white`};
+  ${tw`absolute w-full h-full top-0 left-0 bg-monochrome-black`};
 `;

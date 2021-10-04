@@ -53,6 +53,7 @@ export {
   useTableActionsDispatch,
   Dropdown,
   FormValidator,
+  idValidator,
 } from './components';
 export {
   useClickOutside, useElementSize, useHover, usePreserveCaretPosition,
