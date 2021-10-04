@@ -26,6 +26,7 @@ export {
   Status,
   Stub,
   FormGroup,
+  DarkFormGroup,
   Inputs,
   Button,
   LinkButton,
