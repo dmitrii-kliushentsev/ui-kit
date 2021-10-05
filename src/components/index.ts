@@ -1,4 +1,4 @@
-export { Badge } from './badge';
+export { Badge, CheckedBadge } from './badge';
 export { Icons } from './icon';
 export { Popup } from './popup';
 export { Spinner } from './spinner';
@@ -44,3 +44,4 @@ export {
   FormValidator,
   idValidator,
 } from './forms';
+export { IndicatorInEdge } from './indicator-in-edge';

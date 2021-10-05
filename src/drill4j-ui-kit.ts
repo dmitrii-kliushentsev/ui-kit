@@ -54,6 +54,8 @@ export {
   Dropdown,
   FormValidator,
   idValidator,
+  CheckedBadge,
+  IndicatorInEdge,
 } from './components';
 export {
   useClickOutside, useElementSize, useHover, usePreserveCaretPosition,
