@@ -78,6 +78,8 @@ import { path as transparentLogo } from './path/transparent-logo.path';
 import { path as logout } from './path/logout.path';
 import { path as stepperArrow } from './path/stepper-arrow.path';
 import { path as danger } from './path/danger.path';
+import { path as openInNewTab } from './path/open-in-new-tab';
+import { path as plus } from './path/plus';
 
 export const Icons = {
   Arrow: declareIcon(arrowPath),
@@ -175,4 +177,6 @@ export const Icons = {
   Logout: declareIcon(logout, { defaultWidth: 24, defaultHeight: 24, viewBox: '0 0 24 24' }),
   StepperArrow: declareIcon(stepperArrow),
   Danger: declareIcon(danger),
+  OpenInNewTab: declareIcon(openInNewTab),
+  Plus: declareIcon(plus),
 };

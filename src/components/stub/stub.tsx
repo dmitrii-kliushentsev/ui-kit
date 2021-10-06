@@ -43,5 +43,5 @@ const Title = styled.div`
 `;
 
 const Message = styled.div`
-  ${tw`mt-2 text-14 leading-20 text-monochrome-default text-center`};
+  ${tw`text-14 leading-20 text-monochrome-default text-center`};
 `;
