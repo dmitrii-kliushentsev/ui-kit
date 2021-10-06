@@ -1,8 +1,9 @@
 import React from 'react';
+import 'twin.macro';
 
 export const Spinner = () => (
   <svg
-    className="animate-spin w-4 h-4 text-blue-default"
+    tw="animate-spin w-4 h-4 text-blue-default"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
