@@ -43,4 +43,5 @@ export {
   Dropdown,
   FormValidator,
   idValidator,
+  DisabledFormGroup,
 } from './forms';

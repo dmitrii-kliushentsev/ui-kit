@@ -4,21 +4,23 @@ import { useClickOutside } from '../../../../hooks';
 import { DarkInput } from '../dark-input';
 import { Icons } from '../../../icon';
 
-export const Select = ({ options, placeholder }: { options: string[]; placeholder: string; }) => {
+export const Select = ({ options, placeholder, field }: { options: string[]; placeholder: string; field: any }) => {
   const [selectedOption, setSelectedOption] = useState('');
   const [isListOpened, setIsListOpened] = useState(false);
   const node = useClickOutside(() => setIsListOpened(false));
+
   return (
     <div tw="w-[400px] space-y-1 text-monochrome-medium-tint" ref={node}>
       <div tw="relative hover:text-blue-medium-tint" onClick={() => setIsListOpened(!isListOpened)}>
         <DarkInput
+          {...field}
           value={selectedOption}
           placeholder={placeholder}
           tw="caret-transparent cursor-pointer"
         />
         <Icons.Expander
           rotate={isListOpened ? -90 : 90}
-          tw="absolute top-3 right-4 cursor-pointer"
+          tw="absolute top-[14px] right-4 cursor-pointer"
         />
       </div>
       <div>
