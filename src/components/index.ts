@@ -44,4 +44,5 @@ export {
   FormValidator,
   idValidator,
   DisabledFormGroup,
+  alreadyExist,
 } from './forms';

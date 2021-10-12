@@ -104,3 +104,12 @@ export function idValidator(id: string, alias?: string): FormValidator {
     ? toError(id, `Incorrect ${alias}. Use lowercase Latin letters, digits and dashes.`)
     : undefined);
 }
+
+export function alreadyExist(fieldName: string, unavailableIds: string[], errorMessage: string): FormValidator {
+  return (valitationItem) => {
+    const value = getPropertyByPath<string>(valitationItem, fieldName) || '';
+    return unavailableIds.includes(value)
+      ? toError(fieldName, errorMessage)
+      : undefined;
+  };
+}

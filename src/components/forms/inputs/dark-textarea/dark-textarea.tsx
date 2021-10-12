@@ -26,7 +26,7 @@ ${tw`
 
 ${({ disabled, error, touched }) => [
     touched && error && tw`border-red-default`,
-    disabled && tw`bg-monochrome-dark100 text-monochrome-dark resize-none`,
+    disabled && tw`bg-monochrome-dark100 text-monochrome-medium-tint opacity-40 resize-none`,
   ]}
 
 `;

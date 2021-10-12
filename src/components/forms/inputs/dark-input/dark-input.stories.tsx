@@ -6,7 +6,7 @@ import { Fields } from '../../fields';
 import 'twin.macro';
 
 storiesOf('DarkInput', module).add('DarkInput', () => (
-  <div tw="bg-monochrome-dark p-6">
+  <div tw="bg-monochrome-dark100 p-10">
     <h1>Signup</h1>
     <Formik
       initialValues={{
@@ -34,6 +34,7 @@ storiesOf('DarkInput', module).add('DarkInput', () => (
       <Form tw="w-40 space-y-4">
         <Field name="name" component={Fields.DarkInput} placeholder="enter name" />
         <Field name="email" component={Fields.DarkInput} placeholder="enter email" />
+        <Field name="email" component={Fields.DarkInput} placeholder="enter email" disabled />
       </Form>
     </Formik>
   </div>

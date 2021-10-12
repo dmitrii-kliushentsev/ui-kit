@@ -55,6 +55,7 @@ export {
   FormValidator,
   idValidator,
   DisabledFormGroup,
+  alreadyExist,
 } from './components';
 export {
   useClickOutside, useElementSize, useHover, usePreserveCaretPosition,

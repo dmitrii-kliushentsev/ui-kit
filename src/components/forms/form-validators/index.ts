@@ -10,4 +10,5 @@ export {
   toError,
   FormValidator,
   idValidator,
+  alreadyExist,
 } from './form-validators';
