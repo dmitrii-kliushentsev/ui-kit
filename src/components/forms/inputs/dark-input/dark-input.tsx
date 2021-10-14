@@ -8,12 +8,12 @@ export const DarkInput = styled.input<{ disabled?: boolean; error?: boolean; tou
     font-regular text-14 leading-24 text-monochrome-medium-tint
     bg-monochrome-black border rounded border-monochrome-dark
     placeholder-monochrome-dark
-    focus:border-monochrome-white
     hover:border-monochrome-gray
+    focus:border-monochrome-white
   `}
 
   ${({ disabled, error, touched }) => [
     touched && error && tw`border-red-default`,
-    disabled && tw`bg-monochrome-dark100 text-monochrome-medium-tint opacity-40`,
+    disabled && tw`bg-monochrome-dark100 text-monochrome-medium-tint opacity-40 hover:border-monochrome-dark`,
   ]}
 `;

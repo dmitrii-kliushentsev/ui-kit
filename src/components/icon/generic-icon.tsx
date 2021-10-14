@@ -1,4 +1,4 @@
-import { styled } from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
 interface GenericIconProps {
   className?: string;
@@ -12,18 +12,22 @@ interface GenericIconProps {
   onClick?: () => void;
 }
 
-export const GenericIcon = styled(({ path, rotate = 0, ...rest }: GenericIconProps) => (
-  <svg
-    {...rest}
-    transform={`rotate(${rotate})`}
-    style={{ WebkitTransform: `rotate(${rotate}deg)` }}
-  >
-    {mapPath(path, (d: string, key: number) => (
-      <path d={d} key={key} />
-    ))}
-  </svg>
+export const GenericIcon = styled(({
+  path, rotate = 0, className, onClick, ...rest
+}: GenericIconProps) => (
+  <div className={className} onClick={onClick}>
+    <svg
+      {...rest}
+      transform={`rotate(${rotate})`}
+      style={{ WebkitTransform: `rotate(${rotate}deg)` }}
+    >
+      {mapPath(path, (d: string, key: number) => (
+        <path d={d} key={key} />
+      ))}
+    </svg>
+  </div>
 ))`
-  fill: currentColor;
+  ${tw`inline-flex items-center justify-center fill-current`}
 `;
 
 function mapPath(path = '', mapper: (value: string, index: number) => JSX.Element) {
