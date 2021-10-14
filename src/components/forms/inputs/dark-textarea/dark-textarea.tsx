@@ -11,22 +11,22 @@ const TextareaWrapper = styled.span<{
   error?: boolean;
   touched?: boolean;
 }>`
-${tw`
+  ${tw`
     flex flex-grow py-2
     w-[400px] h-full
     box-border outline-none
     font-regular text-14 leading-24 text-monochrome-medium-tint
     bg-monochrome-black border rounded border-monochrome-dark
     placeholder-monochrome-dark
-    focus:border-monochrome-white
     hover:border-monochrome-gray
+    focus-within:border-monochrome-white
     overflow-hidden
     resize-y
   `}
 
-${({ disabled, error, touched }) => [
+  ${({ disabled, error, touched }) => [
     touched && error && tw`border-red-default`,
-    disabled && tw`bg-monochrome-dark100 text-monochrome-medium-tint opacity-40 resize-none`,
+    disabled && tw`bg-monochrome-dark100 text-monochrome-medium-tint opacity-40 resize-none hover:border-monochrome-dark`,
   ]}
 
 `;
@@ -45,7 +45,6 @@ const StyledTextarea = styled.textarea<{
     placeholder-monochrome-dark
     resize-none
   `}
-  
 
   ::-webkit-scrollbar {
     ${tw`w-[6px] rounded`}
