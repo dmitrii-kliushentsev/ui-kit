@@ -1,33 +1,33 @@
 import tw, { styled } from 'twin.macro';
 
 import { InputProps } from '../input-types';
-import { Input } from '../input';
 import { Icons } from '../../../icon';
 
 export const SearchInput = ({
+  className,
   reset,
   ...restProps
 }: InputProps) => (
   <div tw="relative">
-    <div tw="flex w-full items-center">
+    <div tw="flex items-center" className={className}>
       <SearchIcon />
-      <InputElement {...restProps} />
-      {restProps.value && <ClearIcon width={8} height={8} onClick={reset} data-testid="search-input:clear-icon" />}
+      <Input {...restProps} />
+      {restProps?.value && (
+        <ClearIcon width={8} height={8} onClick={reset} data-testid="search-input:clear-icon" />
+      )}
     </div>
   </div>
 );
 
-const InputElement = styled(Input)`
-  padding: 0 24px;
-  width: 400px;
-  max-height: 25px;
-  border: 0;
-  border-radius: 0;
-
-  &:focus {
-    border: 0;
-    border-bottom: solid 1px #e3e6e8;
-  }
+const Input = styled.input`
+  ${tw`
+    w-full h-6 px-6 
+    appearance-none outline-none 
+    border-b border-transparent
+    text-14 leading-20 font-regular text-monochrome-black
+    placeholder-monochrome-default
+    focus:(border-monochrome-medium-tint)
+  `};
 `;
 
 const SearchIcon = styled(Icons.Search)`
@@ -35,6 +35,5 @@ const SearchIcon = styled(Icons.Search)`
 `;
 
 const ClearIcon = styled(Icons.Close)`
-  ${tw`absolute text-red-default cursor-pointer`}
-  left: 390px;
+  ${tw`absolute text-red-default cursor-pointer right-0`}
 `;
