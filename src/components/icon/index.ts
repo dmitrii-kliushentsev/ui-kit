@@ -80,6 +80,7 @@ import { path as stepperArrow } from './path/stepper-arrow.path';
 import { path as danger } from './path/danger.path';
 import { path as openInNewTab } from './path/open-in-new-tab';
 import { path as plus } from './path/plus';
+import { path as noAgentsPlaceholder } from './path/no-agents-placeholder.path';
 
 export const Icons = {
   Arrow: declareIcon(arrowPath),
@@ -179,4 +180,5 @@ export const Icons = {
   Danger: declareIcon(danger),
   OpenInNewTab: declareIcon(openInNewTab),
   Plus: declareIcon(plus),
+  NoAgentsPlaceholder: declareIcon(noAgentsPlaceholder, { defaultWidth: 234, defaultHeight: 207, viewBox: '0 0 234 207' }),
 };

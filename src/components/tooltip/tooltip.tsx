@@ -64,13 +64,14 @@ export const Tooltip = ({
   };
 
   return (
-    <div tw="inline-block" className={className}>
+    <div tw="inline-block">
       <div ref={ref}>
         <div ref={childrenRef}>{children}</div>
       </div>
       {isVisible && message && (
         <Portal rootElementId="tooltip">
           <Message
+            className={className}
             style={getTooltipPosition(tooltipPositionType, anchors)}
             type={tooltipPositionType}
           >
