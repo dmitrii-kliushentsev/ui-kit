@@ -15,6 +15,15 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - run: npm install
+      - name: Figma Action
+        uses: primer/figma-action@v1.0.0-alpha.2
+        with:
+          args: "format=svg outputDir=./src/"
+        env:
+          FIGMA_FILE_URL: ${{ secrets.FIGMA_FILE_URL }}
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+      - run: npm run fetch
+      - run: npm run generate
       - run: npm run build
       - run: npm publish --access public
         env:
