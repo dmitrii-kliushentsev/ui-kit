@@ -6,5 +6,5 @@
     "@babel/preset-typescript",
     "@babel/preset-env"
   ],
-  "plugins": [ "babel-plugin-styled-components", "babel-plugin-twin", "babel-plugin-macros" ]
+  "plugins": [ "babel-plugin-styled-components", "babel-plugin-twin", "babel-plugin-macros", "@babel/proposal-object-rest-spread" ]
 }
