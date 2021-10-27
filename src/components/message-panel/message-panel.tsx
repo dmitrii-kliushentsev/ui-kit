@@ -10,7 +10,7 @@ interface Props {
 
 export const MessagePanel = ({ message: { type, text }, onClose }: Props) => (
   <div tw="absolute h-12 w-full right-0 z-50">
-    <Content type={type}>
+    <Content type={type} data-test={`message-panel:type:${type}`}>
       <div tw="flex w-full items-center justify-between">
         <div tw="flex w-full items-center">
           {getMessageIcon(type)}
