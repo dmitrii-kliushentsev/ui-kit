@@ -19,7 +19,7 @@ import {
 } from 'formik';
 import tw, { styled } from 'twin.macro';
 import { convertToSingleSpaces } from '../../../utils';
-import { usePreserveCaretPosition } from '../../../hooks/use-preserve-caret-position';
+import { usePreserveCaretPosition } from '../../../hooks';
 
 interface Props {
   field: FieldInputProps<any>;
@@ -28,10 +28,12 @@ interface Props {
   disabled?: boolean;
   name?: string;
   normalize?: (value: string) => string;
+  focus?: boolean;
+  select?: boolean;
 }
 
 export const fieldWrapper = (Input: React.ElementType) => ({
-  field: { name }, form, placeholder, disabled, normalize = (value) => value,
+  field: { name }, form, placeholder, disabled, normalize = (value) => value, focus, select,
 }: Props) => {
   const [field, meta, helper] = useField(name);
   const { isSubmitting, dirty, handleSubmit } = form || {};
@@ -51,6 +53,13 @@ export const fieldWrapper = (Input: React.ElementType) => ({
       node && node.current && node.current.removeEventListener('keydown', listener);
     };
   });
+
+  useEffect(() => {
+    if (node && node.current) {
+      focus && node.current.focus();
+      select && node.current.select();
+    }
+  }, []);
 
   return (
     <div>
