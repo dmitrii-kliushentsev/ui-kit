@@ -13,18 +13,16 @@ interface Props {
 export const Modal = ({
   children, onToggle, isOpen, isDisableFadeClick,
 }: Props) => (
-  <Portal rootElementId="modal">
-    {isOpen && (
-      <div tw="flex w-full h-full justify-center items-center">
-        <ModalCard>
-          <CloseButton tw="cursor-pointer" onClick={() => onToggle(!isOpen)} data-test="modal:close-button">
-            <Icons.Close />
-          </CloseButton>
-          {children}
-        </ModalCard>
-        <Fade onClick={() => !isDisableFadeClick && onToggle(!isOpen)} data-test="modal:fade" />
-      </div>
-    )}
+  <Portal rootElementId="modal" displayContent={isOpen}>
+    <div tw="flex w-full h-full justify-center items-center">
+      <ModalCard>
+        <CloseButton tw="cursor-pointer" onClick={() => onToggle(!isOpen)} data-test="modal:close-button">
+          <Icons.Close />
+        </CloseButton>
+        {children}
+      </ModalCard>
+      <Fade onClick={() => !isDisableFadeClick && onToggle(!isOpen)} data-test="modal:fade" />
+    </div>
   </Portal>
 );
 

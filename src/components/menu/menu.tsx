@@ -5,7 +5,7 @@ import tw, { styled, css } from 'twin.macro';
 
 import { spacesToDashes } from '../../utils';
 import { Icons } from '../icon';
-import { useClickOutside } from '../../hooks';
+import { useClickOutside, useIntersectionCallback } from '../../hooks';
 
 export interface MenuItemType {
   label: string;
@@ -96,22 +96,15 @@ export const Menu = ({
     } else {
       setPosition('top');
     }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        !entry.isIntersecting && setPosition('top');
-      },
-      {
-        root: null,
-        threshold: 1.0,
-      },
-    );
-    menuRef.current && observer.observe(menuRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
   }, [isListOpened]);
+
+  useIntersectionCallback({
+    ref: menuRef,
+    callback: ([entry]) => {
+      !entry.isIntersecting && setPosition('top');
+    },
+    dependency: [isListOpened],
+  });
 
   return (
     <div tw="text-monochrome-black" ref={node}>

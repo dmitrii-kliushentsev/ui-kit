@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import tw, { styled } from 'twin.macro';
 
 import { Icons } from '../../../icon/index';
-import { useClickOutside } from '../../../../hooks';
+import { useClickOutside, useIntersectionCallback } from '../../../../hooks';
 
 type Position = 'top' | 'bottom';
 type Value = string | number;
@@ -36,18 +36,16 @@ export const Dropdown = ({
   useLayoutEffect(() => {
     menuTopPosition && menuTopPosition + dropdownLabelHeight + dropdownHeight < document.documentElement.clientHeight
       ? setPosition('bottom') : setPosition('top');
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        !entry.isIntersecting && setPosition('top');
-      },
-      {
-        root: null,
-        threshold: 1.0,
-      },
-    );
-    dropdownRef.current && observer.observe(dropdownRef.current);
   }, [isOpen]);
+
+  useIntersectionCallback({
+    ref: dropdownRef,
+    callback: ([entry]) => {
+      !entry.isIntersecting && setPosition('top');
+    },
+    dependency: [isOpen],
+  });
+
   const selectedValue = items.find((item) => value === item.value);
   return (
     <div ref={node} tw="relative flex items-center gap-x-1 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
