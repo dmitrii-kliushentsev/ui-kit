@@ -40,27 +40,27 @@ export const Dropdown = ({
                 {selectedValue && selectedValue.label}
               </span>
               <Icons.Expander width={8} height={8} rotate={isOpen ? -90 : 90} />
+              {isOpen && (
+                <ScrollContainer
+                  ref={ref}
+                  style={{
+                    top: intersectionSide === 'bottom' ? `-${dropdownHeight + listMargin}px` : `${dropdownLabelHeight + listMargin}px`,
+                  }}
+                >
+                  {items.map(({ label, value: itemValue }) => (
+                    <div
+                      tw="flex items-center pl-2 pr-8 text-monochrome-black text-14 leading-32 hover:bg-monochrome-light-tint"
+                      data-test="dropdown:item"
+                      onClick={(() => onChange(itemValue))}
+                      key={value}
+                    >
+                      {itemValue === value && <Icons.Check width={14} height={10} viewBox="0 0 14 10" tw="absolute text-blue-default" />}
+                      <span tw="ml-6 whitespace-nowrap font-regular">{label}</span>
+                    </div>
+                  ))}
+                </ScrollContainer>
+              )}
             </div>
-            {isOpen && (
-              <ScrollContainer
-                ref={ref}
-                style={{
-                  top: intersectionSide === 'bottom' ? `-${dropdownHeight + listMargin}px` : `${dropdownLabelHeight + listMargin}px`,
-                }}
-              >
-                {items.map(({ label, value: itemValue }) => (
-                  <div
-                    tw="flex items-center pl-2 pr-8 text-monochrome-black text-14 leading-32 hover:bg-monochrome-light-tint"
-                    data-test="dropdown:item"
-                    onClick={(() => onChange(itemValue))}
-                    key={value}
-                  >
-                    {itemValue === value && <Icons.Check width={14} height={10} viewBox="0 0 14 10" tw="absolute text-blue-default" />}
-                    <span tw="ml-6 whitespace-nowrap font-regular">{label}</span>
-                  </div>
-                ))}
-              </ScrollContainer>
-            )}
           </>
         );
       }}
