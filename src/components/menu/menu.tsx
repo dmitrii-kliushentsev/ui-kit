@@ -29,48 +29,46 @@ export const Menu = ({
       const position = intersectionSide === 'bottom' ? 'top' : 'bottom';
 
       return (
-        <>
-          <MenuIcon
-            onClick={() => setIsOpen(!isOpen)}
-            data-test={`menu:icon:${testContext}`}
-          >
-            {bordered ? <Icons.MoreOptionsWithBorder /> : <Icons.MoreOptions />}
-            {isOpen && (
-              <div
-                ref={ref}
-                style={{
-                  position: 'absolute',
-                  zIndex: 50,
-                  top: position === 'bottom' ? 'calc(100% + 12px)' : undefined,
-                  bottom: position === 'top' ? 'calc(100% + 12px)' : undefined,
-                  right: 'calc(50% - 22px)',
-                }}
-              >
-                <ItemsList position={intersectionSide === 'bottom' ? 'top' : 'bottom'} data-test={`menu:list:${testContext}`}>
-                  {items.map(({
-                    icon,
-                    label,
-                    onClick,
-                    Content = ({ children }) => children,
-                  }) => {
-                    const ItemIcon = Icons[icon];
-                    return (
-                      <Content key={`menu:item:${spacesToDashes(label)}`}>
-                        <Item
-                          onClick={onClick}
-                          data-test={`menu:item:${spacesToDashes(label)}`}
-                        >
-                          <ItemIcon width={16} height={16} />
-                          <ItemLabel>{label}</ItemLabel>
-                        </Item>
-                      </Content>
-                    );
-                  })}
-                </ItemsList>
-              </div>
-            )}
-          </MenuIcon>
-        </>
+        <MenuIcon
+          onClick={() => setIsOpen(!isOpen)}
+          data-test={`menu:icon:${testContext}`}
+        >
+          {bordered ? <Icons.MoreOptionsWithBorder /> : <Icons.MoreOptions />}
+          {isOpen && (
+            <div
+              ref={ref}
+              style={{
+                position: 'absolute',
+                zIndex: 50,
+                top: position === 'bottom' ? 'calc(100% + 12px)' : undefined,
+                bottom: position === 'top' ? 'calc(100% + 12px)' : undefined,
+                right: 'calc(50% - 22px)',
+              }}
+            >
+              <ItemsList position={intersectionSide === 'bottom' ? 'top' : 'bottom'} data-test={`menu:list:${testContext}`}>
+                {items.map(({
+                  icon,
+                  label,
+                  onClick,
+                  Content = ({ children }) => children,
+                }) => {
+                  const ItemIcon = Icons[icon];
+                  return (
+                    <Content key={`menu:item:${spacesToDashes(label)}`}>
+                      <Item
+                        onClick={onClick}
+                        data-test={`menu:item:${spacesToDashes(label)}`}
+                      >
+                        <ItemIcon width={16} height={16} />
+                        <ItemLabel>{label}</ItemLabel>
+                      </Item>
+                    </Content>
+                  );
+                })}
+              </ItemsList>
+            </div>
+          )}
+        </MenuIcon>
       );
     }}
   </Popover>

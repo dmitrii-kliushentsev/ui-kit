@@ -2,13 +2,6 @@ import {
   DependencyList, useLayoutEffect, useRef, useState,
 } from 'react';
 
-type Callback = (entries: IntersectionObserverEntry[]) => void;
-
-export interface Props {
-  callback: Callback;
-  dependency?: DependencyList;
-}
-
 export const useIntersectionSide = ({ dependency = [] }: {dependency?: DependencyList}) => {
   const [intersectionSide, setIntersectionSide] = useState<Sides>(null);
   const ref = useRef<HTMLDivElement>(null);
