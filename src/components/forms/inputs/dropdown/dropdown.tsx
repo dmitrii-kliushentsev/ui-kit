@@ -1,10 +1,10 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import tw, { styled } from 'twin.macro';
 
 import { Icons } from '../../../icon/index';
 import { Popover } from '../../../popover';
+import { useIntersectionSide } from '../../../../hooks';
 
-type Position = 'top' | 'bottom';
 type Value = string | number;
 
 interface Item {
@@ -21,26 +21,21 @@ interface Props {
 export const Dropdown = ({
   items, onChange, value,
 }: Props) => {
-  const [position, setPosition] = useState<Position>('bottom');
-  const node = useRef<HTMLDivElement>(null);
   const labelNode = useRef<HTMLDivElement>(null);
   const itemHeight = 32;
   const dropdownHeight = itemHeight * items.length;
-  const { top: menuTopPosition = 0 } = node?.current?.getBoundingClientRect() || {};
-  const { height: dropdownLabelHeight = 0 } = labelNode?.current?.getBoundingClientRect() || {};
   const listMargin = 4;
-
   const selectedValue = items.find((item) => value === item.value);
+
   return (
     <Popover>
       {({ setIsOpen, isOpen }) => {
-        const error = 10;
-        menuTopPosition && menuTopPosition + dropdownLabelHeight + dropdownHeight + error < document.documentElement.clientHeight
-          ? setPosition('bottom') : setPosition('top');
+        const { ref, intersectionSide } = useIntersectionSide({ dependency: [isOpen] });
+        const { height: dropdownLabelHeight = 0 } = labelNode?.current?.getBoundingClientRect() || {};
 
         return (
           <>
-            <div ref={node} tw="flex items-center gap-x-1 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+            <div tw="flex items-center gap-x-1 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
               <span ref={labelNode} data-test="dropdown:selected-value">
                 {selectedValue && selectedValue.label}
               </span>
@@ -48,8 +43,9 @@ export const Dropdown = ({
             </div>
             {isOpen && (
               <ScrollContainer
+                ref={ref}
                 style={{
-                  top: position === 'bottom' ? `${dropdownLabelHeight + listMargin}px` : `-${dropdownHeight + listMargin}px`,
+                  top: intersectionSide === 'bottom' ? `-${dropdownHeight + listMargin}px` : `${dropdownLabelHeight + listMargin}px`,
                 }}
               >
                 {items.map(({ label, value: itemValue }) => (
