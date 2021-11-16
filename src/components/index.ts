@@ -47,4 +47,4 @@ export {
   DisabledFormGroup,
   alreadyExist,
 } from './forms';
-export { RelativeWrapper } from './relative-wrapper';
+export { Popover } from './popover';

@@ -1,14 +1,18 @@
-import { DependencyList, MutableRefObject, useLayoutEffect } from 'react';
+import {
+  DependencyList, useLayoutEffect, useRef,
+} from 'react';
 
 type Callback = (entries: IntersectionObserverEntry[]) => void;
 
-interface Props {
+export interface Props {
   callback: Callback;
-  ref: MutableRefObject<any>;
   dependency?: DependencyList;
 }
 
-export const useIntersectionCallback = ({ callback, ref, dependency = [] }: Props) => {
+export const useIntersectionCallback = (props: Props) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { callback, dependency = [] } = props;
+
   useLayoutEffect(() => {
     const observer = new IntersectionObserver(
       callback, {
@@ -20,5 +24,7 @@ export const useIntersectionCallback = ({ callback, ref, dependency = [] }: Prop
     return () => {
       observer.disconnect();
     };
-  }, [...dependency]);
+  }, [...dependency, ref.current]);
+
+  return ref;
 };

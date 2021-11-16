@@ -34,7 +34,6 @@ export const Tooltip = ({
   }, [isVisible]);
 
   useIntersectionCallback({
-    ref: messageRef,
     callback: ([entry]) => {
       !entry.isIntersecting &&
       setTooltipPositionType(entry.intersectionRect.left ? 'top-left' : 'top-right');

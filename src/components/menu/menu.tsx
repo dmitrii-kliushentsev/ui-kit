@@ -20,57 +20,6 @@ interface Props {
   testContext?: string;
 }
 
-const MenuIcon = styled.div`
-  max-height: 32px;
-  max-width: 32px;
-  ${tw`relative flex items-center text-blue-default cursor-pointer
-    hover:text-blue-medium-tint
-    active:text-blue-shade
-  `}
-`;
-
-const ItemsList = styled.div<{ position: 'bottom' | 'top' }>`
-  filter: drop-shadow(0 0 24px rgba(0, 0, 0, 0.15));
-  ${tw`flex flex-col py-2 px-0 rounded-lg z-50 bg-monochrome-white text-monochrome-black`}
-
-  &::before {
-    content: '';
-    position: absolute;
-    background-color: #ffffff;
-    left: calc(100% - 30px);
-    height: 15px;
-    width: 15px;
-    transform: rotate(45deg);
-  }
-
-  ${({ position }) => position === 'bottom' && css`
-    &::before {
-      top: -7px;
-    }
-  `}
-
-  ${({ position }) => position === 'top' && css`
-    &::before {
-      bottom: -7px;
-    }
-  `}
-  ${({ position }) => css`
-    &::before {
-      ${position === 'top' ? 'bottom: -7px;' : 'top: -7px;'}
-    }
-  `}
-`;
-
-const Item = styled.div`
-  ${tw`flex flex-row items-center py-0 px-4 cursor-pointer
-    hover:bg-monochrome-light-tint
-  `};
-`;
-
-const ItemLabel = styled.span`
-  ${tw`text-14 leading-32 ml-2 whitespace-nowrap`};
-`;
-
 export const Menu = ({
   items,
   bordered,
@@ -99,7 +48,6 @@ export const Menu = ({
   }, [isListOpened]);
 
   useIntersectionCallback({
-    ref: menuRef,
     callback: ([entry]) => {
       !entry.isIntersecting && setPosition('top');
     },
@@ -151,3 +99,54 @@ export const Menu = ({
     </div>
   );
 };
+
+const MenuIcon = styled.div`
+  max-height: 32px;
+  max-width: 32px;
+  ${tw`relative flex items-center text-blue-default cursor-pointer
+    hover:text-blue-medium-tint
+    active:text-blue-shade
+  `}
+`;
+
+const ItemsList = styled.div<{ position: 'bottom' | 'top' }>`
+  filter: drop-shadow(0 0 24px rgba(0, 0, 0, 0.15));
+  ${tw`flex flex-col py-2 px-0 rounded-lg z-50 bg-monochrome-white text-monochrome-black`}
+
+  &::before {
+    content: '';
+    position: absolute;
+    background-color: #ffffff;
+    left: calc(100% - 30px);
+    height: 15px;
+    width: 15px;
+    transform: rotate(45deg);
+  }
+
+  ${({ position }) => position === 'bottom' && css`
+    &::before {
+      top: -7px;
+    }
+  `}
+
+  ${({ position }) => position === 'top' && css`
+    &::before {
+      bottom: -7px;
+    }
+  `}
+  ${({ position }) => css`
+    &::before {
+      ${position === 'top' ? 'bottom: -7px;' : 'top: -7px;'}
+    }
+  `}
+`;
+
+const Item = styled.div`
+  ${tw`flex flex-row items-center py-0 px-4 cursor-pointer
+    hover:bg-monochrome-light-tint
+  `};
+`;
+
+const ItemLabel = styled.span`
+  ${tw`text-14 leading-32 ml-2 whitespace-nowrap`};
+`;
