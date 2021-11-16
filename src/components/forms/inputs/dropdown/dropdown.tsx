@@ -1,8 +1,7 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import tw, { styled } from 'twin.macro';
 
 import { Icons } from '../../../icon/index';
-import { useClickOutside, useIntersectionCallback } from '../../../../hooks';
 import { Popover } from '../../../popover';
 
 type Position = 'top' | 'bottom';
@@ -37,10 +36,11 @@ export const Dropdown = ({
       intersectionObserverObjectConfiguration={{
         dependency: [],
         callback: ([entry]) => {
+          console.log(entry);
           !entry.isIntersecting && setPosition('top');
         },
       }}
-      content={({ isOpen }) => (
+      content={({ isOpen }) => ( // TODO label
         <div ref={node} tw="flex items-center gap-x-1 cursor-pointer">
           <span ref={labelNode} data-test="dropdown:selected-value">
             {selectedValue && selectedValue.label}
@@ -50,7 +50,8 @@ export const Dropdown = ({
       )}
     >
       {({ ref: dropdownRef }) => {
-        menuTopPosition && menuTopPosition + dropdownLabelHeight + dropdownHeight < document.documentElement.clientHeight
+        const error = 10;
+        menuTopPosition && menuTopPosition + dropdownLabelHeight + dropdownHeight + error < document.documentElement.clientHeight
           ? setPosition('bottom') : setPosition('top');
 
         return (
