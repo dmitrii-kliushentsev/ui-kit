@@ -1,4 +1,4 @@
-import tw, { styled, css } from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
 import { spacesToDashes } from '../../utils';
 import { Icons } from '../icon';
@@ -9,7 +9,7 @@ export interface MenuItemType {
   label: string;
   icon: keyof typeof Icons;
   onClick: () => void;
-  Content?: (props: { children: JSX.Element}) => JSX.Element;
+  Content?: (props: { children: JSX.Element }) => JSX.Element;
 }
 
 interface Props {
@@ -35,15 +35,9 @@ export const Menu = ({
         >
           {bordered ? <Icons.MoreOptionsWithBorder /> : <Icons.MoreOptions />}
           {isOpen && (
-            <div
+            <ItemListWrapper
               ref={ref}
-              style={{
-                position: 'absolute',
-                zIndex: 50,
-                top: position === 'bottom' ? 'calc(100% + 12px)' : undefined,
-                bottom: position === 'top' ? 'calc(100% + 12px)' : undefined,
-                right: 'calc(50% - 22px)',
-              }}
+              position={position}
             >
               <ItemsList position={intersectionSide === 'bottom' ? 'top' : 'bottom'} data-test={`menu:list:${testContext}`}>
                 {items.map(({
@@ -66,7 +60,7 @@ export const Menu = ({
                   );
                 })}
               </ItemsList>
-            </div>
+            </ItemListWrapper>
           )}
         </MenuIcon>
       );
@@ -74,44 +68,30 @@ export const Menu = ({
   </Popover>
 );
 const MenuIcon = styled.div`
-  max-height: 32px;
-  max-width: 32px;
-  ${tw`relative flex items-center text-blue-default cursor-pointer
+  ${tw`relative flex items-center text-blue-default cursor-pointer max-h-[32px] max-w-[32px]
     hover:text-blue-medium-tint
     active:text-blue-shade
   `}
 `;
 
-const ItemsList = styled.div<{ position: 'bottom' | 'top' }>`
-  filter: drop-shadow(0 0 24px rgba(0, 0, 0, 0.15));
-  ${tw`flex flex-col py-2 px-0 rounded-lg z-50 bg-monochrome-white text-monochrome-black`}
+type Position = 'bottom' | 'top'
 
+const ItemListWrapper = styled.div<{ position: Position }>(({ position }) => [
+  tw`absolute z-50 right-[calc(50% - 22px)]`,
+  position === 'bottom' && tw`top-[calc(100% + 12px)]`,
+  position === 'top' && tw`bottom-[calc(100% + 12px)]`,
+]);
+
+const ItemsList = styled.div<{ position: Position }>`
+  filter: drop-shadow(0 0 24px rgba(0, 0, 0, 0.15));
+
+  ${tw`flex flex-col py-2 px-0 rounded-lg z-50 bg-monochrome-white text-monochrome-black`}
   &::before {
     content: '';
-    position: absolute;
-    background-color: #ffffff;
-    left: calc(100% - 30px);
-    height: 15px;
-    width: 15px;
-    transform: rotate(45deg);
+    ${tw`absolute bg-monochrome-white left-[calc(100% - 30px)] w-[15px] h-[15px] transform rotate-45`}
+    ${({ position }) => position === 'top' && tw`bottom-[-7px]`}
+    ${({ position }) => position === 'bottom' && tw`top-[-7px]`}
   }
-
-  ${({ position }) => position === 'bottom' && css`
-    &::before {
-      top: -7px;
-    }
-  `}
-
-  ${({ position }) => position === 'top' && css`
-    &::before {
-      bottom: -7px;
-    }
-  `}
-  ${({ position }) => css`
-    &::before {
-      ${position === 'top' ? 'bottom: -7px;' : 'top: -7px;'}
-    }
-  `}
 `;
 
 const Item = styled.div`
