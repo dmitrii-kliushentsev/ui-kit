@@ -25,21 +25,20 @@ export const Tooltip = ({
     height: 0,
     width: 0,
   } as DOMRect);
-  const messageRef = useRef<HTMLDivElement>(null);
   const childrenRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
-    const messageCoords = messageRef?.current?.getBoundingClientRect();
-    isVisible && messageCoords && setMessageCoords(messageCoords);
-  }, [isVisible]);
-
-  useIntersectionCallback({
+  const messageRef = useIntersectionCallback({
     callback: ([entry]) => {
       !entry.isIntersecting &&
       setTooltipPositionType(entry.intersectionRect.left ? 'top-left' : 'top-right');
     },
     dependency: [isVisible],
   });
+
+  useLayoutEffect(() => {
+    const messageCoords = messageRef?.current?.getBoundingClientRect();
+    isVisible && messageCoords && setMessageCoords(messageCoords);
+  }, [isVisible]);
 
   const {
     top: childrenTopPosition = 0,
@@ -88,32 +87,27 @@ const Message = styled.div<{type?: 'top-center' | 'top-right' | 'top-left' | 'le
     content: '';
     ${({ type }) => [
     type === 'top-left' && css`
-        bottom: -8px;
-        left: calc(100% - 8px);
+      ${tw`-bottom-2 left-[calc(100% - 8px)]`}
         border-right-color: #1b191b;
         border-left: none;
       `,
     type === 'top-center' && css`
-        bottom: -8px;
-        right: calc(50% - 8px);
+      ${tw`-bottom-2 right-[calc(50% - 8px)]`}
         border-top-color: #1b191b;
         border-bottom: none;
       `,
     type === 'top-right' && css`
-        bottom: -8px;
-        right: calc(100% - 8px);
+      ${tw`-bottom-2 right-[calc(100% - 8px)]`}
         border-left-color: #1b191b;
         border-right: none;
       `,
     type === 'left' && css`
-        bottom: 8px;
-        left: 100%;
+      ${tw`bottom-2 left-full`}
         border-left-color: #1b191b;
         border-right: none;
       `,
     type === 'right' && css`
-        bottom: 8px;
-        right: 100%;
+      ${tw`bottom-2 right-full`}
         border-right-color: #1b191b;
         border-left: none;
       `,
