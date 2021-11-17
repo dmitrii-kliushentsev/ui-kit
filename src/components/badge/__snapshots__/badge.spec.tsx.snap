@@ -2,6 +2,6 @@
 
 exports[`Badge should match snapshot 1`] = `
 <span
-  className="badge__Badge-sc-1oppcu8-0 gwGjva"
+  className="badge__Badge-sc-1oppcu8-0 laPoFp"
 />
 `;

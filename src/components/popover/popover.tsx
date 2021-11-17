@@ -13,13 +13,13 @@ export interface Props {
 }
 
 export const Popover = ({
-  children, className,
+  children, className, ...rest
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useClickOutside(() => setIsOpen(false));
 
   return (
-    <div tw="relative" ref={ref} className={className}>
+    <div tw="relative" ref={ref} className={className} {...rest}>
       {children({ setIsOpen, isOpen })}
     </div>
   );

@@ -153,10 +153,14 @@ export const Pagination = ({
   );
 
   const SelectRowsCountDropdown = ({ values, action, initialValue }: SelectRowsCountDropdownProps) => (
-    <Popover data-test="table-pagination:select-rows-dropdown">
+    <Popover>
       {({ setIsOpen, isOpen }) => (
         <>
-          <span tw="flex items-center gap-x-1 text-monochrome-black cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+          <span
+            tw="flex items-center gap-x-1 text-monochrome-black cursor-pointer"
+            onClick={() => setIsOpen(!isOpen)}
+            data-test="table-pagination:select-rows-dropdown"
+          >
             <span tw="font-bold" data-test="table-pagination:page-rows">
               {`${initialValue * (currentPage) - initialValue}-${pagesLength === pageIndex + 1
                 ? rowsCount : (initialValue * (currentPage))}`}
