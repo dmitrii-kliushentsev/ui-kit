@@ -1,17 +1,15 @@
-import {
-  useLayoutEffect, useRef, useState,
-} from 'react';
-import tw, { styled, css } from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
 import { spacesToDashes } from '../../utils';
 import { Icons } from '../icon';
-import { useClickOutside } from '../../hooks';
+import { useIntersectionSide } from '../../hooks';
+import { Popover } from '../popover';
 
 export interface MenuItemType {
   label: string;
   icon: keyof typeof Icons;
   onClick: () => void;
-  Content?: (props: { children: JSX.Element}) => JSX.Element;
+  Content?: (props: { children: JSX.Element }) => JSX.Element;
 }
 
 interface Props {
@@ -20,45 +18,80 @@ interface Props {
   testContext?: string;
 }
 
+export const Menu = ({
+  items,
+  bordered,
+  testContext = '',
+}: Props) => (
+  <Popover tw="text-monochrome-black">
+    {({ isOpen, setIsOpen }) => {
+      const { ref, intersectionSide } = useIntersectionSide({ dependency: [isOpen] });
+      const position = intersectionSide === 'bottom' ? 'top' : 'bottom';
+
+      return (
+        <MenuIcon
+          onClick={() => setIsOpen(!isOpen)}
+          data-test={`menu:icon:${testContext}`}
+        >
+          {bordered ? <Icons.MoreOptionsWithBorder /> : <Icons.MoreOptions />}
+          {isOpen && (
+            <ItemListWrapper
+              ref={ref}
+              position={position}
+            >
+              <ItemsList position={intersectionSide === 'bottom' ? 'top' : 'bottom'} data-test={`menu:list:${testContext}`}>
+                {items.map(({
+                  icon,
+                  label,
+                  onClick,
+                  Content = ({ children }) => children,
+                }) => {
+                  const ItemIcon = Icons[icon];
+                  return (
+                    <Content key={`menu:item:${spacesToDashes(label)}`}>
+                      <Item
+                        onClick={onClick}
+                        data-test={`menu:item:${spacesToDashes(label)}`}
+                      >
+                        <ItemIcon width={16} height={16} />
+                        <ItemLabel>{label}</ItemLabel>
+                      </Item>
+                    </Content>
+                  );
+                })}
+              </ItemsList>
+            </ItemListWrapper>
+          )}
+        </MenuIcon>
+      );
+    }}
+  </Popover>
+);
 const MenuIcon = styled.div`
-  max-height: 32px;
-  max-width: 32px;
-  ${tw`relative flex items-center text-blue-default cursor-pointer
+  ${tw`relative flex items-center text-blue-default cursor-pointer max-h-[32px] max-w-[32px]
     hover:text-blue-medium-tint
     active:text-blue-shade
   `}
 `;
 
-const ItemsList = styled.div<{ position: 'bottom' | 'top' }>`
-  filter: drop-shadow(0 0 24px rgba(0, 0, 0, 0.15));
-  ${tw`flex flex-col py-2 px-0 rounded-lg z-50 bg-monochrome-white text-monochrome-black`}
+type Position = 'bottom' | 'top'
 
+const ItemListWrapper = styled.div<{ position: Position }>(({ position }) => [
+  tw`absolute z-50 right-[calc(50% - 22px)]`,
+  position === 'bottom' && tw`top-[calc(100% + 12px)]`,
+  position === 'top' && tw`bottom-[calc(100% + 12px)]`,
+]);
+
+const ItemsList = styled.div<{ position: Position }>`
+  filter: drop-shadow(0 0 24px rgba(0, 0, 0, 0.15));
+
+  ${tw`flex flex-col py-2 px-0 rounded-lg z-50 bg-monochrome-white text-monochrome-black`}
   &::before {
     content: '';
-    position: absolute;
-    background-color: #ffffff;
-    left: calc(100% - 30px);
-    height: 15px;
-    width: 15px;
-    transform: rotate(45deg);
+    ${tw`absolute bg-monochrome-white left-[calc(100% - 30px)] w-[15px] h-[15px] transform rotate-45`}
+    ${({ position }) => position === 'top' && tw`bottom-[-7px]`}
+    ${({ position }) => position === 'bottom' && tw`top-[-7px]`}
   }
-
-  ${({ position }) => position === 'bottom' && css`
-    &::before {
-      top: -7px;
-    }
-  `}
-
-  ${({ position }) => position === 'top' && css`
-    &::before {
-      bottom: -7px;
-    }
-  `}
-  ${({ position }) => css`
-    &::before {
-      ${position === 'top' ? 'bottom: -7px;' : 'top: -7px;'}
-    }
-  `}
 `;
 
 const Item = styled.div`
@@ -70,91 +103,3 @@ const Item = styled.div`
 const ItemLabel = styled.span`
   ${tw`text-14 leading-32 ml-2 whitespace-nowrap`};
 `;
-
-export const Menu = ({
-  items,
-  bordered,
-  testContext = '',
-}: Props) => {
-  const [isListOpened, setIsListOpened] = useState(false);
-  const [position, setPosition] = useState<'bottom' | 'top'>('bottom');
-  const node = useClickOutside(() => setIsListOpened(false));
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  const {
-    top: iconTopPosition = 0,
-  } = node?.current?.getBoundingClientRect() || {};
-
-  useLayoutEffect(() => {
-    const menuPadding = 16;
-    const triangleHeightAndMargin = 34;
-    const menuItemsHeight = items.length * 32;
-
-    if (iconTopPosition &&
-      menuItemsHeight + menuPadding + iconTopPosition + triangleHeightAndMargin < document.documentElement.clientHeight) {
-      setPosition('bottom');
-    } else {
-      setPosition('top');
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        !entry.isIntersecting && setPosition('top');
-      },
-      {
-        root: null,
-        threshold: 1.0,
-      },
-    );
-    menuRef.current && observer.observe(menuRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [isListOpened]);
-
-  return (
-    <div tw="text-monochrome-black" ref={node}>
-      <MenuIcon
-        onClick={() => setIsListOpened(!isListOpened)}
-        data-test={`menu:icon:${testContext}`}
-      >
-        {bordered ? <Icons.MoreOptionsWithBorder /> : <Icons.MoreOptions />}
-        {isListOpened && (
-          <div
-            ref={menuRef}
-            style={{
-              position: 'absolute',
-              zIndex: 50,
-              top: position === 'bottom' ? 'calc(100% + 12px)' : undefined,
-              bottom: position === 'top' ? 'calc(100% + 12px)' : undefined,
-              right: 'calc(50% - 22px)',
-            }}
-          >
-            <ItemsList position={position} data-test={`menu:list:${testContext}`}>
-              {items.map(({
-                icon,
-                label,
-                onClick,
-                Content = ({ children }) => children,
-              }) => {
-                const ItemIcon = Icons[icon];
-                return (
-                  <Content key={`menu:item:${spacesToDashes(label)}`}>
-                    <Item
-                      onClick={onClick}
-                      data-test={`menu:item:${spacesToDashes(label)}`}
-                    >
-                      <ItemIcon width={16} height={16} />
-                      <ItemLabel>{label}</ItemLabel>
-                    </Item>
-                  </Content>
-                );
-              })}
-            </ItemsList>
-          </div>
-        )}
-      </MenuIcon>
-    </div>
-  );
-};

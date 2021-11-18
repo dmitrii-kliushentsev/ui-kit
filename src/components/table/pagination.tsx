@@ -17,8 +17,8 @@ import { useState } from 'react';
 import 'twin.macro';
 
 import { Icons } from '../icon';
-import { useClickOutside } from '../../hooks';
 import { PaginationElements } from './pagination-elements';
+import { Popover } from '../popover';
 
 interface Props {
   pagesLength: number;
@@ -131,59 +131,61 @@ export const Pagination = ({
     );
   };
 
-  const Ellipsis = () => {
-    const [popupIsOpen, setPopupIsOpen] = useState(false);
-    const node = useClickOutside(() => setPopupIsOpen(false));
-    return (
-      <div ref={node} tw="relative flex items-center h-8 px-3 text-monochrome-default" data-test="table-pagination:dots">
-        <PaginationElements.Dots
-          tw="flex items-end cursor-pointer hover:text-blue-medium-tint"
-          active={popupIsOpen}
-          onClick={() => setPopupIsOpen(!popupIsOpen)}
-        >
-          ...
-        </PaginationElements.Dots>
-        {popupIsOpen && (
-          <div tw="absolute" style={{ top: '-74px', left: '-46px' }}>
-            <Tooltip />
-          </div>
-        )}
-      </div>
-    );
-  };
+  const Ellipsis = () => (
+    <Popover tw="flex items-center h-8 px-3 text-monochrome-default" data-test="table-pagination:dots">
+      {({ isOpen, setIsOpen }) => (
+        <>
+          <PaginationElements.Dots
+            tw="flex items-end cursor-pointer hover:text-blue-medium-tint"
+            active={isOpen}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            ...
+          </PaginationElements.Dots>
+          {isOpen && (
+            <div tw="absolute" style={{ top: '-74px', left: '-46px' }}>
+              <Tooltip />
+            </div>
+          )}
+        </>
+      )}
+    </Popover>
+  );
 
-  const SelectRowsCountDropdown = ({ values, action, initialValue }: SelectRowsCountDropdownProps) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const node = useClickOutside(() => setIsOpen(false));
-    return (
-      <div
-        ref={node}
-        tw="relative flex items-center gap-x-1 text-monochrome-black cursor-pointer"
-        onClick={() => setIsOpen(!isOpen)}
-        data-test="table-pagination:select-rows-dropdown"
-      >
-        <span tw="font-bold" data-test="table-pagination:page-rows">
-          {`${initialValue * (currentPage) - initialValue}-${pagesLength === pageIndex + 1 ? rowsCount : (initialValue * (currentPage))}`}
-        </span>
-        <Icons.Expander width={8} height={8} rotate={isOpen ? 90 : -90} />
-        {isOpen && (
-          <div tw="absolute -top-24 shadow bg-monochrome-white z-50">
-            {values.map((value) => (
-              <div
-                tw="flex items-center px-2 w-36 hover:bg-monochrome-light-tint"
-                onClick={(() => action(value))}
-                key={value}
-                data-test="table-pagination:select-rows-dropdown:item"
-              >
-                {initialValue === value && <Icons.Check width={14} height={10} viewBox="0 0 14 10" tw="absolute text-blue-default" />}
-                <span tw="ml-6">{`${value} per page`}</span>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  };
+  const SelectRowsCountDropdown = ({ values, action, initialValue }: SelectRowsCountDropdownProps) => (
+    <Popover>
+      {({ setIsOpen, isOpen }) => (
+        <>
+          <span
+            tw="flex items-center gap-x-1 text-monochrome-black cursor-pointer"
+            onClick={() => setIsOpen(!isOpen)}
+            data-test="table-pagination:select-rows-dropdown"
+          >
+            <span tw="font-bold" data-test="table-pagination:page-rows">
+              {`${initialValue * (currentPage) - initialValue}-${pagesLength === pageIndex + 1
+                ? rowsCount : (initialValue * (currentPage))}`}
+            </span>
+            <Icons.Expander width={8} height={8} rotate={isOpen ? 90 : -90} />
+          </span>
+          {isOpen && (
+            <div tw="absolute -top-24 shadow bg-monochrome-white z-50">
+              {values.map((value) => (
+                <div
+                  tw="flex items-center px-2 w-36 hover:bg-monochrome-light-tint"
+                  onClick={(() => action(value))}
+                  key={value}
+                  data-test="table-pagination:select-rows-dropdown:item"
+                >
+                  {initialValue === value && <Icons.Check width={14} height={10} viewBox="0 0 14 10" tw="absolute text-blue-default" />}
+                  <span tw="ml-6">{`${value} per page`}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </>
+      )}
+    </Popover>
+  );
 
   return (
     <div tw="flex justify-between pr-1 pt-4">

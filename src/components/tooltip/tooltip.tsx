@@ -1,7 +1,9 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import {
+  useLayoutEffect, useRef, useState,
+} from 'react';
 import tw, { styled, css } from 'twin.macro';
 
-import { useHover } from '../../hooks';
+import { useHover, useIntersectionCallback } from '../../hooks';
 import { Portal } from '../portal';
 import { getTooltipPosition } from './get-tooltip-position';
 
@@ -23,27 +25,19 @@ export const Tooltip = ({
     height: 0,
     width: 0,
   } as DOMRect);
-  const messageRef = useRef<HTMLDivElement>(null);
   const childrenRef = useRef<HTMLDivElement>(null);
+
+  const messageRef = useIntersectionCallback({
+    callback: ([entry]) => {
+      !entry.isIntersecting &&
+      setTooltipPositionType(entry.intersectionRect.left ? 'top-left' : 'top-right');
+    },
+    dependency: [isVisible],
+  });
 
   useLayoutEffect(() => {
     const messageCoords = messageRef?.current?.getBoundingClientRect();
     isVisible && messageCoords && setMessageCoords(messageCoords);
-
-    const observer = new IntersectionObserver(
-      ([entry]) =>
-        !entry.isIntersecting &&
-          setTooltipPositionType(entry.intersectionRect.left ? 'top-left' : 'top-right'),
-      {
-        root: null,
-        threshold: 1.0,
-      },
-    );
-    messageRef.current && observer.observe(messageRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
   }, [isVisible]);
 
   const {
@@ -68,17 +62,15 @@ export const Tooltip = ({
       <div ref={ref}>
         <div ref={childrenRef}>{children}</div>
       </div>
-      {isVisible && message && (
-        <Portal rootElementId="tooltip">
-          <Message
-            className={className}
-            style={getTooltipPosition(tooltipPositionType, anchors)}
-            type={tooltipPositionType}
-          >
-            <div tw="py-2 px-4" ref={messageRef}>{message}</div>
-          </Message>
-        </Portal>
-      )}
+      <Portal rootElementId="tooltip" displayContent={isVisible && Boolean(message)}>
+        <Message
+          className={className}
+          style={getTooltipPosition(tooltipPositionType, anchors)}
+          type={tooltipPositionType}
+        >
+          <div tw="py-2 px-4" ref={messageRef}>{message}</div>
+        </Message>
+      </Portal>
     </div>
   );
 };
@@ -95,35 +87,30 @@ const Message = styled.div<{type?: 'top-center' | 'top-right' | 'top-left' | 'le
     content: '';
     ${({ type }) => [
     type === 'top-left' && css`
-      bottom: -8px;
-      left: calc(100% - 8px);
-      border-right-color: #1b191b;
-      border-left: none;
-    `,
+      ${tw`-bottom-2 left-[calc(100% - 8px)]`}
+        border-right-color: #1b191b;
+        border-left: none;
+      `,
     type === 'top-center' && css`
-      bottom: -8px;
-      right: calc(50% - 8px);
-      border-top-color: #1b191b;
-      border-bottom: none;
-    `,
+      ${tw`-bottom-2 right-[calc(50% - 8px)]`}
+        border-top-color: #1b191b;
+        border-bottom: none;
+      `,
     type === 'top-right' && css`
-      bottom: -8px;
-      right: calc(100% - 8px);
-      border-left-color: #1b191b;
-      border-right: none;
-    `,
+      ${tw`-bottom-2 right-[calc(100% - 8px)]`}
+        border-left-color: #1b191b;
+        border-right: none;
+      `,
     type === 'left' && css`
-      bottom: 8px;
-      left: 100%;
-      border-left-color: #1b191b;
-      border-right: none;
-    `,
+      ${tw`bottom-2 left-full`}
+        border-left-color: #1b191b;
+        border-right: none;
+      `,
     type === 'right' && css`
-      bottom: 8px;
-      right: 100%;
-      border-right-color: #1b191b;
-      border-left: none;
-    `,
+      ${tw`bottom-2 right-full`}
+        border-right-color: #1b191b;
+        border-left: none;
+      `,
   ]}
   }
 `;

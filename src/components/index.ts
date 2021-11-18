@@ -47,3 +47,4 @@ export {
   DisabledFormGroup,
   alreadyExist,
 } from './forms';
+export { Popover } from './popover';

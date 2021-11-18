@@ -1,25 +1,28 @@
 import { useState } from 'react';
 import { storiesOf } from '@storybook/react';
-
+import 'twin.macro';
 import { Dropdown } from './dropdown';
 
 storiesOf('Dropdown', module).add('Dropdown', () => {
   const [value, setValue] = useState('first item');
   return (
-    <Dropdown
-      items={[
-        {
-          value: 'first item',
-          label: 'first item',
-        },
-        {
-          value: 'second item',
-          label: 'second item with custom label',
-        },
-      ]}
-      value={value}
-      onChange={(newValue) => setValue(newValue)}
-    />
+    <div tw="pt-[100px]">
+      <Dropdown
+        items={[
+          {
+            value: 'first item',
+            label: 'first item',
+          },
+          {
+            value: 'second item',
+            label: 'second item with custom label',
+          },
+        ]}
+        value={value}
+        onChange={(newValue) => setValue(newValue)}
+      />
+    </div>
+
   );
 }).add('Dropdown with numeric value ', () => {
   const [timeStamp, setTimeStamp] = useState(60000);

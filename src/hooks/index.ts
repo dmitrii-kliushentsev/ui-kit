@@ -7,3 +7,5 @@ export { useCloseModal } from './use-close-modal';
 export { useGeneralAlertMessage } from './use-general-alert-message';
 export { useIntersection } from './use-intersection';
 export { useQueryParams } from './use-query-params';
+export { useIntersectionSide } from './use-intersection-side';
+export { useIntersectionCallback } from './use-intersection-callback';

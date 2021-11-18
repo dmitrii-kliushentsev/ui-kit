@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { createPortal } from 'react-dom';
 
-export class Portal<Props extends { rootElementId: string }> extends Component<Props> {
+export class Portal<Props extends { rootElementId: string; displayContent: boolean; }> extends Component<Props> {
   public element: HTMLDivElement;
 
   public rootElementById: HTMLElement | null;
@@ -25,7 +25,7 @@ export class Portal<Props extends { rootElementId: string }> extends Component<P
   }
 
   public render() {
-    const { children } = this.props;
-    return createPortal(children, this.element);
+    const { children, displayContent } = this.props;
+    return displayContent ? createPortal(children, this.element) : null;
   }
 }

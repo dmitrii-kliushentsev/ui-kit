@@ -21,19 +21,17 @@ export const Popup = ({
   closeOnFadeClick = false,
 }: Props) => (
   <Wrapper>
-    <Portal rootElementId="modal">
-      {isOpen && (
-        <div>
-          <Content type={type}>
-            <Header>
-              {header}
-              <Icons.Close tw="cursor-pointer" onClick={() => onToggle(!isOpen)} data-test="popup:close-button" />
-            </Header>
-            {children}
-          </Content>
-          <Fade onClick={() => closeOnFadeClick && onToggle(!isOpen)} data-test="popup:fade" />
-        </div>
-      )}
+    <Portal rootElementId="modal" displayContent={isOpen}>
+      <div>
+        <Content type={type}>
+          <Header>
+            {header}
+            <Icons.Close tw="cursor-pointer" onClick={() => onToggle(!isOpen)} data-test="popup:close-button" />
+          </Header>
+          {children}
+        </Content>
+        <Fade onClick={() => closeOnFadeClick && onToggle(!isOpen)} data-test="popup:fade" />
+      </div>
     </Portal>
   </Wrapper>
 );
