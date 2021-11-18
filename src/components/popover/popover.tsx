@@ -1,4 +1,4 @@
-import React, { Dispatch, useState } from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
 import { useClickOutside } from '../../hooks';
 import 'twin.macro';
 
@@ -17,6 +17,18 @@ export const Popover = ({
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useClickOutside(() => setIsOpen(false));
+
+  useEffect(() => {
+    const listener = (e: KeyboardEvent) => {
+      if (e.key === '27') {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('keydown', listener);
+    return () => {
+      document.removeEventListener('keydown', listener);
+    };
+  }, []);
 
   return (
     <div tw="relative" ref={ref} className={className} {...rest}>
