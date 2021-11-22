@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 import React, {
-  useEffect, useMemo, useRef, useState,
+  useEffect, useMemo, useRef,
 } from 'react';
 import {
   useTable, useExpanded, Column, useSortBy, usePagination, useFilters,
@@ -28,6 +28,7 @@ import { Inputs } from '../forms';
 import { Icons } from '../icon';
 import { TableErrorFallback } from '../error-fallback';
 import {
+  setExpandedRows,
   setSearch, setSort, useTableActionsDispatch, useTableActionsState,
 } from './table-actions';
 import { SearchPanel } from '../search-panel';
@@ -133,10 +134,8 @@ export const Table = withErrorBoundary(({
   );
 
   const dispatch = useTableActionsDispatch();
-  const { sort: [sort], search } = useTableActionsState();
+  const { sort: [sort], search, expandedRows } = useTableActionsState();
   const [searchQuery] = search;
-
-  const [expandedRows, setExpandedRows] = useState<string[]>([]);
 
   if (typeof data !== 'object') {
     throw new Error('Table received incorrect data');
@@ -205,7 +204,7 @@ export const Table = withErrorBoundary(({
         </TableElements.TableHead>
         <tbody {...getTableBodyProps()}>
           {page.map((rawRow: any) => {
-            const row = { ...rawRow, isExpanded: expandedRows.includes(rawRow.original.id) };
+            const row = { ...rawRow, isExpanded: expandedRows.includes(rawRow.original.name) };
             prepareRow(row);
             const rowProps = row.getRowProps();
 
@@ -227,9 +226,9 @@ export const Table = withErrorBoundary(({
                           title={cell?.value}
                           data-test={`td-row-cell-${cell.column.id}`}
                           onClick={() => cell.column.id === 'expander' &&
-                          setExpandedRows(row.isExpanded
-                            ? expandedRows.filter((id) => id !== row.original.id)
-                            : [...expandedRows, row.original.id])}
+                          dispatch(setExpandedRows(row.isExpanded
+                            ? expandedRows.filter((name) => name !== row.original.name)
+                            : [...expandedRows, row.original.name]))}
                         >
                           {isDefaultCell
                             ? (

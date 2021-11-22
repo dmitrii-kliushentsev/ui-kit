@@ -18,12 +18,15 @@ import { TableActionsState } from './table-actions-types';
 
 const SET_SEARCH = 'SET_SEARCH';
 const SET_SORT = 'SET_SORT';
+const SET_EXPANDED_ROWS = 'SET_EXPANDED_ROWS';
 
-export type Action = ReturnType<typeof setSearch | typeof setSort>;
+export type Action = ReturnType<typeof setSearch | typeof setSort | typeof setExpandedRows>;
 
 export const setSearch = (searchQuery: Search[]) => ({ type: SET_SEARCH, payload: searchQuery } as const);
 
 export const setSort = (sort: Sort) => ({ type: SET_SORT, payload: sort } as const);
+
+export const setExpandedRows = (rowsIds: string[]) => ({ type: SET_EXPANDED_ROWS, payload: rowsIds } as const);
 
 export const actionsReducer = (state: TableActionsState, action: Action): TableActionsState => {
   const [sort] = state.sort;
@@ -37,6 +40,11 @@ export const actionsReducer = (state: TableActionsState, action: Action): TableA
           field: action.payload.field,
           order: action.payload.field === sort?.field ? action.payload.order : 'ASC',
         }].filter(({ order }) => Boolean(order)),
+      };
+    case SET_EXPANDED_ROWS:
+      return {
+        ...state,
+        expandedRows: action.payload,
       };
     default:
       return state;

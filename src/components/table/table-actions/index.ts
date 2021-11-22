@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 export { TableActionsProvider } from './table-actions-provider';
-export { setSearch, setSort } from './reducer';
+export { setSearch, setSort, setExpandedRows } from './reducer';
 export { useTableActionsState, useTableActionsDispatch } from './table-actions-context';

@@ -21,6 +21,7 @@ import { Action } from './reducer';
 export const defaultState: TableActionsState = {
   search: [],
   sort: [],
+  expandedRows: [],
 };
 
 export const TableActionsStateContext = createContext<TableActionsState>(defaultState);
