@@ -192,10 +192,10 @@ export const Table = withErrorBoundary(({
                           />
                         </TableElements.SortArrow>
                       )}
-                      <div tw="flex items-center gap-3 w-full">
+                      <TableElements.HeaderText position={column.textAlign}>
                         {column.render('Header')}
                         {column.filterable ? column.render('Filter') : null}
-                      </div>
+                      </TableElements.HeaderText>
                     </TableElements.Label>
                   </TableElements.TH>
                 );

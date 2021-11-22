@@ -41,8 +41,7 @@ BuildsTable.args = {
     {
       Header: 'Params',
       accessor: 'testDetails.params',
-      textAlign: 'left',
-      filterable: true,
+      textAlign: 'right',
     },
   ],
   data: Array.from({ length: 200 }, (_, i) => ({

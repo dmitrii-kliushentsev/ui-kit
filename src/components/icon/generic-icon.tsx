@@ -27,7 +27,7 @@ export const GenericIcon = styled(({
     </svg>
   </div>
 ))`
-  ${tw`inline-flex items-center justify-center fill-current`}
+  ${tw`fill-current`}
 `;
 
 function mapPath(path = '', mapper: (value: string, index: number) => JSX.Element) {

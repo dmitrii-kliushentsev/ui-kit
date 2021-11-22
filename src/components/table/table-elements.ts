@@ -1,5 +1,4 @@
 import tw, { styled } from 'twin.macro';
-import { Icons } from '../icon';
 
 const TableHead = styled.thead`
   ${tw`bg-monochrome-white text-14 leading-20 font-bold`};
@@ -16,11 +15,21 @@ const SortArrow = styled.div`
 `;
 
 const Label = styled.span`
-  ${tw`w-full relative inline-flex items-center`};
-  
+  ${tw`relative inline-flex items-center`};
+
   &:hover ${SortArrow} {
     ${tw`visible`};
   }
+`;
+
+const HeaderText = styled.div`
+  ${tw`flex items-center gap-3 w-full`};
+
+  ${({ position }: { position?: 'center' | 'right' | 'left' }) => [
+    position === 'center' && tw`justify-center`,
+    position === 'right' && tw`justify-end`,
+    position === 'left' && tw`justify-start`,
+  ]}
 `;
 
 const TH = styled.th`
@@ -36,6 +45,7 @@ export const TableElements = {
   TableHead,
   SortArrow,
   Label,
+  HeaderText,
   TH,
   TR,
 };
