@@ -13,7 +13,9 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-import React, { useMemo, useRef, useState } from 'react';
+import React, {
+  useEffect, useMemo, useRef, useState,
+} from 'react';
 import {
   useTable, useExpanded, Column, useSortBy, usePagination, useFilters,
 } from 'react-table';
@@ -58,24 +60,15 @@ function DefaultColumnFilter({
     filterValue = '', setFilter = () => {}, Header = '',
   } = {},
 }: any) {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
-    <div tw="relative z-50">
-      <TableElements.ColumnSearchIcon active={isOpen} onClick={() => setIsOpen(!isOpen)} />
-      {isOpen && (
-        <div tw="absolute top-6 -left-2 w-60 p-4 rounded-lg bg-monochrome-white shadow text-14 leading-32 z-50">
-          <Inputs.Search
-            value={filterValue}
-            onChange={e => {
-              setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
-            }}
-            reset={() => setFilter('')}
-            placeholder={`Search by ${Header.toLowerCase()}`}
-          />
-        </div>
-      )}
-    </div>
+    <Inputs.Search
+      value={filterValue}
+      onChange={e => {
+        setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+      }}
+      reset={() => setFilter('')}
+      placeholder={`Search by ${Header.toLowerCase()}`}
+    />
   );
 }
 
@@ -158,6 +151,8 @@ export const Table = withErrorBoundary(({
 
   const ref = useRef<HTMLDivElement>(null);
 
+  useEffect(() => gotoPage(0), [filters]);
+
   return (
     <>
       {withSearch && (
@@ -197,7 +192,7 @@ export const Table = withErrorBoundary(({
                           />
                         </TableElements.SortArrow>
                       )}
-                      <div tw="flex items-center gap-3">
+                      <div tw="flex items-center gap-3 w-full">
                         {column.render('Header')}
                         {column.filterable ? column.render('Filter') : null}
                       </div>
@@ -255,38 +250,40 @@ export const Table = withErrorBoundary(({
           })}
         </tbody>
       </table>
-      <React.Fragment key="table-stub">{stub}</React.Fragment>
-      <Pagination
-        pagesLength={pageOptions.length}
-        gotoPage={async (value: number) => {
-          const newPage = value - 1; // in the react-table pages start from 0
-          if (value > 0 && newPage < pageOptions.length && newPage !== pageIndex) {
-            gotoPage(newPage);
-            // need this code to be executed after rendering
-            await ref && ref.current && ref.current.scrollIntoView({
+      {page.length === 0 && stub}
+      {page.length !== 0 && (
+        <Pagination
+          pagesLength={pageOptions.length}
+          gotoPage={async (value: number) => {
+            const newPage = value - 1; // in the react-table pages start from 0
+            if (value > 0 && newPage < pageOptions.length && newPage !== pageIndex) {
+              gotoPage(newPage);
+              // need this code to be executed after rendering
+              await ref && ref.current && ref.current.scrollIntoView({
+                behavior: 'smooth',
+              });
+            }
+          }}
+          pageIndex={pageIndex}
+          previousPage={() => {
+            previousPage();
+            ref && ref.current && ref.current.scrollIntoView({
               behavior: 'smooth',
             });
-          }
-        }}
-        pageIndex={pageIndex}
-        previousPage={() => {
-          previousPage();
-          ref && ref.current && ref.current.scrollIntoView({
-            behavior: 'smooth',
-          });
-        }}
-        nextPage={() => {
-          nextPage();
-          ref && ref.current && ref.current.scrollIntoView({
-            behavior: 'smooth',
-          });
-        }}
-        canPreviousPage={canPreviousPage}
-        canNextPage={canNextPage}
-        pageSize={pageSize}
-        setPageSize={setPageSize}
-        rowsCount={data.length}
-      />
+          }}
+          nextPage={() => {
+            nextPage();
+            ref && ref.current && ref.current.scrollIntoView({
+              behavior: 'smooth',
+            });
+          }}
+          canPreviousPage={canPreviousPage}
+          canNextPage={canNextPage}
+          pageSize={pageSize}
+          setPageSize={setPageSize}
+          rowsCount={data.length}
+        />
+      )}
     </>
   );
 }, {

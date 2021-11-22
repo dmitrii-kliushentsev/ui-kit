@@ -1,4 +1,6 @@
 import 'twin.macro';
+import { Icons } from '../icon';
+import { Stub } from '../stub';
 
 import { Table } from './table';
 
@@ -13,6 +15,7 @@ export const BuildsTable = Template.bind({});
 
 // @ts-ignore
 BuildsTable.args = {
+  stub: <Stub icon={<Icons.Class width={96} height={96} />} title="Tests table" message="Not Found" />,
   withSearch: true,
   isDefaulToggleSortBy: true,
   placeholder: 'Search packages by name',
@@ -59,9 +62,9 @@ BuildsTable.args = {
       },
     },
     testDetails: {
-      engine: `junit-jupiter-${(Math.random() + 1).toString(36).substring(7)}`,
-      class: `api.standalone.StandaloneApiTest-${(Math.random() + 1).toString(36).substring(7)}`,
-      mathod: `junit5IgnoredTest-${(Math.random() + 1).toString(36).substring(7)}`,
+      engine: `junit-jupiter-${i}`,
+      class: `api.standalone.StandaloneApiTest-${i}`,
+      mathod: `junit5IgnoredTest-${i}`,
       params: 'qwe-wwwe-qwe',
     },
     details: {
