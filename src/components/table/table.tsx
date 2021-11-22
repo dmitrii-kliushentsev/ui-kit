@@ -42,7 +42,7 @@ interface SortBy {
   desc: boolean;
 }
 
-interface Props {
+export interface Props {
   columns: Array<CustomColumn>;
   data: Array<any>;
   filteredCount?: number;
@@ -135,7 +135,7 @@ export const Table = withErrorBoundary(({
   const dispatch = useTableActionsDispatch();
   const { sort: [sort], search } = useTableActionsState();
   const [searchQuery] = search;
-
+  console.log(searchQuery);
   const [expandedRows, setExpandedRows] = useState<string[]>([]);
 
   if (typeof data !== 'object') {
