@@ -38,6 +38,7 @@
   "dependencies": {
     "@drill4j/types-admin": "^1.0.1",
     "@testing-library/dom": "^8.2.0",
+    "@types/react-router": "^5.1.17",
     "formik": "^2.2.9",
     "jest-junit": "^13.0.0",
     "mini-svg-data-uri": "^1.3.3",
