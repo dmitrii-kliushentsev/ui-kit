@@ -18,7 +18,6 @@ import { removeQueryParamsFromPath } from '../utils';
 
 export const useCloseModal = (name: string, params?: string[], state?: unknown) => {
   const { push } = useHistory();
-
   if (params) {
     return () => push({ pathname: removeQueryParamsFromPath(['activeModal', ...params]), state });
   }

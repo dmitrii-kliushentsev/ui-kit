@@ -19,5 +19,8 @@ export const removeQueryParamsFromPath = (params: string[]) => {
   const { pathname, search } = window.location;
   const filteredSearchParams = Object.entries(queryString.parse(search.slice(1)))
     .filter(([key]) => !params.includes(key)); // remove ? from serach
-  return `${pathname}?${queryString.stringify(Object.fromEntries(filteredSearchParams))}`;
+  if (filteredSearchParams.length) {
+    return `${pathname}?${queryString.stringify(Object.fromEntries(filteredSearchParams))}`;
+  }
+  return pathname;
 };
