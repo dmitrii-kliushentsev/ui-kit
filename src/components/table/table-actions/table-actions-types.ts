@@ -18,4 +18,5 @@ import { Search, Sort } from '@drill4j/types-admin';
 export interface TableActionsState {
   search: Search[];
   sort: Sort[];
+  expandedRows: string[]
 }

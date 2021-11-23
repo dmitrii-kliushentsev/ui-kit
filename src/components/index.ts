@@ -20,7 +20,8 @@ export { Status } from './status';
 export { Stub } from './stub';
 export { SearchPanel } from './search-panel';
 export {
-  Table, TableElements, TableActionsProvider, setSearch, setSort, useTableActionsState, useTableActionsDispatch, Cells,
+  Table, TableElements, TableActionsProvider, setSearch, setSort, useTableActionsState, useTableActionsDispatch,
+  Cells,
 } from './table';
 export {
   FormGroup,

@@ -58,6 +58,7 @@ export {
   DisabledFormGroup,
   alreadyExist,
   SearchPanel,
+  Popover,
 } from './components';
 export {
   useClickOutside, useElementSize, useHover, usePreserveCaretPosition,
