@@ -20,9 +20,9 @@ import { Cells } from '../cells';
 import { TableElements } from '../table-elements';
 
 export const DefaultRow = ({
-  rawRow, prepareRow, renderRowSubComponent, searchWords,
+  rawRow, prepareRow, renderRowSubComponent, searchWords, isDefaultExpanded = false,
 }: any) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(isDefaultExpanded);
   const row = { ...rawRow, isExpanded };
   prepareRow(row);
   const rowProps = row.getRowProps();

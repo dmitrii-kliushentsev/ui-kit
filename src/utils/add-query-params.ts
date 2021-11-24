@@ -13,13 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { useHistory } from 'react-router-dom';
-import { removeQueryParamsFromPath } from '../utils';
+import queryString from 'querystring';
 
-export const useCloseModal = (name: string, params?: string[]) => {
-  const { push } = useHistory();
-  if (params) {
-    return () => push(removeQueryParamsFromPath(['activeModal', ...params]));
-  }
-  return () => push(removeQueryParamsFromPath(['activeModal']));
+export const addQueryParamsToPath = (params: Record<string, string>) => {
+  const { pathname, search } = window.location;
+  const filteredSearchParams = Object.entries(queryString.parse(search.slice(1)));
+  return `${pathname}?${queryString.stringify({ ...Object.fromEntries(filteredSearchParams), ...params })}`;
 };

@@ -38,3 +38,5 @@ export { dotsAndSlashesToSlash } from './dots-and-slashes-to-slash';
 export { convertToSingleSpaces } from './convert-to-single-spaces';
 export { snakeToSpaces } from './snake-to-spaces';
 export { isPristine } from './is-pristine';
+export { addQueryParamsToPath } from './add-query-params';
+export { removeQueryParamsFromPath } from './remove-query-params-from-path';
