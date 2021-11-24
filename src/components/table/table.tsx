@@ -111,11 +111,10 @@ export const Table = withErrorBoundary(({
     {
       columns: useMemo(() => columns, [...columnsDependency]),
       data: useMemo(() => data, [data]),
-      initialState: { pageSize: 25, sortBy: defaultSortBy },
+      initialState: { pageSize: 25, sortBy: defaultSortBy, filters: defaultFilters },
       autoResetPage: false,
       defaultColumn, // Be sure to pass the defaultColumn option
       filterTypes,
-      filters: defaultFilters,
     } as any,
     useFilters,
     useSortBy,
@@ -130,7 +129,7 @@ export const Table = withErrorBoundary(({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => gotoPage(0), [filters]);
-  console.log('page', page);
+
   return (
     <>
       <div ref={ref} />
