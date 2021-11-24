@@ -43,6 +43,8 @@ export interface Props {
   stub?: React.ReactNode;
   columnsDependency?: Array<string | number | boolean | null | undefined>;
   defaultSortBy?: SortBy[];
+  defaultFilters?: {id: string; value: string}[];
+  isDefaultExpanded?: (original: any) => boolean
 }
 
 function DefaultColumnFilter({
@@ -69,6 +71,8 @@ export const Table = withErrorBoundary(({
   stub = null,
   columnsDependency = [],
   defaultSortBy = [],
+  defaultFilters = [],
+  isDefaultExpanded,
 }: Props) => {
   const filterTypes = React.useMemo(
     () => ({
@@ -111,6 +115,7 @@ export const Table = withErrorBoundary(({
       autoResetPage: false,
       defaultColumn, // Be sure to pass the defaultColumn option
       filterTypes,
+      filters: defaultFilters,
     } as any,
     useFilters,
     useSortBy,
@@ -125,7 +130,7 @@ export const Table = withErrorBoundary(({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => gotoPage(0), [filters]);
-
+  console.log('page', page);
   return (
     <>
       <div ref={ref} />
@@ -144,6 +149,7 @@ export const Table = withErrorBoundary(({
               prepareRow={prepareRow}
               renderRowSubComponent={renderRowSubComponent}
               searchWords={filters.map(({ value = '' }) => value)}
+              isDefaultExpanded={isDefaultExpanded && isDefaultExpanded(rawRow.original)}
             />
           ))}
         </tbody>
