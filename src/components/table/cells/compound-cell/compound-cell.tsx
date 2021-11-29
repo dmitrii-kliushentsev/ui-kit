@@ -23,10 +23,11 @@ interface Props {
   cellName: string;
   cellAdditionalInfo?: string;
   icon?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export const CompoundCell = ({
-  icon, cellName, cellAdditionalInfo,
+  icon, cellName, cellAdditionalInfo, children,
 }: Props) => {
   const [copied, setCopied] = useState(false);
   return (
@@ -34,7 +35,13 @@ export const CompoundCell = ({
       <div tw="h-5 flex items-center">{icon}</div>
       <div className="text-ellipsis group ">
         <div tw="flex gap-x-2 items-center">
-          <div className="text-ellipsis font-bold h-5 leading-20" data-test="compound-cell:name" title={cellName}>{cellName}</div>
+          <div
+            className="text-ellipsis font-bold h-5 leading-20"
+            data-test="compound-cell:name"
+            title={cellName}
+          >
+            {children || cellName}
+          </div>
           {copied
             ? (
               <Icons.Success tw="text-blue-default" />
