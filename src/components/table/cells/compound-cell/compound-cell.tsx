@@ -13,7 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { useState } from 'react';
 import 'twin.macro';
+
+import { Icons } from '../../../icon';
+import { copyToClipboard } from '../../../../utils';
 
 interface Props {
   cellName: string;
@@ -23,18 +27,33 @@ interface Props {
 
 export const CompoundCell = ({
   icon, cellName, cellAdditionalInfo,
-}: Props) => (
-  <div tw="flex gap-2 py-2 text-monochrome-black">
-    <div tw="h-5 flex items-center">{icon}</div>
-    <div className="text-ellipsis">
-      <div className="text-ellipsis font-bold h-5 leading-20" data-test="compound-cell:name" title={cellName}>{cellName}</div>
-      <div
-        className="text-ellipsis mt-1 h-5 leading-20 text-12 font-regular text-monochrome-default"
-        data-test="compound-cell:additional-info"
-        title={cellAdditionalInfo}
-      >
-        {cellAdditionalInfo}
+}: Props) => {
+  const [copied, setCopied] = useState(false);
+  return (
+    <div tw="flex gap-2 py-2 text-monochrome-black">
+      <div tw="h-5 flex items-center">{icon}</div>
+      <div className="text-ellipsis group ">
+        <div tw="flex gap-x-2 items-center">
+          <div className="text-ellipsis font-bold h-5 leading-20" data-test="compound-cell:name" title={cellName}>{cellName}</div>
+          {copied
+            ? (
+              <Icons.Success tw="text-blue-default" />
+            )
+            : (
+              <Icons.Copy
+                tw="invisible text-monochrome-dark-tint cursor-pointer hover:text-blue-default group-hover:visible"
+                onClick={() => { copyToClipboard(cellName); setCopied(true); }}
+              />
+            )}
+        </div>
+        <div
+          className="text-ellipsis mt-1 h-5 leading-20 text-12 font-regular text-monochrome-default"
+          data-test="compound-cell:additional-info"
+          title={cellAdditionalInfo}
+        >
+          {cellAdditionalInfo}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};

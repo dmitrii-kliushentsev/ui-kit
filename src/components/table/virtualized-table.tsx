@@ -28,7 +28,7 @@ import { TableHeader } from './table-header';
 import { DefaultColumnFilter } from './filters';
 
 type CustomColumn = Column &
-{ textAlign?: string; width?: string; notSortable?: boolean; disableEllipsis?: boolean, filterable?: boolean; };
+{ textAlign?: string; width?: string; notSortable?: boolean; disableEllipsis?: boolean, filterable?: boolean; isCustomCell?: boolean };
 
 interface SortBy {
   id: string;
@@ -43,6 +43,7 @@ export interface Props {
   defaultSortBy?: SortBy[];
   defaultFilters?: {id: string; value: string}[];
   name?: string;
+  resultName?: string;
   itemSize?: number;
 }
 
@@ -54,6 +55,7 @@ export const VirtualizedTable = withErrorBoundary(({
   defaultSortBy = [],
   defaultFilters = [],
   name = '',
+  resultName = '',
   itemSize = 35,
 }: Props) => {
   const filterTypes = React.useMemo(
@@ -117,7 +119,7 @@ export const VirtualizedTable = withErrorBoundary(({
                 style={{ width: cell.column.width }}
                 tw="px-4 border-b border-monochrome-medium-tint bg-monochrome-white"
               >
-                {cell.column.filterable
+                {cell.column.filterable && !cell.column.isCustomCell
                   ? (
                     <Cells.Highlight
                       text={cell.value}
@@ -146,7 +148,7 @@ export const VirtualizedTable = withErrorBoundary(({
     <>
       <TableHeader
         name={name}
-        displayedResult={`Displaying ${rows.length === data.length ? itemSize : rows.length} of ${data.length} ${name}`}
+        displayedResult={`Displaying ${rows.length === data.length ? itemSize : rows.length} of ${data.length} ${resultName}`}
         tw="mb-3"
       />
       <div {...getTableProps()} tw="w-full text-14 leading-24 text-monochrome-black bg-monochrome-white">

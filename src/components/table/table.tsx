@@ -47,6 +47,7 @@ export interface Props {
   defaultFilters?: {id: string; value: string}[];
   isDefaultExpanded?: (original: any) => boolean;
   name?: string;
+  resultName?: string;
 }
 
 export const Table = withErrorBoundary(({
@@ -59,6 +60,7 @@ export const Table = withErrorBoundary(({
   defaultFilters = [],
   isDefaultExpanded,
   name = '',
+  resultName = '',
 }: Props) => {
   const filterTypes = React.useMemo(
     () => ({
@@ -119,7 +121,7 @@ export const Table = withErrorBoundary(({
   return (
     <>
       <div ref={ref} />
-      <TableHeader name={name} displayedResult={`Displaying ${page.length} of ${data.length} ${name}`} tw="mb-3" />
+      <TableHeader name={name} displayedResult={`Displaying ${page.length} of ${data.length} ${resultName}`} tw="mb-3" />
       <table {...getTableProps()} tw="table-fixed relative w-full text-14 leading-16 text-monochrome-black">
         <TableElements.TableHead>
           {headerGroups.map((headerGroup: any) => (
