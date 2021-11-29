@@ -44,7 +44,8 @@ export interface Props {
   defaultFilters?: {id: string; value: string}[];
   name?: string;
   resultName?: string;
-  itemSize?: number;
+  listHeight?: number;
+  listItemSize?: number;
 }
 
 export const VirtualizedTable = withErrorBoundary(({
@@ -56,7 +57,8 @@ export const VirtualizedTable = withErrorBoundary(({
   defaultFilters = [],
   name = '',
   resultName = '',
-  itemSize = 35,
+  listHeight = 500,
+  listItemSize = 64,
 }: Props) => {
   const filterTypes = React.useMemo(
     () => ({
@@ -112,7 +114,7 @@ export const VirtualizedTable = withErrorBoundary(({
             style,
           })}
         >
-          <div tw="w-full grid grid-template-columns[3fr 1fr 1fr]">
+          <div tw="w-full h-full grid grid-template-columns[3fr 1fr 1fr]">
             {row.cells.map((cell: any) => (
               <div
                 {...cell.getCellProps()}
@@ -144,17 +146,22 @@ export const VirtualizedTable = withErrorBoundary(({
     document.body.removeChild(scrollDiv);
     return scrollbarWidth;
   }, []);
+
   return (
     <>
       <TableHeader
         name={name}
-        displayedResult={`Displaying ${rows.length === data.length ? itemSize : rows.length} of ${data.length} ${resultName}`}
+        displayedResult={`Displaying ${rows.length} of ${data.length} ${resultName}`}
         tw="mb-3"
       />
       <div {...getTableProps()} tw="w-full text-14 leading-24 text-monochrome-black bg-monochrome-white">
         <div tw="grid items-center w-full h-13 bg-monochrome-white border-monochrome-black border-t border-b">
           {headerGroups.map(headerGroup => (
-            <HeaderGroup {...headerGroup.getHeaderGroupProps()} style={{ display: 'grid !important' }}>
+            <HeaderGroup
+              {...headerGroup.getHeaderGroupProps()}
+              style={{ display: 'grid !important' }}
+              withScroll={listItemSize * rows.length > listHeight}
+            >
               {headerGroup.headers.map((column: any) => (
                 <div {...column.getHeaderProps()} tw="w-full px-4">
                   <div tw="flex gap-3 items-center font-weight[600]" style={{ width: column.width }}>
@@ -177,14 +184,14 @@ export const VirtualizedTable = withErrorBoundary(({
           ))}
         </div>
 
-        <div {...getTableBodyProps()} tw="w-full h-[576px]">
+        <div {...getTableBodyProps()} tw="w-full">
           {rows.length === 0
             ? stub
             : (
               <FixedSizeListWithCustomScroll
-                height={576}
+                height={listHeight}
+                itemSize={listItemSize}
                 itemCount={rows.length}
-                itemSize={itemSize}
                 width={totalColumnsWidth + scrollBarSize}
               >
                 {RenderRow}
@@ -199,7 +206,7 @@ export const VirtualizedTable = withErrorBoundary(({
 });
 
 const FixedSizeListWithCustomScroll = styled(FixedSizeList)`
-  ${tw`grid`}
+  ${tw`grid overflow-y-scroll`}
   ::-webkit-scrollbar {
     ${tw`w-[14px] rounded`}
   }
@@ -214,18 +221,20 @@ const FixedSizeListWithCustomScroll = styled(FixedSizeList)`
 `;
 
 const HeaderGroup = styled.div`
-  ${tw`grid w-full grid-flow-col grid-template-columns[3fr 1fr 1fr] overflow-y-scroll`}
+  ${tw`grid w-full grid-flow-col grid-template-columns[3fr 1fr 1fr]`}
+
+  ${({ withScroll }: {withScroll: boolean}) => withScroll && tw`overflow-y-scroll`}
 
   ::-webkit-scrollbar {
     ${tw`w-[14px] rounded`}
   }
 
   ::-webkit-scrollbar-track {
-    ${tw`bg-monochrome-white rounded`}
+    ${tw`bg-transparent rounded`}
   }
 
   ::-webkit-scrollbar-thumb {
-    ${tw`bg-monochrome-white border-4 border-solid rounded-full border-monochrome-white`}
+    ${tw`bg-transparent border-4 border-solid rounded-full border-transparent`}
   }
 `;
 

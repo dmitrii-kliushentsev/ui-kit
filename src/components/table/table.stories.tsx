@@ -1,6 +1,7 @@
 import 'twin.macro';
 import { Icons } from '../icon';
 import { Stub } from '../stub';
+import { Cells } from './cells';
 
 import { VirtualizedTable } from './virtualized-table';
 
@@ -26,7 +27,17 @@ BuildsTable.args = {
       accessor: 'testDetails.class',
       textAlign: 'left',
       filterable: true,
+      isCustomCell: true,
       width: '100%',
+      Cell: ({ value = '', state }: any) => (
+        <Cells.Compound
+          cellName={value}
+          cellAdditionalInfo="foo-bar"
+          icon={<Icons.Function />}
+        >
+          <Cells.Highlight text={value} searchWords={state.filters.map((filter: {value: string}) => filter.value)} />
+        </Cells.Compound>
+      ),
     },
     {
       Header: 'Engine',
@@ -42,7 +53,7 @@ BuildsTable.args = {
       width: '100%',
     },
   ],
-  data: Array.from({ length: 100 }, (_, i) => ({
+  data: Array.from({ length: 6 }, (_, i) => ({
     id: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]:AUTO-${i}`,
     type: 'AUTO',
     name: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]-${i}`,
