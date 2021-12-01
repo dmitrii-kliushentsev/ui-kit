@@ -21,6 +21,7 @@
   },
   "scripts": {
     "start": "npm run storybook",
+    "start:standalone": "npm run tailwind:css && webpack serve",
     "build:tw": "npx tailwindcss -i ./src/tailwind.css -o ./dist/tailwind.css --minify",
     "build": "tsc && webpack --mode=production",
     "build:dev": "webpack",

@@ -21,6 +21,7 @@ import {
 } from 'react-table';
 import { withErrorBoundary } from 'react-error-boundary';
 
+import { useHistory } from 'react-router-dom';
 import { DefaultColumnFilter } from './filters';
 import { TableErrorFallback } from '../error-fallback';
 import { TableElements } from './table-elements';
@@ -28,6 +29,8 @@ import { Pagination } from './pagination';
 import { DefaultTableHeaderColumn } from './default-table-header-column';
 import { DefaultRow } from './default-row';
 import { TableHeader } from './table-header';
+import { addQueryParamsToPath, removeQueryParamsFromPath } from '../../utils';
+import { useQueryParams } from '../../hooks';
 
 type CustomColumn = Column &
 { textAlign?: string; width?: string; notSortable?: boolean; disableEllipsis?: boolean, filterable?: boolean; isCustomCell?: boolean };
@@ -44,7 +47,7 @@ export interface Props {
   stub?: React.ReactNode;
   columnsDependency?: Array<string | number | boolean | null | undefined>;
   defaultSortBy?: SortBy[];
-  defaultFilters?: {id: string; value: string}[];
+  defaultFilters?: { id: string; value: string }[];
   isDefaultExpanded?: (original: any) => boolean;
   name?: string;
   resultName?: string;
@@ -64,7 +67,7 @@ export const Table = withErrorBoundary(({
 }: Props) => {
   const filterTypes = React.useMemo(
     () => ({
-      text: (rows: any, id: any, filterValue: any) => rows.filter((row:any) => {
+      text: (rows: any, id: any, filterValue: any) => rows.filter((row: any) => {
         const rowValue = row.values[id];
         return rowValue !== undefined
           ? String(rowValue)
@@ -84,6 +87,9 @@ export const Table = withErrorBoundary(({
     [],
   );
 
+  const { tableState = '{"pageIndex":0,"pageSize":25}' } = useQueryParams<{ tableState?: string }>();
+  const parsedTableState = JSON.parse(tableState);
+
   const {
     page,
     getTableProps, getTableBodyProps, headerGroups, prepareRow,
@@ -100,7 +106,7 @@ export const Table = withErrorBoundary(({
       columns: useMemo(() => columns, [...columnsDependency]),
       data,
       initialState: {
-        pageSize: 25, sortBy: defaultSortBy, filters: defaultFilters,
+        pageSize: 25, sortBy: defaultSortBy, filters: defaultFilters, ...parsedTableState,
       },
       autoResetPage: false,
       autoResetFilters: false,
@@ -113,6 +119,28 @@ export const Table = withErrorBoundary(({
     useExpanded,
     usePagination,
   );
+  const { push } = useHistory() || {};
+
+  useEffect(() => {
+    const state = JSON.stringify({ pageIndex, pageSize });
+    if (state !== tableState) {
+      if (pageIndex === 0 && pageSize === 25) {
+        push(removeQueryParamsFromPath(['tableState']));
+        return;
+      }
+      push(addQueryParamsToPath({ tableState: state }));
+    }
+  }, [pageIndex, pageSize, push]);
+
+  useEffect(() => () => {
+    push(removeQueryParamsFromPath(['tableState']));
+  }, []);
+
+  useEffect(() => {
+    const { pageIndex: pageIndexFromUrl = 0, pageSize: pageSizeFromUrl = 25 } = parsedTableState;
+    gotoPage(pageIndexFromUrl);
+    setPageSize(pageSizeFromUrl);
+  }, [tableState]);
 
   if (typeof data !== 'object') {
     throw new Error('Table received incorrect data');
@@ -120,7 +148,11 @@ export const Table = withErrorBoundary(({
 
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => gotoPage(0), [filters]);
+  useEffect(() => {
+    if (filters[0]) {
+      gotoPage(0);
+    }
+  }, [filters]);
 
   return (
     <>

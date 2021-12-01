@@ -15,6 +15,7 @@
  */
 const { merge } = require('webpack-merge');
 const singleSpaDefaults = require('webpack-config-single-spa-react-ts');
+const webpack = require('webpack');
 
 module.exports = (webpackConfigEnv, argv) => {
   const orgName = 'drill4j';
