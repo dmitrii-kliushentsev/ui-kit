@@ -122,13 +122,13 @@ export const Table = withErrorBoundary(({
   const { push } = useHistory() || {};
 
   useEffect(() => {
-    const state = JSON.stringify({ pageIndex, pageSize });
-    if (state !== tableState) {
+    const newState = JSON.stringify({ pageIndex, pageSize });
+    if (newState !== tableState) {
       if (pageIndex === 0 && pageSize === 25) {
         push(removeQueryParamsFromPath(['tableState']));
         return;
       }
-      push(addQueryParamsToPath({ tableState: state }));
+      push(addQueryParamsToPath({ tableState: newState }));
     }
   }, [pageIndex, pageSize, push]);
 
