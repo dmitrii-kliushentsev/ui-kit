@@ -1,6 +1,6 @@
 {
   "name": "@drill4j/ui-kit",
-  "version": "0.1.179",
+  "version": "0.1.180",
   "homepage": "http://drill4j.github.io/ui-kit",
   "author": "Drill4J",
   "license": "Apache-2.0",
@@ -21,6 +21,7 @@
   },
   "scripts": {
     "start": "npm run storybook",
+    "start:standalone": "npm run tailwind:css && webpack serve",
     "build:tw": "npx tailwindcss -i ./src/tailwind.css -o ./dist/tailwind.css --minify",
     "build": "tsc && webpack --mode=production",
     "build:dev": "webpack",
