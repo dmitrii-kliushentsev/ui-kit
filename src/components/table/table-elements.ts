@@ -47,7 +47,7 @@ const FadeInAnimation = keyframes`
   to { opacity: 1; border-bottom-width: 1px; }
 `;
 
-const FadeInTR = styled(TR)`
+const FadeInTR: any = styled(TR)`
   animation-name: ${FadeInAnimation};
   animation-duration: ${(props: any) => props.duration};  
   animation-timing-function: ${(props: any) => props.timingFunction};      
