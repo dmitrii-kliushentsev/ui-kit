@@ -1,17 +1,37 @@
+import React, { useEffect, useState } from 'react';
 import 'twin.macro';
+
 import { Icons } from '../icon';
+import { Skeleton } from '../skeleton';
 import { Stub } from '../stub';
 import { Cells } from './cells';
 
-import { VirtualizedTable } from './virtualized-table';
+import { Table } from './table';
 
 export default {
-  component: VirtualizedTable,
+  component: Table,
   title: 'Components/table',
 };
 
-const Template = (args: any) => <VirtualizedTable {...args} />;
-
+const Template = (args: any) =>
+  // const [data, setData] = useState([]);
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => setData(Array.from({ length: 60 }, (_, i) => ({
+  //     id: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]:AUTO-${i}`,
+  //     type: 'AUTO',
+  //     name: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]-${i}`,
+  //     coverage: 50,
+  //   }))), 5000);
+  //   return () => clearTimeout(timeout);
+  // }, []);
+  (
+    <Table
+      {...args}
+      isLoading
+      data={[]}
+      initialRowsCount={22}
+    />
+  );
 export const BuildsTable = Template.bind({});
 
 // @ts-ignore
@@ -23,13 +43,13 @@ BuildsTable.args = {
   name: 'app packages',
   columns: [
     {
-      Header: 'Class',
-      accessor: 'testDetails.class',
+      Header: 'Name',
+      accessor: 'name',
       textAlign: 'left',
       filterable: true,
       isCustomCell: true,
       width: '100%',
-      Cell: ({ value = '', state }: any) => (
+      Cell: ({ value = '', state }: any) => (value ? (
         <Cells.Compound
           cellName={value}
           cellAdditionalInfo="foo-bar"
@@ -37,51 +57,23 @@ BuildsTable.args = {
         >
           <Cells.Highlight text={value} searchWords={state.filters.map((filter: {value: string}) => filter.value)} />
         </Cells.Compound>
-      ),
+      ) : <Skeleton withIcon withSubLine />),
     },
     {
-      Header: 'Engine',
-      accessor: 'testDetails.engine',
+      Header: 'Type',
+      accessor: 'type',
       textAlign: 'left',
-      filterable: true,
       width: '100%',
+      Cell: ({ value = '' }: any) => (value || <Skeleton />),
     },
     {
-      Header: 'Params',
-      accessor: 'testDetails.params',
-      textAlign: 'right',
+      Header: 'Coverage, %',
+      accessor: 'coverage',
+      textAlign: 'left',
       width: '100%',
+      Cell: ({ value = '' }: any) => (value
+        ? <Cells.Coverage value={value} />
+        : <Skeleton />),
     },
   ],
-  data: Array.from({ length: 6 }, (_, i) => ({
-    id: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]:AUTO-${i}`,
-    type: 'AUTO',
-    name: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]-${i}`,
-    toRun: false,
-    coverage: {
-      percentage: 0,
-      methodCount: {
-        covered: 0,
-        total: 97,
-      },
-      count: {
-        covered: 0,
-        total: 828,
-      },
-    },
-    testDetails: {
-      engine: `junit-jupiter-${i}`,
-      class: `api.standalone.StandaloneApiTest-${i}`,
-      mathod: `junit5IgnoredTest-${i}`,
-      params: 'qwe-wwwe-qwe',
-    },
-    details: {
-      duration: 0,
-      result: 'SKIPPED',
-      metadata: {
-        hash: '',
-        data: {},
-      },
-    },
-  })),
 };

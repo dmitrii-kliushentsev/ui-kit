@@ -27,7 +27,7 @@ import { TableErrorFallback } from '../error-fallback';
 import { TableElements } from './table-elements';
 import { Pagination } from './pagination';
 import { DefaultTableHeaderColumn } from './default-table-header-column';
-import { DefaultRow } from './default-row';
+import { DefaultRow, SkeletonRow } from './rows';
 import { TableHeader } from './table-header';
 import { addQueryParamsToPath, removeQueryParamsFromPath } from '../../utils';
 import { useQueryParams } from '../../hooks';
@@ -51,6 +51,8 @@ export interface Props {
   isDefaultExpanded?: (original: any) => boolean;
   name?: string;
   resultName?: string;
+  initialRowsCount?: number;
+  isLoading?: boolean;
 }
 
 export const Table = withErrorBoundary(({
@@ -64,6 +66,8 @@ export const Table = withErrorBoundary(({
   isDefaultExpanded,
   name = '',
   resultName = '',
+  initialRowsCount = 0,
+  isLoading = true,
 }: Props) => {
   const filterTypes = React.useMemo(
     () => ({
@@ -104,7 +108,7 @@ export const Table = withErrorBoundary(({
   }: any = useTable(
     {
       columns: useMemo(() => columns, [...columnsDependency]),
-      data,
+      data: data.length > 0 ? data : Array(initialRowsCount).fill(initialRowsCount),
       initialState: {
         pageSize: 25, sortBy: defaultSortBy, filters: defaultFilters, ...parsedTableState,
       },
@@ -167,15 +171,19 @@ export const Table = withErrorBoundary(({
           ))}
         </TableElements.TableHead>
         <tbody {...getTableBodyProps()}>
-          {page.map((rawRow: any) => (
-            <DefaultRow
-              rawRow={rawRow}
-              prepareRow={prepareRow}
-              renderRowSubComponent={renderRowSubComponent}
-              searchWords={filters.map(({ value = '' }) => value)}
-              isDefaultExpanded={isDefaultExpanded && isDefaultExpanded(rawRow.original)}
-            />
-          ))}
+          {page.map((rawRow: any, i: number) => (isLoading
+            ? (
+              <SkeletonRow rawRow={rawRow} prepareRow={prepareRow} delay={`${Math.ceil((i + 1) / 3)}s`} />
+            )
+            : (
+              <DefaultRow
+                rawRow={rawRow}
+                prepareRow={prepareRow}
+                renderRowSubComponent={renderRowSubComponent}
+                searchWords={filters.map(({ value = '' }) => value)}
+                isDefaultExpanded={isDefaultExpanded && isDefaultExpanded(rawRow.original)}
+              />
+            )))}
         </tbody>
       </table>
       {page.length === 0 && stub}

@@ -49,3 +49,5 @@ export {
   alreadyExist,
 } from './forms';
 export { Popover } from './popover';
+export { Skeleton } from './skeleton';
+export { PercentageBar } from './percentage-bar';

@@ -16,8 +16,8 @@
 import { useState } from 'react';
 import tw from 'twin.macro';
 
-import { Cells } from '../cells';
-import { TableElements } from '../table-elements';
+import { Cells } from '../../cells';
+import { TableElements } from '../../table-elements';
 
 export const DefaultRow = ({
   rawRow, prepareRow, renderRowSubComponent, searchWords, isDefaultExpanded = false,

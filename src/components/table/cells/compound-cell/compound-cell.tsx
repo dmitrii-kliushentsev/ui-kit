@@ -24,10 +24,11 @@ interface Props {
   cellAdditionalInfo?: string;
   icon?: React.ReactNode;
   children?: React.ReactNode;
+  link?: React.ReactNode;
 }
 
 export const CompoundCell = ({
-  icon, cellName, cellAdditionalInfo, children,
+  icon, cellName, cellAdditionalInfo, children, link,
 }: Props) => {
   const [copied, setCopied] = useState(false);
   return (
@@ -52,6 +53,7 @@ export const CompoundCell = ({
                 onClick={() => { copyToClipboard(cellName); setCopied(true); }}
               />
             )}
+          {link && <div tw="invisible text-monochrome-dark-tint cursor-pointer hover:text-blue-default group-hover:visible">{link}</div>}
         </div>
         <div
           className="text-ellipsis mt-1 h-5 leading-20 text-12 font-regular text-monochrome-default"

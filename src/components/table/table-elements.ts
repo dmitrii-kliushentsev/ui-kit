@@ -1,4 +1,5 @@
 import tw, { styled } from 'twin.macro';
+import { keyframes } from 'styled-components';
 
 const TableHead = styled.thead`
   ${tw`bg-monochrome-white text-14 leading-20 font-bold`};
@@ -38,8 +39,34 @@ const TH = styled.th`
 
 const TR = styled.tr`
   ${tw`h-10 border-b border-monochrome-medium-tint bg-monochrome-white`}
-  ${({ isExpanded }: { isExpanded: boolean }) => isExpanded && tw`bg-monochrome-light-tint`}
+  ${({ isExpanded }: { isExpanded?: boolean }) => isExpanded && tw`bg-monochrome-light-tint`}
 `;
+
+const FadeInAnimation = keyframes`  
+  from { opacity: 0; border-bottom-width: 0; }
+  to { opacity: 1; border-bottom-width: 1px; }
+`;
+
+const FadeInTR = styled(TR)`
+  animation-name: ${FadeInAnimation};
+  animation-duration: ${(props: any) => props.duration};  
+  animation-timing-function: ${(props: any) => props.timingFunction};      
+  animation-delay: ${(props: any) => props.delay};  
+  animation-iteration-count: ${(props: any) => props.iterationCount};  
+  animation-direction: ${(props: any) => props.direction}; 
+  animation-fill-mode: ${(props: any) => props.fillMode};  
+  animation-play-state:  ${(props: any) => props.playState};
+`;
+
+FadeInTR.defaultProps = {
+  duration: '1s',
+  timingFunction: 'ease-in',
+  delay: '0s',
+  iterationCount: '1',
+  direction: 'normal',
+  fillMode: 'both',
+  playState: 'running',
+} as any;
 
 export const TableElements = {
   TableHead,
@@ -48,4 +75,5 @@ export const TableElements = {
   HeaderText,
   TH,
   TR,
+  FadeInTR,
 };

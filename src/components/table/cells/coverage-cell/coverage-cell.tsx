@@ -18,13 +18,15 @@ import 'twin.macro';
 
 import { percentFormatter } from '../../../../utils';
 import { ClickableCell } from '../clickable-cell';
+import { PercentageBar } from '../../../percentage-bar';
 
 interface Props {
   value: number;
 }
 
 export const CoverageCell = ({ value = 0 }: Props) => (
-  <div tw="leading-64">
+  <div tw="flex items-center gap-x-2 leading-64">
+    <PercentageBar percentage={percentFormatter(value)} />
     <ClickableCell disabled>
       {value === 0 && (
         <span

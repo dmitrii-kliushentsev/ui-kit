@@ -46,6 +46,7 @@ export interface Props {
   resultName?: string;
   listHeight?: number;
   listItemSize?: number;
+  initialRowsCount?: number;
 }
 
 export const VirtualizedTable = withErrorBoundary(({
@@ -58,7 +59,8 @@ export const VirtualizedTable = withErrorBoundary(({
   name = '',
   resultName = '',
   listHeight = 500,
-  listItemSize = 64,
+  listItemSize = 62,
+  initialRowsCount = 0,
 }: Props) => {
   const filterTypes = React.useMemo(
     () => ({
@@ -93,7 +95,7 @@ export const VirtualizedTable = withErrorBoundary(({
   } = useTable(
     {
       columns: useMemo(() => columns, [...columnsDependency]),
-      data: useMemo(() => data, [data]),
+      data: useMemo(() => (data.length > 0 ? data : Array(initialRowsCount).fill(initialRowsCount)), [data]),
       initialState: { sortBy: defaultSortBy, filters: defaultFilters },
       autoResetPage: false,
       defaultColumn, // Be sure to pass the defaultColumn option
@@ -108,9 +110,10 @@ export const VirtualizedTable = withErrorBoundary(({
     ({ index, style }) => {
       const row = rows[index];
       prepareRow(row);
+
       return (
         <div
-          {...row.getRowProps({
+          {...row?.getRowProps({
             style,
           })}
         >
@@ -119,7 +122,7 @@ export const VirtualizedTable = withErrorBoundary(({
               <div
                 {...cell.getCellProps()}
                 style={{ width: cell.column.width }}
-                tw="px-4 border-b border-monochrome-medium-tint bg-monochrome-white"
+                tw="grid items-center h-full w-full px-4 border-b border-monochrome-medium-tint bg-monochrome-white"
               >
                 {cell.column.filterable && !cell.column.isCustomCell
                   ? (
