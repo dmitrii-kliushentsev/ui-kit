@@ -1,4 +1,4 @@
-import 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
 interface Props {
   withIcon?: boolean;
@@ -12,10 +12,15 @@ export const Skeleton = ({ withIcon, withSubLine, className }: Props) => (
       {withIcon && <div tw="mt-1 rounded-full bg-monochrome-medium-tint h-4 w-4" />}
       <div tw="flex-1 space-y-4 py-1">
         <div tw="space-y-2">
-          <div tw="w-1/2 h-4 bg-monochrome-medium-tint rounded" />
+          <MainLine withSubLine={withSubLine} />
           {withSubLine && <div tw="w-full h-3 bg-monochrome-medium-tint rounded" />}
         </div>
       </div>
     </div>
   </div>
 );
+
+const MainLine = styled.div`
+  ${tw`w-full h-4 bg-monochrome-medium-tint rounded`}
+  ${({ withSubLine }: {withSubLine?: boolean}) => withSubLine && tw`w-1/2`}
+`;
