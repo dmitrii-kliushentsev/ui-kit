@@ -9,7 +9,7 @@ export const SearchInput = ({
   reset,
   ...restProps
 }: InputProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(Boolean(restProps.value));
   const node = useRef<HTMLFormElement>(null);
 
   useEffect(() => {

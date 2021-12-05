@@ -67,7 +67,7 @@ export const Table = withErrorBoundary(({
   name = '',
   resultName = '',
   initialRowsCount = 0,
-  isLoading = true,
+  isLoading = false,
 }: Props) => {
   const filterTypes = React.useMemo(
     () => ({
@@ -108,7 +108,7 @@ export const Table = withErrorBoundary(({
   }: any = useTable(
     {
       columns: useMemo(() => columns, [...columnsDependency]),
-      data: data.length > 0 ? data : Array(initialRowsCount).fill(initialRowsCount),
+      data: useMemo(() => (!isLoading && data.length > 0 ? data : Array(initialRowsCount).fill(initialRowsCount)), [isLoading, data]),
       initialState: {
         pageSize: 25, sortBy: defaultSortBy, filters: defaultFilters, ...parsedTableState,
       },

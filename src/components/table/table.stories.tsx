@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import 'twin.macro';
 
 import { Icons } from '../icon';
@@ -25,12 +26,14 @@ const Template = (args: any) =>
   //   return () => clearTimeout(timeout);
   // }, []);
   (
-    <Table
-      {...args}
-      isLoading
-      data={[]}
-      initialRowsCount={22}
-    />
+    <BrowserRouter>
+      <Table
+        {...args}
+        isLoading
+        data={[]}
+        initialRowsCount={22}
+      />
+    </BrowserRouter>
   );
 export const BuildsTable = Template.bind({});
 
