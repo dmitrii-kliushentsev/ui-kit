@@ -13,27 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Icons } from '../../../icon';
 import 'twin.macro';
 
 import { percentFormatter } from '../../../../utils';
 import { ClickableCell } from '../clickable-cell';
+import { PercentageBar } from '../../../percentage-bar';
 
 interface Props {
   value: number;
 }
 
-export const CoverageCell = ({ value = 0 }: Props) => (
-  <div tw="leading-64">
+export const CoverageProgressCell = ({ value = 0 }: Props) => (
+  <div tw="flex items-center gap-x-2 leading-64">
+    <PercentageBar percentage={percentFormatter(value)} />
     <ClickableCell disabled>
-      {value === 0 && (
-        <span
-          tw="flex items-center mr-2 text-orange-default pointer-events-auto"
-          title="Test didn't cover any methods. Make sure the test is actual or modify/delete it."
-        >
-          <Icons.UncoveredMethods />
-        </span>
-      )}
       {percentFormatter(value)}
     </ClickableCell>
   </div>
