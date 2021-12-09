@@ -22,9 +22,9 @@ interface Props {
 export const useCopy = ({ delay }: Props) => {
   const [copied, setCopied] = useState(false);
   useEffect(() => {
-    const timeout = setTimeout(() => setCopied(false), delay);
-    copied && timeout;
-    return () => clearTimeout(timeout);
+    const handleTimeout = setTimeout(() => setCopied(false), delay);
+
+    return () => clearTimeout(handleTimeout);
   }, [copied]);
 
   return { copied, setCopied };
