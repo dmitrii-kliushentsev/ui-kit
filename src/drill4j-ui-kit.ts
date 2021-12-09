@@ -70,7 +70,7 @@ export {
 } from './components';
 export {
   useClickOutside, useElementSize, useHover, usePreserveCaretPosition,
-  useRunAfterUpdate, useQueryParams, useIntersection, useGeneralAlertMessage, useCloseModal,
+  useRunAfterUpdate, useQueryParams, useIntersection, useGeneralAlertMessage, useCloseModal, useCopy,
 } from './hooks';
 
 export const Typography = {

@@ -38,7 +38,7 @@ const TH = styled.th`
 `;
 
 const TR = styled.tr`
-  ${tw`h-10 border-b border-monochrome-medium-tint bg-monochrome-white`}
+  ${tw`h-10 border-b border-monochrome-medium-tint bg-monochrome-white hover:bg-monochrome-light-tint`}
   ${({ isExpanded }: { isExpanded?: boolean }) => isExpanded && tw`bg-monochrome-light-tint`}
 `;
 

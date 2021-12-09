@@ -9,3 +9,4 @@ export { useIntersection } from './use-intersection';
 export { useQueryParams } from './use-query-params';
 export { useIntersectionSide } from './use-intersection-side';
 export { useIntersectionCallback } from './use-intersection-callback';
+export { useCopy } from './use-copy';

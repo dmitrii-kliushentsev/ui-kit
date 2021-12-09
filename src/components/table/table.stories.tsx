@@ -15,22 +15,17 @@ export default {
 };
 
 const Template = (args: any) =>
-  // const [data, setData] = useState([]);
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => setData(Array.from({ length: 60 }, (_, i) => ({
-  //     id: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]:AUTO-${i}`,
-  //     type: 'AUTO',
-  //     name: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]-${i}`,
-  //     coverage: 50,
-  //   }))), 5000);
-  //   return () => clearTimeout(timeout);
-  // }, []);
   (
     <BrowserRouter>
       <Table
         {...args}
-        isLoading
-        data={[]}
+        isLoading={false}
+        data={Array.from({ length: 60 }, (_, i) => ({
+          id: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]:AUTO-${i}`,
+          type: 'AUTO',
+          name: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]-${i}`,
+          coverage: 50,
+        }))}
         initialRowsCount={22}
       />
     </BrowserRouter>
@@ -67,7 +62,14 @@ BuildsTable.args = {
       accessor: 'type',
       textAlign: 'left',
       width: '100%',
-      Cell: ({ value = '' }: any) => (value || <Skeleton />),
+      Cell: ({ value = '' }: any) => (value ? (
+        <Cells.Compound
+          cellName={value}
+          icon={<Icons.Class />}
+        >
+          {value}
+        </Cells.Compound>
+      ) : <Skeleton withIcon withSubLine />),
     },
     {
       Header: 'Coverage, %',

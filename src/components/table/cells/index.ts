@@ -16,6 +16,7 @@
 import { DurationCell } from './duration-cell';
 import { CompoundCell } from './compound-cell';
 import { CoverageCell } from './coverage-cell';
+import { CoverageProgressCell } from './coverage-progress-cell';
 import { ClickableCell } from './clickable-cell';
 import { TestStatusCell } from './test-status-cell';
 import { HighlightCell } from './highlight-cell';
@@ -25,6 +26,7 @@ export const Cells = {
   Compound: CompoundCell,
   Clickable: ClickableCell,
   Coverage: CoverageCell,
+  CoverageProgress: CoverageProgressCell,
   TestStatus: TestStatusCell,
   Highlight: HighlightCell,
 } as any;
