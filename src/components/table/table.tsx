@@ -50,6 +50,7 @@ export interface Props {
   defaultFilters?: { id: string; value: string }[];
   isDefaultExpanded?: (original: any) => boolean;
   name?: string;
+  header?: (title: string, pagesLength: number, dataLength: number) => JSX.Element;
   resultName?: string;
   initialRowsCount?: number;
   isLoading?: boolean;
@@ -64,6 +65,7 @@ export const Table = withErrorBoundary(({
   defaultSortBy = [],
   isDefaultExpanded,
   name = '',
+  header = (title, pagesLength, dataLength) => <TableHeader name={title} displayedResult={`Displaying ${pagesLength} of ${dataLength}`}/>,
   resultName = '',
   initialRowsCount = 0,
   isLoading = false,
@@ -158,7 +160,7 @@ export const Table = withErrorBoundary(({
   return (
     <>
       <div ref={ref} />
-      <TableHeader name={name} displayedResult={`Displaying ${page.length} of ${data.length} ${resultName}`} tw="mb-3" />
+      {header(name, page.length, data.length)}
       <table {...getTableProps()} tw="table-fixed relative w-full text-14 leading-16 text-monochrome-black">
         <TableElements.TableHead>
           {headerGroups.map((headerGroup: any) => (
