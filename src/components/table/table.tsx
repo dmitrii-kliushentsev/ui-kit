@@ -103,6 +103,7 @@ export const Table = withErrorBoundary(({
     nextPage,
     previousPage,
     setPageSize,
+    setAllFilters,
     state: { pageIndex, pageSize, filters },
   }: any = useTable(
     {
@@ -136,9 +137,10 @@ export const Table = withErrorBoundary(({
   }, [pageIndex, pageSize, filters]);
 
   useEffect(() => {
-    const { pageIndex: pageIndexFromUrl = 0, pageSize: pageSizeFromUrl = 25 } = parsedTableState;
+    const { pageIndex: pageIndexFromUrl = 0, pageSize: pageSizeFromUrl = 25, filters: filtersFromUrl = [] } = parsedTableState;
     gotoPage(pageIndexFromUrl);
     setPageSize(pageSizeFromUrl);
+    setAllFilters(filtersFromUrl);
   }, [tableState]);
 
   if (typeof data !== 'object') {
