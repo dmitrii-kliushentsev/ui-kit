@@ -4,10 +4,6 @@ import Highlighter from 'react-highlight-words';
 import ReactDOM from 'react-dom';
 
 export {
-  Link, NavLink, useHistory, useLocation, matchPath, Route, Switch, BrowserRouter, RouterProps, Router, withRouter, Redirect, useParams,
-} from 'react-router-dom';
-export * from 'react-router';
-export {
   Field, Form, Formik, FieldInputProps, useFormikContext, FormikProps, ErrorMessage, useField,
 } from 'formik';
 export {

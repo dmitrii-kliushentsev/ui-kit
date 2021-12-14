@@ -27,6 +27,6 @@ module.exports = (webpackConfigEnv, argv) => {
   });
 
   return merge(defaultConfig, {
-    externals: ['single-spa', 'react', 'react-dom'],
+    externals: ['single-spa', 'react', 'react-dom', 'react-router-dom'],
   });
 };
