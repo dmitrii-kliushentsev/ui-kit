@@ -7,20 +7,20 @@ export function DefaultColumnFilter({
     filterValue = '', setFilter = () => {}, Header = '',
   } = {},
 }: any) {
-  const [value, setValue] = useState(filterValue);
+  const [valueInput, setValueInput] = useState(filterValue);
 
-  const search = useCallback(debounce((v) => {
-    setFilter(v?.trimEnd() || v);
+  const search = useCallback(debounce((value) => {
+    setFilter(value);
   }, 300), [setFilter]);
 
-  const onChangeHandler = (v: string) => {
-    search(v);
-    setValue(v);
+  const onChangeHandler = (value: string) => {
+    search(value);
+    setValueInput(value);
   }
 
   return (
     <Inputs.Search
-      value={value}
+      value={valueInput}
       onChange={e => {
         onChangeHandler(e.target.value);
       }}
