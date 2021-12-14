@@ -28,7 +28,6 @@ import { TableElements } from './table-elements';
 import { Pagination } from './pagination';
 import { DefaultTableHeaderColumn } from './default-table-header-column';
 import { DefaultRow, SkeletonRow } from './rows';
-import { TableHeader } from './table-header';
 import { addQueryParamsToPath, removeQueryParamsFromPath } from '../../utils';
 import { useQueryParams } from '../../hooks';
 
@@ -49,7 +48,7 @@ export interface Props {
   defaultSortBy?: SortBy[];
   defaultFilters?: { id: string; value: string }[];
   isDefaultExpanded?: (original: any) => boolean;
-  renderHeader?: (pagesLength: number, dataLength: number) => JSX.Element;
+  renderHeader?: (data: {currentCount: number, totalCount: number}) => JSX.Element;
   initialRowsCount?: number;
   isLoading?: boolean;
 }
@@ -156,7 +155,7 @@ export const Table = withErrorBoundary(({
   return (
     <>
       <div ref={ref} />
-      {renderHeader && renderHeader(page.length, data.length)}
+      {renderHeader && renderHeader({currentCount: page.length, totalCount: data.length})}
       <table {...getTableProps()} tw="table-fixed relative w-full text-14 leading-16 text-monochrome-black">
         <TableElements.TableHead>
           {headerGroups.map((headerGroup: any) => (
