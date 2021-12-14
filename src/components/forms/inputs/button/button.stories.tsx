@@ -1,4 +1,5 @@
-import { storiesOf } from '@storybook/react';
+import React from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 import 'twin.macro';
 
 import { Button } from './button';
@@ -6,33 +7,52 @@ import { CancelButton } from './cancel-button';
 import { LinkButton } from './link-button';
 import { NegativeActionButton } from './negative-action-button';
 
-storiesOf('Button', module).add('types of buttons', () => (
-  <div tw="space-y-5">
-    <Button primary size="large">
-      Primary large
-    </Button>
-    <Button primary size="small">
-      Primary small
-    </Button>
-    <Button secondary size="large">
-      Secondary large
-    </Button>
-    <Button secondary size="small">
-      Secondary small
-    </Button>
-    <Button primary size="large">
-      <span>Primary large</span>
-    </Button>
-    <Button secondary size="small">
-      <span>Secondary small</span>
-    </Button>
-    <CancelButton size="large">Cancel button large</CancelButton>
-    <CancelButton size="small">Cancel button small</CancelButton>
-    <div tw="flex flex-col">
-      <LinkButton size="large">Link button large</LinkButton>
-      <LinkButton size="small">Link button small</LinkButton>
-    </div>
-    <NegativeActionButton size="large">Negative action button large</NegativeActionButton>
-    <NegativeActionButton size="small">Negative action button small</NegativeActionButton>
-  </div>
-));
+export default {
+  title: 'Button',
+  component: Button,
+} as ComponentMeta<typeof Button>;
+
+const Template: ComponentStory<typeof Button> = (args) => <Button {...args}>Button</Button>;
+const TemplateCancel: ComponentStory<typeof CancelButton> = (args) => <CancelButton {...args}>Cancel Button</CancelButton>;
+const TemplateLink: ComponentStory<typeof LinkButton> = (args) => <LinkButton {...args}>Link Button</LinkButton>;
+const TemplateNegative: ComponentStory<typeof NegativeActionButton> = (args) => <NegativeActionButton {...args}>Negative</NegativeActionButton>;
+
+export const PrimaryLarge = Template.bind({});
+PrimaryLarge.args = { primary: true, size: 'large' };
+PrimaryLarge.storyName = 'Primary Large';
+
+export const PrimarySmall = Template.bind({});
+PrimarySmall.args = { primary: true, size: 'small' };
+PrimarySmall.storyName = 'Primary Small';
+
+export const SecondaryLarge = Template.bind({});
+SecondaryLarge.args = { secondary: true, size: 'large' };
+SecondaryLarge.storyName = 'Secondary Large';
+
+export const SecondarySmall = Template.bind({});
+SecondarySmall.args = { secondary: true, size: 'small' };
+SecondarySmall.storyName = 'Secondary Small';
+
+export const CancelLarge = TemplateCancel.bind({});
+CancelLarge.args = { size: 'large' };
+CancelLarge.storyName = 'Cancel Large';
+
+export const CancelSmall = TemplateCancel.bind({});
+CancelSmall.args = { size: 'small' };
+CancelSmall.storyName = 'Cancel Small';
+
+export const LinkLarge = TemplateLink.bind({});
+LinkLarge.args = { size: 'large' };
+LinkLarge.storyName = 'Link Large';
+
+export const LinkSmall = TemplateLink.bind({});
+LinkSmall.args = { size: 'small' };
+LinkSmall.storyName = 'Link Small';
+
+export const NegativeLarge = TemplateNegative.bind({});
+NegativeLarge.args = { size: 'large' };
+NegativeLarge.storyName = 'Negative Large';
+
+export const NegativeSmall = TemplateNegative.bind({});
+NegativeSmall.args = { size: 'small' };
+NegativeSmall.storyName = 'Negative Small';

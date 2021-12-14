@@ -1,6 +1,6 @@
 {
   "name": "@drill4j/ui-kit",
-  "version": "0.1.186",
+  "version": "0.1.187",
   "homepage": "http://drill4j.github.io/ui-kit",
   "author": "Drill4J",
   "license": "Apache-2.0",
@@ -55,7 +55,7 @@
     "react-window": "^1.8.6",
     "regenerator-runtime": "^0.13.9",
     "styled-components": "^5.2.3",
-    "tailwindcss": "^2.2.6",
+    "tailwindcss": "^3.0.1",
     "twin.macro": "^2.5.0"
   },
   "devDependencies": {
@@ -84,7 +84,7 @@
     "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
-    "autoprefixer": "^10.3.1",
+    "autoprefixer": "^10.4.0",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.2.2",
     "babel-plugin-macros": "^3.1.0",
@@ -107,7 +107,7 @@
     "jest-styled-components": "^7.0.5",
     "local-web-server": "^5.1.0",
     "mini-css-extract-plugin": "^2.1.0",
-    "postcss": "^8.3.6",
+    "postcss": "^8.4.5",
     "react-test-renderer": "^17.0.2",
     "styled-components": "^5.2.3",
     "ts-node": "^10.0.0",
