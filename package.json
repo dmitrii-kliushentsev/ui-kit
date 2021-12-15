@@ -1,6 +1,6 @@
 {
   "name": "@drill4j/ui-kit",
-  "version": "0.1.201",
+  "version": "0.1.202",
   "homepage": "http://drill4j.github.io/ui-kit",
   "author": "Drill4J",
   "license": "Apache-2.0",
@@ -55,7 +55,7 @@
     "react-window": "^1.8.6",
     "regenerator-runtime": "^0.13.9",
     "styled-components": "^5.2.3",
-    "tailwindcss": "^3.0.1",
+    "tailwindcss": "^2.2.6",
     "twin.macro": "^2.5.0"
   },
   "devDependencies": {
