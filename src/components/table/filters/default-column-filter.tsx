@@ -7,7 +7,7 @@ export function DefaultColumnFilter({
     filterValue = '', setFilter = () => {}, Header = '',
   } = {},
 }: any) {
-  const [valueInput, setValueInput] = useState(filterValue);
+  const [inputValue, setInputValue] = useState(filterValue);
 
   const search = useCallback(debounce((value) => {
     setFilter(value);
@@ -15,16 +15,19 @@ export function DefaultColumnFilter({
 
   const onChangeHandler = (value: string) => {
     search(value);
-    setValueInput(value);
-  }
+    setInputValue(value);
+  };
 
   return (
     <Inputs.Search
-      value={valueInput}
+      value={inputValue}
       onChange={e => {
         onChangeHandler(e.target.value);
       }}
-      reset={() => setFilter('')}
+      reset={() => {
+        setFilter('');
+        setInputValue('');
+      }}
       placeholder={`Search by ${Header.toLowerCase()}`}
     />
   );
