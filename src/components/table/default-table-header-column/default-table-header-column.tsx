@@ -13,10 +13,16 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+import { HeaderGroup } from 'react-table';
 import { Icons } from '../../icon';
+import { CustomColumn } from '../custom-table-types';
 import { TableElements } from '../table-elements';
 
-export const DefaultTableHeaderColumn = ({ column }: any) => (
+interface Props {
+  column: HeaderGroup & CustomColumn;
+}
+
+export const DefaultTableHeaderColumn = ({ column }: Props) => (
   <TableElements.TH
     key={`table-th-${column.id}`}
     style={{ textAlign: column.textAlign || 'right', width: column.filterable ? '100%' : column.width }}

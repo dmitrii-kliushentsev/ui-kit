@@ -17,7 +17,7 @@ import React, {
   useEffect, useMemo, useRef,
 } from 'react';
 import {
-  useTable, useExpanded, Column, useSortBy, usePagination, useFilters,
+  useTable, useExpanded, Column, useSortBy, usePagination, useFilters, Row, HeaderGroup,
 } from 'react-table';
 import { withErrorBoundary } from 'react-error-boundary';
 
@@ -30,30 +30,28 @@ import { DefaultTableHeaderColumn } from './default-table-header-column';
 import { DefaultRow, SkeletonRow } from './rows';
 import { addQueryParamsToPath, removeQueryParamsFromPath } from '../../utils';
 import { useQueryParams } from '../../hooks';
-
-type CustomColumn = Column &
-{ textAlign?: string; width?: string; notSortable?: boolean; disableEllipsis?: boolean, filterable?: boolean; isCustomCell?: boolean };
+import { CustomColumn } from './custom-table-types';
 
 interface SortBy {
   id: string;
   desc: boolean;
 }
 
-export interface Props {
-  columns: Array<CustomColumn | any>;
-  data: Array<any>;
-  renderRowSubComponent?: ({ row, rowProps }: any) => JSX.Element;
+export interface Props <T>{
+  columns: Array<CustomColumn>;
+  data: Array<T>;
+  renderRowSubComponent?: ({ row, rowProps }: { row: Row; rowProps: any }) => JSX.Element;
   stub?: React.ReactNode;
-  columnsDependency?: Array<string | number | boolean | null | undefined>;
+  columnsDependency?: Array<T>;
   defaultSortBy?: SortBy[];
   defaultFilters?: { id: string; value: string }[];
-  isDefaultExpanded?: (original: any) => boolean;
+  isDefaultExpanded?: (original: Pick<Row, 'original'>) => boolean;
   renderHeader?: (data: {currentCount: number, totalCount: number}) => JSX.Element;
   initialRowsCount?: number;
   isLoading?: boolean;
 }
 
-export const Table = withErrorBoundary(({
+export const Table = withErrorBoundary(<T extends Record<string, any>>({
   columns,
   data,
   renderRowSubComponent,
@@ -64,7 +62,7 @@ export const Table = withErrorBoundary(({
   renderHeader,
   initialRowsCount = 0,
   isLoading = false,
-}: Props) => {
+}: Props<T>) => {
   const filterTypes = React.useMemo(
     () => ({
       text: (rows: any, id: any, filterValue: any) => rows.filter((row: any) => {
@@ -102,7 +100,7 @@ export const Table = withErrorBoundary(({
     setPageSize,
     setAllFilters,
     state: { pageIndex, pageSize, filters },
-  }: any = useTable(
+  } = useTable(
     {
       columns: useMemo(() => columns, [...columnsDependency]),
       data: useMemo(() => (!isLoading && data.length > 0 ? data : Array(initialRowsCount).fill(initialRowsCount)), [isLoading, data]),
@@ -114,7 +112,7 @@ export const Table = withErrorBoundary(({
       autoResetSortBy: false,
       defaultColumn, // Be sure to pass the defaultColumn option
       filterTypes,
-    } as any,
+    },
     useFilters,
     useSortBy,
     useExpanded,
@@ -155,12 +153,12 @@ export const Table = withErrorBoundary(({
   return (
     <>
       <div ref={ref} />
-      {renderHeader && renderHeader({currentCount: page.length, totalCount: data.length})}
+      {renderHeader && renderHeader({ currentCount: page.length, totalCount: data.length })}
       <table {...getTableProps()} tw="table-fixed relative w-full text-14 leading-16 text-monochrome-black">
         <TableElements.TableHead>
-          {headerGroups.map((headerGroup: any) => (
+          {headerGroups.map((headerGroup: HeaderGroup) => (
             <tr tw="h-13 px-4">
-              {headerGroup.headers.map((column: any) => <DefaultTableHeaderColumn column={column} />)}
+              {headerGroup.headers.map((column: HeaderGroup) => <DefaultTableHeaderColumn column={column as HeaderGroup & CustomColumn} />)}
             </tr>
           ))}
         </TableElements.TableHead>
