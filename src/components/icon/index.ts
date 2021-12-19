@@ -82,6 +82,7 @@ import { path as openInNewTab } from './path/open-in-new-tab';
 import { path as plus } from './path/plus';
 import { path as noAgentsPlaceholder } from './path/no-agents-placeholder.path';
 import { path as regex } from './path/regex.path';
+import { path as filter } from './path/filter.path';
 
 export const Icons = {
   Arrow: declareIcon(arrowPath),
@@ -183,4 +184,5 @@ export const Icons = {
   Plus: declareIcon(plus),
   NoAgentsPlaceholder: declareIcon(noAgentsPlaceholder, { defaultWidth: 234, defaultHeight: 207, viewBox: '0 0 234 207' }),
   Regex: declareIcon(regex),
+  Filter: declareIcon(filter),
 };
