@@ -20,7 +20,7 @@ export const SearchInput = ({
 
   return (
     <div tw="w-full relative">
-      <div tw="flex h-6 items-center" className={className}>
+      <div tw="flex h-11 items-center" className={className}>
         <SearchIcon onClick={() => setIsOpen(!isOpen)} isActive={isOpen || restProps?.value} />
         {isOpen && <Input {...restProps} ref={node} />}
         {isOpen && restProps?.value && (
@@ -55,5 +55,5 @@ const SearchIcon = styled(Icons.Search)`
 `;
 
 const ClearIcon = styled(Icons.Close)`
-  ${tw`absolute text-red-default cursor-pointer right-0`}
+  ${tw`absolute text-monochrome-black cursor-pointer right-0`}
 `;
