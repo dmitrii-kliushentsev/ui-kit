@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
 import { useCopy } from '../../../../hooks';
 import { Icons } from '../../../icon';
@@ -27,6 +27,7 @@ interface Props {
   link?: React.ReactNode;
 }
 
+// FIX this and Cells pls
 export const CompoundCell = ({
   icon, cellName, cellAdditionalInfo, children, link,
 }: Props) => {
@@ -36,28 +37,32 @@ export const CompoundCell = ({
       <div tw="h-5 flex items-center">{icon}</div>
       <div className="text-ellipsis group">
         <div tw="flex gap-x-2 items-center">
-          <div
-            className="text-ellipsis font-bold h-5 leading-20"
+          <Name
             data-test="compound-cell:name"
             title={cellName}
+            bold={!!cellAdditionalInfo}
           >
             {children || cellName}
-          </div>
+          </Name>
           {copied
             ? (
               <Icons.Success tw="text-blue-default" />
             )
             : (
               <Icons.Copy
-                tw="invisible text-monochrome-dark-tint cursor-pointer hover:text-blue-default group-hover:visible"
+                tw="invisible text-monochrome-dark-tint cursor-pointer hover:text-blue-medium-tint group-hover:visible"
                 onClick={() => { copyToClipboard(cellName); setCopied(true); }}
               />
             )}
-          {link && <div tw="invisible text-monochrome-dark-tint cursor-pointer hover:text-blue-default group-hover:visible">{link}</div>}
+          {link && (
+            <div tw="invisible h-4 text-monochrome-dark-tint cursor-pointer hover:text-blue-medium-tint group-hover:visible">
+              {link}
+            </div>
+          )}
         </div>
         {cellAdditionalInfo && (
           <div
-            className="text-ellipsis mt-1 h-5 leading-20 text-12 font-regular text-monochrome-default"
+            tw="text-ellipsis mt-1 h-5 leading-20 text-12 font-regular text-monochrome-default"
             data-test="compound-cell:additional-info"
             title={cellAdditionalInfo}
           >
@@ -68,3 +73,9 @@ export const CompoundCell = ({
     </div>
   );
 };
+
+const Name = styled.div`
+  ${tw`text-ellipsis h-5 leading-20`}
+
+  ${({ bold }: { bold: boolean }) => bold && tw`font-bold`}
+`;
