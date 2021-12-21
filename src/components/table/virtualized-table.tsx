@@ -24,7 +24,6 @@ import tw, { styled } from 'twin.macro';
 import { Icons } from '../icon';
 import { Cells } from './cells';
 import { TableErrorFallback } from '../error-fallback';
-import { TableHeader } from './table-header';
 import { DefaultColumnFilter } from './filters';
 
 type CustomColumn = Column &
@@ -42,11 +41,11 @@ export interface Props {
   columnsDependency?: Array<string | number | boolean | null | undefined>;
   defaultSortBy?: SortBy[];
   defaultFilters?: {id: string; value: string}[];
-  name?: string;
-  resultName?: string;
+  renderHeader?: (data: { currentCount: number, totalCount: number }) => JSX.Element;
   listHeight?: number;
   listItemSize?: number;
   initialRowsCount?: number;
+  gridTemplateColumns?: string;
 }
 
 export const VirtualizedTable = withErrorBoundary(({
@@ -56,11 +55,11 @@ export const VirtualizedTable = withErrorBoundary(({
   columnsDependency = [],
   defaultSortBy = [],
   defaultFilters = [],
-  name = '',
-  resultName = '',
+  renderHeader,
   listHeight = 500,
   listItemSize = 62,
   initialRowsCount = 0,
+  gridTemplateColumns = '',
 }: Props) => {
   const filterTypes = React.useMemo(
     () => ({
@@ -117,12 +116,12 @@ export const VirtualizedTable = withErrorBoundary(({
             style,
           })}
         >
-          <div tw="w-full h-full grid grid-template-columns[3fr 1fr 1fr]">
+          <div tw="w-full h-full grid" style={{ gridTemplateColumns }}>
             {row.cells.map((cell: any) => (
               <div
                 {...cell.getCellProps()}
                 style={{ width: cell.column.width }}
-                tw="grid items-center h-full w-full px-4 border-b border-monochrome-medium-tint bg-monochrome-white"
+                tw="grid items-center grid-cols-1 h-full max-width[100%] px-4 border-b border-monochrome-medium-tint bg-monochrome-white"
               >
                 {cell.column.filterable && !cell.column.isCustomCell
                   ? (
@@ -152,17 +151,13 @@ export const VirtualizedTable = withErrorBoundary(({
 
   return (
     <>
-      <TableHeader
-        name={name}
-        displayedResult={`Displaying ${rows.length} of ${data.length} ${resultName}`}
-        tw="mb-3"
-      />
+      {renderHeader && renderHeader({ currentCount: rows.length, totalCount: data.length })}
       <div {...getTableProps()} tw="w-full text-14 leading-24 text-monochrome-black bg-monochrome-white">
         <div tw="grid items-center w-full h-13 bg-monochrome-white border-monochrome-black border-t border-b">
           {headerGroups.map(headerGroup => (
             <HeaderGroup
               {...headerGroup.getHeaderGroupProps()}
-              style={{ display: 'grid !important' }}
+              style={{ display: 'grid !important', gridTemplateColumns }}
               withScroll={listItemSize * rows.length > listHeight}
             >
               {headerGroup.headers.map((column: any) => (
