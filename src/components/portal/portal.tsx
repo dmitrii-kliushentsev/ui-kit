@@ -10,19 +10,20 @@ interface Props {
 }
 
 export const Portal = ({ rootElementId = '', displayContent, children }: Props): ReactPortal | null => {
-  const element = useMemo(() => document.createElement('div'), [rootElementId]);
-  const portal = useMemo(() => createPortal(children, element), [element, children]);
+  const element = useMemo(() => document.createElement('div'), []);
   useEffect(() => {
-    const rootElementById = document.getElementById(rootElementId);
+    const rootElementById = document.getElementById(rootElementId) || createAndAppendElementWithId(rootElementId);
     if (rootElementById) {
       rootElementById.appendChild(element);
     }
-    return () => {
-      if (rootElementById) {
-        rootElementById.removeChild(element);
-      }
-    };
+    return () => element.remove();
   }, [rootElementId]);
-
-  return displayContent ? portal : null;
+  return displayContent ? createPortal(children, element) : null;
 };
+
+function createAndAppendElementWithId(id: string): HTMLDivElement {
+  const element = document.createElement('div');
+  element.id = id;
+  document.body.appendChild(element);
+  return element;
+}
