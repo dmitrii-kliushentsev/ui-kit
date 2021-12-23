@@ -1,25 +1,17 @@
-import { storiesOf } from '@storybook/react';
+import React from 'react';
+import { ComponentMeta } from '@storybook/react';
+import 'twin.macro';
 
 import { NumberInput } from './number-input';
 
-storiesOf('NumberInput', module).add('NumberInput types', () => (
-  <>
-    <h3>Simple input</h3>
-    <NumberInput
-      placeholder="enter text..."
-      type="number"
-    />
-    <h3>Disabled input</h3>
-    <NumberInput
-      placeholder="enter text..."
-      type="number"
-      disabled
-    />
-    <h3>Error input</h3>
-    <NumberInput
-      placeholder="enter text..."
-      type="number"
-      error
-    />
-  </>
-));
+export default {
+  title: 'NumberInput',
+  component: NumberInput,
+} as ComponentMeta<typeof NumberInput>;
+
+const Template = (args) => <NumberInput type="number" placeholder="enter text..." {...args} />;
+export const Default = Template.bind({});
+Default.args = { disabled: false };
+
+export const Disabled = Template.bind({});
+Disabled.args = { disabled: true };
