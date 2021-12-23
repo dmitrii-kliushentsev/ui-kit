@@ -1,30 +1,25 @@
-import { storiesOf } from '@storybook/react';
+import React from 'react';
+import { ComponentMeta } from '@storybook/react';
 import 'twin.macro';
 
 import { MessagePanel } from './message-panel';
-import { LinkButton } from '../forms';
 
-storiesOf('MessagePanel', module)
-  .add('SUCCESS', () => (
-    <MessagePanel message={{ type: 'SUCCESS', text: 'Succes! Congratz!' }} onClose={() => {}} />
-  ))
-  .add('ERROR', () => (
-    <MessagePanel message={{ type: 'ERROR', text: 'Error! Something went wrong!' }} onClose={() => {}} />
-  ))
-  .add('WARNING', () => (
-    <MessagePanel
-      message={{
-        type: 'WARNING',
-        text: (
-          <div tw="flex items-center w-full">
-            Warning! Something might go wrong!&nbsp;
-            <LinkButton size="large">Undo</LinkButton>
-          </div>
-        ),
-      }}
-      onClose={() => {}}
-    />
-  ))
-  .add('INFO', () => (
-    <MessagePanel message={{ type: 'INFO', text: 'Info! This should be read!' }} onClose={() => {}} />
-  ));
+export default {
+  title: 'MessagePanel',
+  component: MessagePanel,
+  argTypes: { onClose: { action: 'close' } },
+} as ComponentMeta<typeof MessagePanel>;
+
+const Template = (args) => <MessagePanel {...args} />;
+
+export const SUCCESS = Template.bind({});
+SUCCESS.args = { message: { type: 'SUCCESS', text: 'Message' } };
+
+export const ERROR = Template.bind({});
+ERROR.args = { message: { type: 'ERROR', text: 'Message' } };
+
+export const INFO = Template.bind({});
+INFO.args = { message: { type: 'INFO', text: 'Message' } };
+
+export const WARNING = Template.bind({});
+WARNING.args = { message: { type: 'WARNING', text: 'Message' } };
