@@ -11,7 +11,7 @@ import { Table } from './table';
 
 export default {
   component: Table,
-  title: 'Components/table',
+  title: 'Components/Table',
 };
 
 const Template = (args: any) =>
@@ -38,7 +38,7 @@ BuildsTable.args = {
   withSearch: true,
   isDefaulToggleSortBy: true,
   placeholder: 'Search packages by name',
-  renderHeader: (currentCount: number, totalCount: number) => (
+  renderHeader: ({ currentCount, totalCount }: { currentCount: number, totalCount: number }) => (
     <div tw="flex justify-between text-monochrome-default text-14 leading-24 pb-3">
       <div tw="uppercase font-bold">{`Current (${currentCount})`}</div>
       <div>{`Displaying ${currentCount} of ${totalCount}`}</div>
