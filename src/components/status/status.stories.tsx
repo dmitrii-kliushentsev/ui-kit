@@ -1,19 +1,14 @@
-import { storiesOf } from '@storybook/react';
+import React from 'react';
+import { ComponentMeta } from '@storybook/react';
 import 'twin.macro';
 
 import { Status } from './status';
 
-storiesOf('Status', module)
-  .add('with simple and bold text', () => (
-    <>
-      <div tw="text-green-default">
-        <Status>Active</Status>
-      </div>
-      <div tw="text-red-default">
-        <Status>Ignored</Status>
-      </div>
-      <div tw="text-blue-medium-tint">
-        <Status />
-      </div>
-    </>
-  ));
+export default {
+  title: 'Status',
+  component: Status,
+} as ComponentMeta<typeof Status>;
+
+const Template = (args) => <Status {...args}>Status</Status>;
+
+export const Default = Template.bind({});
