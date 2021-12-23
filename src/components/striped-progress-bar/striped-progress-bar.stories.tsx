@@ -1,22 +1,34 @@
-import { ChangeEvent, useState } from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react';
+import { ComponentMeta } from '@storybook/react';
 import 'twin.macro';
 
 import { StripedProgressBar } from './striped-progress-bar';
 
-storiesOf('StripedProgressBar', module).add('StripedProgressBar with change coverage panel', () => {
-  const [coverage, setCoverage] = useState(0);
-  const handleChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    setCoverage(Number(value));
-  };
-  return (
-    <div tw="p-10">
-      <div tw="grid place-items-center w-40 h-40">
-        <StripedProgressBar value={`${coverage}%`} type="primary" />
-        <br />
-        <StripedProgressBar value={`${coverage}%`} type="secondary" />
-      </div>
-      <input type="range" min="0" max="100" value={coverage} onChange={handleChange} />
-    </div>
-  );
-});
+export default {
+  title: 'StripedProgressBar',
+  component: StripedProgressBar,
+  argTypes: {
+    value: {
+      control: {
+        type: 'range',
+        min: 0,
+        max: 300,
+        step: 1,
+      },
+    },
+    type: {
+      control: {
+        type: 'radio',
+      },
+      options: ['primary', 'secondary'],
+    },
+  },
+} as ComponentMeta<typeof StripedProgressBar>;
+
+const Template = (args) => <StripedProgressBar value={100} {...args} />;
+
+export const Primary = Template.bind({});
+Primary.args = { type: 'primary' };
+
+export const Secondary = Template.bind({});
+Secondary.args = { type: 'secondary' };
