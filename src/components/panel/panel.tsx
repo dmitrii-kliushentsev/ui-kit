@@ -49,7 +49,7 @@ const PanelContent: FC<PanelContentProps> = ({
           {children}
         </div>
         <PanelFade onClick={() => !isDisableFadeClick && setIsOpen(false)} data-test="panel:fade" />
-    </div>
+      </div>
     </Portal>
   );
 };
