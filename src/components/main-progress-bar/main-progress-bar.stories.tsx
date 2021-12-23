@@ -1,20 +1,35 @@
-import { ChangeEvent, useState } from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react';
+import { ComponentMeta } from '@storybook/react';
 import 'twin.macro';
 
 import { MainProgressBar } from './main-progress-bar';
 
-storiesOf('MainProgressBar', module).add('MainProgressBar with change coverage panel', () => {
-  const [coverage, setCoverage] = useState(20);
-  const handleChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    setCoverage(Number(value));
-  };
-  return (
-    <div tw="grid gap-5 p-10">
-      <MainProgressBar value={`${coverage}%`} />
-      <MainProgressBar value={`${coverage}%`} type="primary" />
-      <MainProgressBar value={`${coverage}%`} type="secondary" />
-      <input type="range" min="0" max="100" value={coverage} onChange={handleChange} />
-    </div>
-  );
-});
+export default {
+  title: 'MainProgressBar',
+  component: MainProgressBar,
+  argTypes: {
+    value: {
+      control: {
+        type: 'range',
+        min: 0,
+        max: 100,
+        step: 1,
+      },
+    },
+    type: {
+      control: {
+        type: 'radio',
+      },
+      options: ['primary', 'secondary'],
+    },
+  },
+} as ComponentMeta<typeof MainProgressBar>;
+
+const Template = (args) => <MainProgressBar value={100} {...args} />;
+export const Default = Template.bind({});
+
+export const Primary = Template.bind({});
+Primary.args = { type: 'primary' };
+
+export const Secondary = Template.bind({});
+Secondary.args = { type: 'secondary' };
