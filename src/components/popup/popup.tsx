@@ -1,52 +1,48 @@
+import React, {
+  createContext, useContext, useState,
+} from 'react';
 import tw, { styled, css } from 'twin.macro';
 
 import { Portal } from '../portal';
 import { Icons } from '../icon';
 
-interface Props {
-  children: React.ReactChild;
-  header: React.ReactNode;
-  onToggle: (isOpen: boolean) => void;
-  isOpen: boolean;
+type State = {isOpen: boolean; setIsOpen: (value: boolean) => void};
+type Children = React.ReactChild | React.ReactChild[] | React.FC<State>;
+const defaultState: State = { isOpen: false, setIsOpen: () => {} };
+
+const PopupContext = createContext<State>(defaultState);
+
+export const Popup = ({ children }: {children: Children}) => {
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <PopupContext.Provider value={{ isOpen, setIsOpen }}>
+      {typeof children === 'function' ? children({ setIsOpen, isOpen }) : children}
+    </PopupContext.Provider>
+  );
+};
+
+export interface PanelProps {
   type?: 'info' | 'error';
   closeOnFadeClick?: boolean;
 }
 
-export const Popup = ({
-  header,
-  children,
-  onToggle,
-  isOpen,
-  type = 'info',
-  closeOnFadeClick = false,
-}: Props) => (
-  <Wrapper>
+const Panel: React.FC<PanelProps> = ({
+  children, type, closeOnFadeClick, ...rest
+}) => {
+  const { isOpen, setIsOpen } = useContext(PopupContext);
+
+  return (
     <Portal rootElementId="modal" displayContent={isOpen}>
-      <div>
-        <Content type={type}>
-          <Header>
-            {header}
-            <Icons.Close tw="cursor-pointer" onClick={() => onToggle(!isOpen)} data-test="popup:close-button" />
-          </Header>
-          {children}
-        </Content>
-        <Fade onClick={() => closeOnFadeClick && onToggle(!isOpen)} data-test="popup:fade" />
-      </div>
+      <Content type={type} {...rest}>{children}</Content>
+      <Fade onClick={() => closeOnFadeClick && setIsOpen(false)} data-test="popup:fade" />
     </Portal>
-  </Wrapper>
-);
+  );
+};
 
-const Wrapper = styled.div`
-  display: contents;
-`;
-
-const Content = styled.div<{type?: 'info' | 'error'}>`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 100;
-  ${tw`bg-monochrome-white`};
-  transform: translate(-50%, -50%);
+const Content = styled.div<PanelProps>`
+  ${tw`absolute top-1/2 left-1/2 z-[100] bg-monochrome-white`}
+  ${tw`-translate-x-1/2 -translate-y-1/2`}
   
   ${({ type }) => [
     type === 'info' && css`box-shadow: 0 -4px 0 0 #007fff, 0 0 24px 0 rgba(0, 0, 0, 0.15)`,
@@ -54,13 +50,30 @@ const Content = styled.div<{type?: 'info' | 'error'}>`
   ]}
 `;
 
-const Header = styled.div`
-  min-height: 64px;
-  ${tw`flex justify-between items-center w-auto px-6 border-b border-monochrome-medium-tint text-20 leading-32 text-monochrome-black`};
+const Fade = styled.div`
+  ${tw`absolute w-full h-full top-0 left-0 bg-monochrome-black z-[90] opacity-40`};
 `;
 
-const Fade = styled.div`
-  opacity: 0.4;
-  z-index: 90;
-  ${tw`absolute w-full h-full top-0 left-0 bg-monochrome-black`};
+const Header: React.FC = ({ children, ...rest }) => {
+  const { setIsOpen } = useContext(PopupContext);
+  return (
+    <div
+      tw="
+        flex justify-between items-center min-h[64px] px-6 py-4
+        border-b border-monochrome-medium-tint
+        text-20 leading-32 text-monochrome-black"
+      {...rest}
+    >
+      {children}
+      <Icons.Close tw="cursor-pointer" onClick={() => setIsOpen(false)} data-test="popup:close-button" />
+    </div>
+  );
+};
+
+const Footer = styled.div`
+  ${tw`pt-9 px-6 pb-6`}
 `;
+
+Popup.Footer = Footer;
+Popup.Header = Header;
+Popup.Panel = Panel;
