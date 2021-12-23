@@ -1,41 +1,13 @@
-import { storiesOf } from '@storybook/react';
-import {
-  Formik, Form, Field,
-} from 'formik';
-import { Fields } from '../../fields';
+import React from 'react';
+import { ComponentMeta } from '@storybook/react';
 import 'twin.macro';
 
-storiesOf('DarkInput', module).add('DarkInput', () => (
-  <div tw="bg-monochrome-dark100 p-10">
-    <h1>Signup</h1>
-    <Formik
-      initialValues={{
-        name: '',
-        email: '',
-      }}
-      onSubmit={values => {
-        alert(JSON.stringify(values));
-      }}
-      validate={values => {
-        const errors = {} as any;
+import { DarkInput } from './dark-input';
 
-        if (!values.name) {
-          errors.name = 'Required';
-        }
+export default {
+  title: 'DarkInput',
+  component: DarkInput,
+} as ComponentMeta<typeof DarkInput>;
 
-        if (!values.email) {
-          errors.email = 'Required';
-        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-          errors.email = 'Invalid email address';
-        }
-        return errors;
-      }}
-    >
-      <Form tw="w-40 space-y-4">
-        <Field name="name" component={Fields.DarkInput} placeholder="enter name" />
-        <Field name="email" component={Fields.DarkInput} placeholder="enter email" />
-        <Field name="email" component={Fields.DarkInput} placeholder="enter email" disabled />
-      </Form>
-    </Formik>
-  </div>
-));
+const Template = (args) => <DarkInput {...args} />;
+export const Default = Template.bind({});
