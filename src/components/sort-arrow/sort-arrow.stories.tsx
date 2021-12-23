@@ -1,13 +1,19 @@
-import { useState } from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react';
+import { ComponentMeta } from '@storybook/react';
+import 'twin.macro';
 
 import { SortArrow } from './sort-arrow';
 
-storiesOf('SortArrow', module).add('SortArrow', () => {
-  const [order, setOrder] = useState<'ASC' | 'DESC'>('ASC');
-  return (
-    <div onClick={() => setOrder(order === 'ASC' ? 'DESC' : 'ASC')}>
-      <SortArrow order={order} />
-    </div>
-  );
-});
+export default {
+  title: 'SortArrow',
+  component: SortArrow,
+} as ComponentMeta<typeof SortArrow>;
+
+const Template = (args) => <SortArrow {...args} />;
+export const Default = Template.bind({});
+
+export const DESC = Template.bind({});
+DESC.args = { order: 'DESC' };
+
+export const ASC = Template.bind({});
+ASC.args = { order: 'ASC' };
