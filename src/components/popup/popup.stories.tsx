@@ -1,75 +1,30 @@
-import { useState } from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react';
+import { ComponentMeta } from '@storybook/react';
 import 'twin.macro';
 
 import { Popup } from './popup';
-import { CancelButton, Button } from '../forms';
 
-storiesOf('Popup', module).add('Popup', () => {
-  const [isOpenedInfoPopup, setisOpenedInfoPopup] = useState(true);
-  const [isOpenedErrorPopup, setIsOpenedErrorPop] = useState(false);
-  return (
-    <>
-      <div tw="inline-grid gap-5">
-        <Button primary size="large" onClick={() => setisOpenedInfoPopup(true)}>
-          Open info popup
-        </Button>
-        <Button primary size="large" onClick={() => setIsOpenedErrorPop(true)}>
-          Open error popup
-        </Button>
-      </div>
-      <Popup
-        isOpen={isOpenedInfoPopup}
-        type="info"
-        onToggle={() => setisOpenedInfoPopup(false)}
-        header={<div>Info</div>}
-        closeOnFadeClick
-      >
-        <div tw="p-6">
-          <h2>Info popup content</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti ullam praesentium
-            laudantium delectus...
-          </p>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus, iure magni quia
-            excepturi aliquid quas nostrum?
-          </p>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas nisi corrupti dolorem
-            incidunt quisquam.
-          </p>
-          <CancelButton size="large" onClick={() => setisOpenedInfoPopup(false)}>
-            Cancel
-          </CancelButton>
-        </div>
-      </Popup>
-      <Popup
-        isOpen={isOpenedErrorPopup}
-        type="error"
-        onToggle={() => setIsOpenedErrorPop(false)}
-        header={<h1>Error</h1>}
-        closeOnFadeClick
-      >
-        <div tw="p-6">
-          <h2>Error popup content</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti ullam praesentium
-            laudantium delectus...
-          </p>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus, iure magni quia
-            excepturi aliquid quas nostrum?
-          </p>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas nisi corrupti dolorem
-            incidunt quisquam.
-          </p>
-          <CancelButton size="large" onClick={() => setIsOpenedErrorPop(false)}>
-            Cancel
-          </CancelButton>
-        </div>
-      </Popup>
-    </>
-  );
-});
+export default {
+  title: 'Popup',
+  component: Popup,
+  argTypes: {
+    type: {
+      control: {
+        type: 'radio',
+      },
+      options: ['info', 'error'],
+    },
+  },
+} as ComponentMeta<typeof Popup>;
+
+const Template = (args) => (
+  <Popup value={100} {...args}>
+    <div tw="p-6">
+      <h2>Error popup content</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti ullam praesentium laudantium delectus...</p>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus, iure magni quia excepturi aliquid quas nostrum?</p>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas nisi corrupti dolorem incidunt quisquam.</p>
+    </div>
+  </Popup>
+);
+export const Default = Template.bind({});
