@@ -3,6 +3,7 @@ import { ComponentMeta } from '@storybook/react';
 import 'twin.macro';
 
 import { Checkbox } from './checkbox';
+import CheckboxDocs from './checkbox-docs.mdx';
 
 export default {
   title: 'Checkbox',
@@ -10,6 +11,11 @@ export default {
   argTypes: {
     wrapperColor: {
       control: 'color',
+    },
+  },
+  parameters: {
+    docs: {
+      page: CheckboxDocs,
     },
   },
 } as ComponentMeta<typeof Checkbox>;
