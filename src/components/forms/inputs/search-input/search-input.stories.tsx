@@ -1,10 +1,15 @@
-import { useState } from 'react';
-import { storiesOf } from '@storybook/react';
+import React, { useState } from 'react';
+import { ComponentMeta } from '@storybook/react';
 import 'twin.macro';
 
 import { SearchInput } from './search-input';
 
-storiesOf('SearchInput', module).add('SearchInput types', () => {
+export default {
+  title: 'SearchInput',
+  component: SearchInput,
+} as ComponentMeta<typeof SearchInput>;
+
+export const Default = () => {
   const [value, setValue] = useState('');
   return (
     <div tw="bg-monochrome-white w-full h-full p-10">
@@ -16,4 +21,4 @@ storiesOf('SearchInput', module).add('SearchInput types', () => {
       />
     </div>
   );
-});
+};
