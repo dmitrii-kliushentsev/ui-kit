@@ -64,6 +64,7 @@ export const Table = withErrorBoundary(({
   renderHeader,
   initialRowsCount = 0,
   isLoading = false,
+  ...rest
 }: Props) => {
   const filterTypes = React.useMemo(
     () => ({
@@ -156,7 +157,7 @@ export const Table = withErrorBoundary(({
     <>
       <div ref={ref} />
       {renderHeader && renderHeader({ currentCount: page.length, totalCount: data.length })}
-      <table {...getTableProps()} tw="table-fixed relative w-full text-14 leading-16 text-monochrome-black">
+      <table {...getTableProps()} tw="table-fixed relative w-full text-14 leading-16 text-monochrome-black" {...rest}>
         <TableElements.TableHead>
           {headerGroups.map((headerGroup: any) => (
             <tr tw="h-13 px-4">

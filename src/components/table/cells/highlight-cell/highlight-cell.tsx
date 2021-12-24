@@ -20,12 +20,13 @@ interface Props {
   searchWords: string[];
 }
 
-export const HighlightCell = ({ text = '', searchWords }: Props) => (
+export const HighlightCell = ({ text = '', searchWords, ...rest }: Props) => (
   <Highlighter
     highlightStyle={{ backgroundColor: '#FFE74C' }}
     searchWords={searchWords}
     autoEscape
     textToHighlight={text}
+    {...rest}
   >
     {text}
   </Highlighter>

@@ -23,8 +23,8 @@ interface Props {
   value: number;
 }
 
-export const CoverageProgressCell = ({ value = 0 }: Props) => (
-  <div tw="flex items-center gap-x-2 leading-64">
+export const CoverageProgressCell = ({ value = 0, ...rest }: Props) => (
+  <div tw="flex items-center gap-x-2 leading-64" {...rest}>
     <PercentageBar percentage={percentFormatter(value)} />
     <ClickableCell disabled>
       {percentFormatter(value)}

@@ -20,13 +20,13 @@ interface Props {
   value?: number;
 }
 
-export const DurationCell = ({ value = 0 }: Props) => {
+export const DurationCell = ({ value = 0, ...rest }: Props) => {
   const {
     hours, seconds, minutes, isLessThenOneSecond,
   } = getDuration(value);
 
   return (
-    <div tw="leading-16 text-monochrome-black">
+    <div tw="leading-16 text-monochrome-black" {...rest}>
       {isLessThenOneSecond && <span tw="mr-1 text-monochrome-dark-tint">&#60;</span>}
       {`${hours}:${minutes}:${isLessThenOneSecond ? '01' : seconds}`}
     </div>

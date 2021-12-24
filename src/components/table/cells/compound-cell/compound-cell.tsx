@@ -29,11 +29,11 @@ interface Props {
 
 // FIX this and Cells pls
 export const CompoundCell = ({
-  icon, cellName, cellAdditionalInfo, children, link,
+  icon, cellName, cellAdditionalInfo, children, link, ...rest
 }: Props) => {
   const { copied, setCopied } = useCopy({ delay: 3000 });
   return (
-    <div tw="flex gap-2 py-2 text-monochrome-black">
+    <div tw="flex gap-2 py-2 text-monochrome-black" {...rest}>
       <div tw="h-5 flex items-center">{icon}</div>
       <div className="text-ellipsis group">
         <div tw="flex gap-x-2 items-center">

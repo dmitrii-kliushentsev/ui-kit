@@ -60,6 +60,7 @@ export const VirtualizedTable = withErrorBoundary(({
   listItemSize = 62,
   initialRowsCount = 0,
   gridTemplateColumns = '',
+  ...rest
 }: Props) => {
   const filterTypes = React.useMemo(
     () => ({
@@ -152,7 +153,7 @@ export const VirtualizedTable = withErrorBoundary(({
   return (
     <>
       {renderHeader && renderHeader({ currentCount: rows.length, totalCount: data.length })}
-      <div {...getTableProps()} tw="w-full text-14 leading-24 text-monochrome-black bg-monochrome-white">
+      <div {...getTableProps()} tw="w-full text-14 leading-24 text-monochrome-black bg-monochrome-white" {...rest}>
         <div tw="grid items-center w-full h-13 bg-monochrome-white border-monochrome-black border-t border-b">
           {headerGroups.map(headerGroup => (
             <HeaderGroup

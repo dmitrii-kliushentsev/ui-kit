@@ -23,8 +23,8 @@ interface Props {
   value: number;
 }
 
-export const CoverageCell = ({ value = 0 }: Props) => (
-  <div tw="leading-64" title={`${percentFormatter(value)}`}>
+export const CoverageCell = ({ value = 0, ...rest }: Props) => (
+  <div tw="leading-64" title={`${percentFormatter(value)}`} {...rest}>
     <ClickableCell disabled>
       {value === 0 && (
         <span
