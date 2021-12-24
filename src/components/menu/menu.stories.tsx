@@ -32,7 +32,7 @@ export default {
   component: Menu,
   decorators: [
     (Story) => (
-      <div style={{ marginLeft: '500px', padding: '300px' }}>
+      <div style={{ marginLeft: '300px' }}>
         <Story />
       </div>
     ),
