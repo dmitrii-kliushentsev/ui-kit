@@ -1,31 +1,22 @@
-import { Component } from 'react';
+import {
+  ReactChild, ReactPortal,
+} from 'react';
 import { createPortal } from 'react-dom';
 
-export class Portal<Props extends { rootElementId: string; displayContent: boolean; }> extends Component<Props> {
-  public element: HTMLDivElement;
+interface Props {
+  rootElementId?: string,
+  displayContent: boolean,
+  children: ReactChild,
+}
 
-  public rootElementById: HTMLElement | null;
+export const Portal = ({ rootElementId = '', displayContent, children }: Props): ReactPortal | null => {
+  const rootElementById = document.getElementById(rootElementId) || createAndAppendElement(rootElementId);
+  return displayContent ? createPortal(children, rootElementById) : null;
+};
 
-  constructor(props: Props) {
-    super(props);
-    this.element = document.createElement('div');
-    this.rootElementById = document.getElementById(props.rootElementId);
-  }
-
-  public componentDidMount() {
-    if (this.rootElementById) {
-      this.rootElementById.appendChild(this.element);
-    }
-  }
-
-  public componentWillUnmount() {
-    if (this.rootElementById) {
-      this.rootElementById.removeChild(this.element);
-    }
-  }
-
-  public render() {
-    const { children, displayContent } = this.props;
-    return displayContent ? createPortal(children, this.element) : null;
-  }
+function createAndAppendElement(id: string): HTMLDivElement {
+  const element = document.createElement('div');
+  element.id = id;
+  document.body.appendChild(element);
+  return element;
 }
