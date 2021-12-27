@@ -1,12 +1,12 @@
 import { styled, css } from 'twin.macro';
 
 interface Props {
-  value?: string;
+  percentage?: number;
   type: 'primary' | 'secondary';
 }
 
-export const StripedProgressBar = ({ value, type }: Props) => (
-  <Wrapper type={type} style={{ width: value }} data-test={`striped-progress-bar:${type}`} />
+export const StripedProgressBar = ({ percentage = 0, type }: Props) => (
+  <Wrapper type={type} style={{ width: `${percentage}%` }} data-test={`striped-progress-bar:${type}`} />
 );
 
 const Wrapper = styled.div<{type?: 'primary' | 'secondary'}>`

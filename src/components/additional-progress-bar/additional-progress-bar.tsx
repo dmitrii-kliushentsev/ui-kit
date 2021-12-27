@@ -1,18 +1,18 @@
 import tw, { styled, css } from 'twin.macro';
 
 interface Props {
-  value: string;
+  percentage: number;
   type?: 'primary' | 'secondary';
   testContext?: string;
 }
 
 export const AdditionalProgressBar = ({
-  value,
+  percentage = 0,
   type,
   testContext,
 }: Props) => (
   <div tw="h-3 rounded bg-monochrome-light-tint" data-test={`additional-progress-bar:${testContext || type}`}>
-    <Progress style={{ width: value }} type={type} />
+    <Progress style={{ width: `${percentage}%` }} type={type} />
   </div>
 );
 
