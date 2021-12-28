@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { MessagePanel } from './message-panel';
@@ -8,9 +8,9 @@ export default {
   title: 'MessagePanel',
   component: MessagePanel,
   argTypes: { onClose: { action: 'close' } },
-} as ComponentMeta<typeof MessagePanel>;
+} as Meta;
 
-const Template = (args) => <MessagePanel {...args} />;
+const Template: Story = (args) => <MessagePanel message={{ type: 'SUCCESS', text: 'Message' }} onClose={() => {}} {...args} />;
 
 export const SUCCESS = Template.bind({});
 SUCCESS.args = { message: { type: 'SUCCESS', text: 'Message' } };
