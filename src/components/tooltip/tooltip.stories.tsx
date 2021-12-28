@@ -1,4 +1,4 @@
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import React from 'react';
@@ -15,15 +15,15 @@ export default {
     options: ['top-center', 'top-right', 'top-left', 'left', 'right'],
   },
   decorators: [
-    (Story) => (
+    (StoryComponent) => (
       <div style={{ margin: '100px' }}>
-        <Story />
+        <StoryComponent />
       </div>
     ),
   ],
 } as ComponentMeta<typeof Tooltip>;
 
-const Template = (args) => <Tooltip message="mesage" {...args}>Tooltip</Tooltip>;
+const Template: Story = (args) => <Tooltip message="mesage" {...args}>Tooltip</Tooltip>;
 export const Default = Template.bind({});
 
 export const TopCenter = Template.bind({});
