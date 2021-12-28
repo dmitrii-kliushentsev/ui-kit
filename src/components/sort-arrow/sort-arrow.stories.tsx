@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { SortArrow } from './sort-arrow';
@@ -7,9 +7,9 @@ import { SortArrow } from './sort-arrow';
 export default {
   title: 'SortArrow',
   component: SortArrow,
-} as ComponentMeta<typeof SortArrow>;
+} as Meta;
 
-const Template = (args) => <SortArrow {...args} />;
+const Template: Story = (args) => <SortArrow order={null} {...args} />;
 export const Default = Template.bind({});
 
 export const DESC = Template.bind({});
