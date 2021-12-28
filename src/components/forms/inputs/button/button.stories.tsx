@@ -56,11 +56,11 @@ export const LinkSmall = TemplateLink.bind({});
 LinkSmall.args = { size: 'small' };
 LinkSmall.storyName = 'Link Small';
 
-export const NegativeLarge = TemplateNegative.bind({});
+export const NegativeLarge = TempNegative.bind({});
 NegativeLarge.args = { size: 'large' };
 NegativeLarge.storyName = 'Negative Large';
 
-export const NegativeSmall = TemplateNegative.bind({});
+export const NegativeSmall = TempNegative.bind({});
 NegativeSmall.args = { size: 'small' };
 NegativeSmall.storyName = 'Negative Small';
 
