@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { AdditionalProgressBar } from './additional-progress-bar';
@@ -23,13 +23,14 @@ export default {
       options: ['primary', 'secondary'],
     },
   },
-} as ComponentMeta<typeof AdditionalProgressBar>;
+} as Meta;
 
-const Template = (args) => <AdditionalProgressBar value={100} {...args} />;
-export const Default = Template.bind({});
+const TemplateAdditionalProgressBar: Story = (args) => <AdditionalProgressBar value="100" {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = { type: 'primary' };
+export const DefaultAdditionalProgressBar: Story = TemplateAdditionalProgressBar.bind({});
 
-export const Secondary = Template.bind({});
-Secondary.args = { type: 'secondary' };
+export const PrimaryAdditionalProgressBar: Story = TemplateAdditionalProgressBar.bind({});
+PrimaryAdditionalProgressBar.args = { type: 'primary' };
+
+export const SecondaryAdditionalProgressBar: Story = TemplateAdditionalProgressBar.bind({});
+SecondaryAdditionalProgressBar.args = { type: 'secondary' };
