@@ -2,9 +2,9 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import 'twin.macro';
 
-import { Menu } from './menu';
+import { Menu, MenuItemType } from './menu';
 
-const menuItems = [
+const menuItems: MenuItemType[] = [
   {
     label: 'Rename',
     icon: 'Edit',
