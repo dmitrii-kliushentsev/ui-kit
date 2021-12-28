@@ -13,7 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import tw from 'twin.macro';
 
 import { Cells } from '../../cells';
@@ -22,15 +22,20 @@ import { TableElements } from '../../table-elements';
 export const DefaultRow = ({
   rawRow, prepareRow, renderRowSubComponent, searchWords, isDefaultExpanded = false,
 }: any) => {
-  const [isExpanded, setIsExpanded] = useState(isDefaultExpanded);
-  const row = { ...rawRow, isExpanded };
+  const [expandedRowId, setExpandedRowId] = useState<null | string>(isDefaultExpanded ? rawRow.id : null);
+
+  useLayoutEffect(() => {
+    setExpandedRowId(null);
+  }, [rawRow.id]);
+
+  const row = { ...rawRow, isExpanded: expandedRowId === rawRow.id };
   prepareRow(row);
   const rowProps = row.getRowProps();
 
   return (
     <>
       <TableElements.TR isExpanded={row.isExpanded}>
-        {row.cells.map((cell: any) => {
+        {row?.cells?.map((cell: any) => {
           const isDefaultCell = cell.column.filterable && !cell.column.isCustomCell;
           return (
             <td
@@ -43,7 +48,11 @@ export const DefaultRow = ({
               <div
                 css={[!cell.column.disableEllipsis && tw`text-ellipsis`]}
                 data-test={`td-row-cell-${cell.column.id}`}
-                onClick={() => cell.column.id === 'expander' && setIsExpanded(!isExpanded)}
+                onClick={() => {
+                  if (cell.column.id === 'expander') {
+                    setExpandedRowId(expandedRowId ? null : row.id);
+                  }
+                }}
               >
                 {isDefaultCell
                   ? (
