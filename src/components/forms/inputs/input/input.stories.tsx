@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { Input } from './input';
@@ -9,7 +9,7 @@ export default {
   component: Input,
 } as ComponentMeta<typeof Input>;
 
-const Template = (args) => <Input {...args} />;
+const Template: Story = (args) => <Input {...args} />;
 export const Default = Template.bind({});
 Default.args = { disabled: false };
 Default.parameters = {
