@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { NumberInput } from './number-input';
@@ -9,7 +9,7 @@ export default {
   component: NumberInput,
 } as ComponentMeta<typeof NumberInput>;
 
-const Template = (args) => <NumberInput type="number" placeholder="enter text..." {...args} />;
+const Template: Story = (args) => <NumberInput type="number" placeholder="enter text..." {...args} />;
 export const Default = Template.bind({});
 Default.args = { disabled: false };
 
