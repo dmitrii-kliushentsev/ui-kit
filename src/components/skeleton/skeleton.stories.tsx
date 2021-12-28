@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { Skeleton } from './skeleton';
@@ -7,9 +7,9 @@ import { Skeleton } from './skeleton';
 export default {
   title: 'Skeleton',
   component: Skeleton,
-} as ComponentMeta<typeof Skeleton>;
+} as Meta;
 
-const Template = (args) => <Skeleton {...args} />;
+const Template: Story = (args) => <Skeleton {...args} />;
 export const Default = Template.bind({});
 
 export const WithIcon = Template.bind({});
