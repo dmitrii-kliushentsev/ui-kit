@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { StripedProgressBar } from './striped-progress-bar';
@@ -23,9 +23,9 @@ export default {
       options: ['primary', 'secondary'],
     },
   },
-} as ComponentMeta<typeof StripedProgressBar>;
+} as Meta;
 
-const Template = (args) => <StripedProgressBar value={100} {...args} />;
+const Template: Story = (args) => <StripedProgressBar type="primary" value="100" {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = { type: 'primary' };
