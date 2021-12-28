@@ -1,11 +1,12 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentStory, ComponentMeta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { Button } from './button';
 import { CancelButton } from './cancel-button';
 import { LinkButton } from './link-button';
 import { NegativeActionButton } from './negative-action-button';
+import { CopyButton } from './copy-button';
 
 export default {
   title: 'Button',
@@ -16,6 +17,7 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args}>Butt
 const TemplateCancel: ComponentStory<typeof CancelButton> = (args) => <CancelButton {...args}>Cancel Button</CancelButton>;
 const TemplateLink: ComponentStory<typeof LinkButton> = (args) => <LinkButton {...args}>Link Button</LinkButton>;
 const TemplateNegative: ComponentStory<typeof NegativeActionButton> = (args) => <NegativeActionButton {...args}>Negative</NegativeActionButton>;
+const TemplateCopy: Story = (args) => <CopyButton text="" {...args} />;
 
 export const PrimaryLarge = Template.bind({});
 PrimaryLarge.args = { primary: true, size: 'large' };
@@ -56,3 +58,7 @@ NegativeLarge.storyName = 'Negative Large';
 export const NegativeSmall = TemplateNegative.bind({});
 NegativeSmall.args = { size: 'small' };
 NegativeSmall.storyName = 'Negative Small';
+
+export const CopyButtonDefault = TemplateCopy.bind({});
+CopyButtonDefault.args = { text: 'Copied Text' };
+CopyButtonDefault.storyName = 'Copy Button';
