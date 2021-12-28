@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { MainProgressBar } from './main-progress-bar';
@@ -23,9 +23,9 @@ export default {
       options: ['primary', 'secondary'],
     },
   },
-} as ComponentMeta<typeof MainProgressBar>;
+} as Meta;
 
-const Template = (args) => <MainProgressBar value={100} {...args} />;
+const Template: Story = (args) => <MainProgressBar value="100" {...args} />;
 export const Default = Template.bind({});
 
 export const Primary = Template.bind({});
