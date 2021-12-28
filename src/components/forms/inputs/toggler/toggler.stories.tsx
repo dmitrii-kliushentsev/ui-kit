@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { Toggler } from './toggler';
@@ -9,7 +9,7 @@ export default {
   component: Toggler,
 } as ComponentMeta<typeof Toggler>;
 
-const Template = (args) => {
+const Template: Story = (args) => {
   const { value, label, disabled } = args;
   const [val, setValue] = useState(value);
   return (
