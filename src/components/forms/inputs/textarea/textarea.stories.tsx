@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { Textarea } from './textarea';
@@ -9,7 +9,7 @@ export default {
   component: Textarea,
 } as ComponentMeta<typeof Textarea>;
 
-const Template = (args) => <Textarea {...args} />;
+const Template: Story = (args) => <Textarea {...args} />;
 
 export const Default = Template.bind({});
 Default.args = { disabled: false };
