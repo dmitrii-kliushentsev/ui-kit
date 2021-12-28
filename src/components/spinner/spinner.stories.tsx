@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { Spinner } from './spinner';
@@ -7,9 +7,9 @@ import { Spinner } from './spinner';
 export default {
   title: 'Spinner',
   component: Spinner,
-} as ComponentMeta<typeof Spinner>;
+} as Meta;
 
-const Template = (args) => <Spinner {...args} />;
+const Template: Story = (args) => <Spinner {...args} />;
 export const Default = Template.bind({});
 
 export const Disabled = Template.bind({});
