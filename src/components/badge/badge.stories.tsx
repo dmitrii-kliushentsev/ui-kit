@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { Badge } from './badge';
@@ -19,10 +19,10 @@ export default {
       control: 'text',
     },
   },
-} as ComponentMeta<typeof Badge>;
+} as Meta;
 
-const Template = (args) => <Badge children="Badge" {...args} />;
-export const Default = Template.bind({});
+const Template: Story = (args) => <Badge {...args}>Badge</Badge>;
+export const Default: Story = Template.bind({});
 Default.parameters = {
   docs: {
     source: {
@@ -31,7 +31,7 @@ Default.parameters = {
   },
 };
 
-export const Gray = Template.bind({});
+export const Gray: Story = Template.bind({});
 Gray.args = { color: 'gray' };
 Gray.parameters = {
   docs: {
@@ -41,7 +41,7 @@ Gray.parameters = {
   },
 };
 
-export const Green = Template.bind({});
+export const Green: Story = Template.bind({});
 Green.args = { color: 'green' };
 Green.parameters = {
   docs: {
@@ -51,7 +51,7 @@ Green.parameters = {
   },
 };
 
-export const Orange = Template.bind({});
+export const Orange: Story = Template.bind({});
 Orange.args = { color: 'orange' };
 Orange.parameters = {
   docs: {
@@ -61,7 +61,7 @@ Orange.parameters = {
   },
 };
 
-export const Red = Template.bind({});
+export const Red: Story = Template.bind({});
 Red.args = { color: 'red' };
 Red.parameters = {
   docs: {
