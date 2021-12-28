@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { Menu } from './menu';
@@ -31,15 +31,15 @@ export default {
   title: 'Menu',
   component: Menu,
   decorators: [
-    (Story) => (
+    (StoryComponent) => (
       <div style={{ marginLeft: '300px' }}>
-        <Story />
+        <StoryComponent />
       </div>
     ),
   ],
-} as ComponentMeta<typeof Menu>;
+} as Meta;
 
-const Template = (args) => <Menu items={menuItems} {...args} />;
+const Template: Story = (args) => <Menu items={menuItems} {...args} />;
 
 export const Default = Template.bind({});
 Default.parameters = {
