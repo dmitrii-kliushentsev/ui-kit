@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { PercentageBar } from './percentage-bar';
@@ -17,7 +17,7 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof PercentageBar>;
+} as Meta;
 
-const Template = (args) => <PercentageBar value={100} {...args} />;
+const Template: Story = (args) => <PercentageBar percentage={100} {...args} />;
 export const Default = Template.bind({});
