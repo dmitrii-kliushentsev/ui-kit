@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { Popup } from './popup';
@@ -15,10 +15,10 @@ export default {
       options: ['info', 'error'],
     },
   },
-} as ComponentMeta<typeof Popup>;
+} as Meta;
 
-const Template = (args) => (
-  <Popup value={100} {...args}>
+const Template: Story = (args) => (
+  <Popup header={undefined} onToggle={() => {}} isOpen {...args}>
     <div tw="p-6">
       <h2>Error popup content</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti ullam praesentium laudantium delectus...</p>
