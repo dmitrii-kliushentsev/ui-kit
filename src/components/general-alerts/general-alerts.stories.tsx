@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { GeneralAlerts } from './general-alerts';
@@ -15,9 +15,9 @@ export default {
       options: ['SUCCESS', 'ERROR', 'INFO', 'WARNING'],
     },
   },
-} as ComponentMeta<typeof GeneralAlerts>;
+} as Meta;
 
-const Template = (args) => <GeneralAlerts {...args}>Alert</GeneralAlerts>;
+const Template: Story = (args) => <GeneralAlerts type="SUCCESS" {...args}>Alert</GeneralAlerts>;
 
 export const SUCCESS = Template.bind({});
 SUCCESS.args = { type: 'SUCCESS' };
