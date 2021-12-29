@@ -17,7 +17,12 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args}>Butt
 const TemplateCancel: ComponentStory<typeof CancelButton> = (args) => <CancelButton {...args}>Cancel Button</CancelButton>;
 const TemplateLink: ComponentStory<typeof LinkButton> = (args) => <LinkButton {...args}>Link Button</LinkButton>;
 const TemplateNegative: ComponentStory<typeof NegativeActionButton> = (args) => <NegativeActionButton {...args}>Negative</NegativeActionButton>;
-const TemplateCopy: Story = (args) => <CopyButton text="" {...args} />;
+const TemplateCopy: Story = (args) => (
+  <div className="flex group items-center gap-x-2">
+    <span>{args.text}</span>
+    <CopyButton text="" {...args} />
+  </div>
+);
 
 export const PrimaryLarge = Template.bind({});
 PrimaryLarge.args = { primary: true, size: 'large' };

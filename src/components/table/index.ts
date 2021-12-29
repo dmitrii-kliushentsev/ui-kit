@@ -20,4 +20,3 @@ export { Cells } from './cells';
 export {
   TableActionsProvider, setSearch, setSort, useTableActionsState, useTableActionsDispatch,
 } from './table-actions';
-export { CellComponents } from './cellcomponents';

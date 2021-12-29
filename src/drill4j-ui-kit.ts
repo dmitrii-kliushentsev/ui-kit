@@ -63,7 +63,6 @@ export {
   Popover,
   Skeleton,
   PercentageBar,
-  CellComponents,
   CopyButton,
 } from './components';
 export {

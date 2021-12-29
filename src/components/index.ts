@@ -21,7 +21,7 @@ export { Stub } from './stub';
 export { SearchPanel } from './search-panel';
 export {
   Table, VirtualizedTable, TableElements, TableActionsProvider, setSearch, setSort, useTableActionsState, useTableActionsDispatch,
-  Cells, CellComponents,
+  Cells,
 } from './table';
 export {
   FormGroup,

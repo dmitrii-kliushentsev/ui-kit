@@ -14,3 +14,4 @@
  * limitations under the License.
  */
 export { CompoundCell } from './compound-cell';
+export { NameWrapper } from './name-wrapper';

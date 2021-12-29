@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { DurationCell } from './duration-cell';
-import { CompoundCell } from './compound-cell';
+import { CompoundCell, NameWrapper } from './compound-cell';
 import { CoverageCell } from './coverage-cell';
 import { CoverageProgressCell } from './coverage-progress-cell';
 import { ClickableCell } from './clickable-cell';
@@ -29,4 +29,7 @@ export const Cells = {
   CoverageProgress: CoverageProgressCell,
   TestStatus: TestStatusCell,
   Highlight: HighlightCell,
+  Helpers: {
+    NameWrapper,
+  },
 } as any;
