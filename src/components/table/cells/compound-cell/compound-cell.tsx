@@ -25,13 +25,19 @@ interface Props {
 
 // FIX this and Cells pls
 export const CompoundCell = ({
-  icon, cellAdditionalInfo, children, link, ...rest
+  icon, cellName, cellAdditionalInfo, children, link, ...rest
 }: Props) => (
   <div tw="flex gap-2 py-2 text-monochrome-black" {...rest}>
     <div tw="h-5 flex items-center">{icon}</div>
-    <div className="text-ellipsis group">
+    <div tw="text-ellipsis group">
       <div tw="flex gap-x-2 items-center">
-        {children}
+        <Name
+          data-test="compound-cell:name"
+          title={cellName}
+          bold={!!cellAdditionalInfo}
+        >
+          {children || cellName}
+        </Name>
         {link && (
           <div tw="invisible h-4 text-monochrome-dark-tint cursor-pointer hover:text-blue-medium-tint group-hover:visible">
             {link}
@@ -50,3 +56,8 @@ export const CompoundCell = ({
     </div>
   </div>
 );
+
+const Name = styled.div`
+  ${tw`text-ellipsis h-5 leading-20`}
+  ${({ bold }: { bold: boolean }) => bold && tw`font-bold`}
+`;

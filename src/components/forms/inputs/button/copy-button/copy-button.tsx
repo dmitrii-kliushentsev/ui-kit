@@ -22,6 +22,7 @@ import { copyToClipboard } from '../../../../../utils';
 interface Props {
   text: string,
 }
+
 export const CopyButton = ({ text }: Props) => {
   const { copied, setCopied } = useCopy({ delay: 3000 });
   return (
