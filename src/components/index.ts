@@ -21,7 +21,7 @@ export { Stub } from './stub';
 export { SearchPanel } from './search-panel';
 export {
   Table, VirtualizedTable, TableElements, TableActionsProvider, setSearch, setSort, useTableActionsState, useTableActionsDispatch,
-  Cells,
+  Cells, CellComponents,
 } from './table';
 export {
   FormGroup,
@@ -31,6 +31,7 @@ export {
   LinkButton,
   CancelButton,
   NegativeActionButton,
+  CopyButton,
   Checkbox,
   Fields,
   handleFieldErrors,

@@ -32,7 +32,7 @@ export const CopyButton = ({ text }: Props) => {
         )
         : (
           <Icons.Copy
-            tw="text-monochrome-dark-tint cursor-pointer hover:text-blue-medium-tint group-hover:visible"
+            tw="invisible text-monochrome-dark-tint cursor-pointer hover:text-blue-medium-tint group-hover:visible"
             onClick={() => { copyToClipboard(text); setCopied(true); }}
           />
         )}

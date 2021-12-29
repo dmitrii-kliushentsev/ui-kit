@@ -63,6 +63,8 @@ export {
   Popover,
   Skeleton,
   PercentageBar,
+  CellComponents,
+  CopyButton,
 } from './components';
 export {
   useClickOutside, useElementSize, useHover, usePreserveCaretPosition,
