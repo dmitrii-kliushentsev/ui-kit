@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
 import 'twin.macro';
 
@@ -9,7 +9,14 @@ export default {
   component: Tab,
 } as ComponentMeta<typeof Tab>;
 
-const Template: Story = (args) => <Tab {...args}>Tab</Tab>;
+const Template: Story = (args) => {
+  const { active } = args;
+  const [state, setState] = useState(active);
+  const changeHandler = () => {
+    !state && setState(true);
+  }
+  return (<Tab active={state} onClick={changeHandler}>Tab</Tab>)
+};
 export const Default = Template.bind({});
 Default.args = { active: false };
 Default.parameters = {
