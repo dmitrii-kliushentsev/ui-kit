@@ -24,7 +24,7 @@ const Template = (args: any) =>
           id: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]:AUTO-${i}`,
           type: 'AUTO',
           name: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]-${i}`,
-          coverage: 50,
+          coverage: ++i,
         }))}
         initialRowsCount={22}
       />
