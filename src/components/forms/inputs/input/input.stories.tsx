@@ -7,6 +7,11 @@ import { Input } from './input';
 export default {
   title: 'Input',
   component: Input,
+  argTypes: {
+    touched: {type: 'boolean'},
+    error: {type: 'boolean'},
+    disabled: {type: 'boolean'},
+  },
 } as ComponentMeta<typeof Input>;
 
 const Template: Story = (args) => <Input {...args} />;
