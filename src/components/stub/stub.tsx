@@ -38,7 +38,7 @@ export const Stub = ({
 );
 
 const Content = styled.div`
-  ${tw`flex flex-col flex-grow py-10 px-0 justify-center items-center w-full h-full text-monochrome-medium-tint`};
+  ${tw`flex flex-col flex-grow py-20 px-0 justify-center items-center w-full h-full text-monochrome-medium-tint`};
 `;
 
 const Title = styled.div`
