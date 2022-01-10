@@ -7,6 +7,11 @@ import { Textarea } from './textarea';
 export default {
   title: 'Textarea',
   component: Textarea,
+  argTypes: {
+    touched: {type: 'boolean'},
+    error: {type: 'boolean'},
+    disabled: {type: 'boolean'},
+  },
 } as ComponentMeta<typeof Textarea>;
 
 const Template: Story = (args) => <Textarea {...args} />;
