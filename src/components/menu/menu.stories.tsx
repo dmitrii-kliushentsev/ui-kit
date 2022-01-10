@@ -39,9 +39,10 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = (args) => <Menu items={menuItems} {...args} />;
+const Template: Story = (args) => <Menu items={[]} {...args} />;
 
 export const Default = Template.bind({});
+Default.args = { items: menuItems };
 Default.parameters = {
   docs: {
     source: {
@@ -51,7 +52,7 @@ Default.parameters = {
 };
 
 export const WithBorder = Template.bind({});
-WithBorder.args = { bordered: true };
+WithBorder.args = { bordered: true, items: menuItems };
 WithBorder.parameters = {
   docs: {
     source: {
