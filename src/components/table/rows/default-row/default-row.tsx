@@ -22,11 +22,15 @@ import { TableElements } from '../../table-elements';
 export const DefaultRow = ({
   rawRow, prepareRow, renderRowSubComponent, searchWords, isDefaultExpanded = false,
 }: any) => {
-  const [expandedRowId, setExpandedRowId] = useState<null | string>(isDefaultExpanded ? rawRow.id : null);
+  const [expandedRowId, setExpandedRowId] = useState<null | string>(null);
 
   useLayoutEffect(() => {
     setExpandedRowId(null);
   }, [rawRow.id]);
+
+  useLayoutEffect(() => {
+    setExpandedRowId(isDefaultExpanded ? rawRow.id : null);
+  }, []);
 
   const row = { ...rawRow, isExpanded: expandedRowId === rawRow.id };
   prepareRow(row);
