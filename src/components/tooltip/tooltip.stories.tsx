@@ -1,67 +1,42 @@
-import { storiesOf } from '@storybook/react';
+import { ComponentMeta, Story } from '@storybook/react';
 import 'twin.macro';
+
+import React from 'react';
 
 import { Tooltip } from './tooltip';
 
-storiesOf('Tooltip', module).add('Tooltip', () => (
-  <>
-    <div tw="my-10 mx-20">
-      <Tooltip message="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam vero">
-        Tooltip
-        <div>top-right</div>
-      </Tooltip>
-    </div>
-    <div tw="my-16 mx-30">
-      <Tooltip
-        message={(
-          <>
-            <div>
-              <div>
-                <div>Lorem ipsum dolor sit amet</div>
-                <div>Lorem ipsum dolor sit amet</div>
-              </div>
-              <div>Consequatur rerum amet fuga expedita</div>
-            </div>
-            <div>
-              <div>
-                <div>Lorem ipsum dolor sit amet</div>
-                <div>Lorem ipsum dolor sit amet</div>
-              </div>
-              <div>Consequatur rerum amet fuga expedita</div>
-            </div>
-          </>
-        )}
-      >
-        Tooltip
-        <div>top-center</div>
-      </Tooltip>
-    </div>
-    <div tw="my-20 mx-100">
-      <Tooltip
-        position="right"
-        message="Consequatur rerum amet fuga expedita sunt et tempora saepe? Iusto nihil explicabo..."
-      >
-        Tooltip
-        <div>right</div>
-      </Tooltip>
-    </div>
-    <div tw="my-20 mx-100">
-      <Tooltip
-        position="left"
-        message="Consequatur rerum amet fuga expedita sunt et tempora saepe? Iusto nihil explicabo..."
-      >
-        Tooltip
-        <div>left</div>
-      </Tooltip>
-    </div>
-    <div tw="my-20 mx-100">
-      <Tooltip
-        position="top-left"
-        message="Consequatur rerum amet fuga expedita sunt et tempora saepe? Iusto nihil explicabo..."
-      >
-        Tooltip
-        <div>top-left</div>
-      </Tooltip>
-    </div>
-  </>
-));
+export default {
+  title: 'Tooltip',
+  component: Tooltip,
+  position: {
+    control: {
+      type: 'radio',
+    },
+    options: ['top-center', 'top-right', 'top-left', 'left', 'right'],
+  },
+  decorators: [
+    (StoryComponent) => (
+      <div style={{ margin: '100px' }}>
+        <StoryComponent />
+      </div>
+    ),
+  ],
+} as ComponentMeta<typeof Tooltip>;
+
+const Template: Story = (args) => <Tooltip message="mesage" {...args}>Tooltip</Tooltip>;
+export const Default = Template.bind({});
+
+export const TopCenter = Template.bind({});
+TopCenter.args = { position: 'top-center' };
+
+export const TopRight = Template.bind({});
+TopRight.args = { position: 'top-rigth' };
+
+export const TopLeft = Template.bind({});
+TopLeft.args = { position: 'top-left' };
+
+export const Left = Template.bind({});
+Left.args = { position: 'left' };
+
+export const Right = Template.bind({});
+Right.args = { position: 'right' };

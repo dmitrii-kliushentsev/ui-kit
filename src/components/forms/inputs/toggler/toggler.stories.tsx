@@ -1,23 +1,37 @@
-import { useState } from 'react';
-import { storiesOf } from '@storybook/react';
+import React, { useState } from 'react';
+import { ComponentMeta, Story } from '@storybook/react';
+import 'twin.macro';
 
 import { Toggler } from './toggler';
 
-storiesOf('Toggler', module).add('Toggler', () => {
-  const [value, setValue] = useState(true);
+export default {
+  title: 'Toggler',
+  component: Toggler,
+} as ComponentMeta<typeof Toggler>;
+
+const Template: Story = (args) => {
+  const { value, label, disabled } = args;
+  const [val, setValue] = useState(value);
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between', width: '300px' }}>
-      <Toggler
-        label="toggler"
-        value={value}
-        onChange={() => (value ? setValue(false) : setValue(true))}
-      />
-      <Toggler
-        label="toggler"
-        value={value}
-        onChange={() => (value ? setValue(false) : setValue(true))}
-        disabled
-      />
-    </div>
+    <Toggler
+      value={val}
+      label={label}
+      disabled={disabled}
+      onChange={() => (val ? setValue(false) : setValue(true))}
+    />
   );
-});
+};
+
+export const Default = Template.bind({});
+Default.args = {
+  value: true,
+  label: 'toggler',
+  disabled: false,
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  value: true,
+  label: 'toggler',
+  disabled: true,
+};
