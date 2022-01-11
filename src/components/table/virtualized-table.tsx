@@ -113,6 +113,7 @@ export const VirtualizedTable = withErrorBoundary(({
 
       return (
         <div
+          tw="bg-monochrome-white hover:bg-monochrome-light-tint"
           {...row?.getRowProps({
             style,
           })}
@@ -122,7 +123,7 @@ export const VirtualizedTable = withErrorBoundary(({
               <div
                 {...cell.getCellProps()}
                 style={{ width: cell.column.width }}
-                tw="grid items-center grid-cols-1 h-full max-width[100%] px-4 border-b border-monochrome-medium-tint bg-monochrome-white"
+                tw="grid items-center grid-cols-1 h-full max-width[100%] px-4 border-b border-monochrome-medium-tint"
               >
                 {cell.column.filterable && !cell.column.isCustomCell
                   ? (
