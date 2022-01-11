@@ -1,20 +1,51 @@
-import { storiesOf } from '@storybook/react';
+import React from 'react';
+import { ComponentMeta } from '@storybook/react';
 import 'twin.macro';
 
 import { Cells } from './index';
 
-storiesOf('Cells', module)
-  .add('Clickable cell', () => <Cells.Clickable>Click</Cells.Clickable>)
-  .add('Compound cell', () => <Cells.Compound cellName="Cell Name" cellAdditionalInfo="Info" />)
-  .add('Coverage cell', () => <Cells.Coverage value={100} />)
-  .add('Coverage progress cell', () => (
-    <div>
-      <Cells.CoverageProgress value={100} />
-      <Cells.CoverageProgress value={50} />
-      <Cells.CoverageProgress value={50.123} />
-      <Cells.CoverageProgress value={50.0} />
-      <Cells.CoverageProgress value={0} />
-    </div>
-  ))
-  .add('Duration cell', () => <Cells.Duration value={0} />)
-  .add('Test status cell', () => <Cells.TestStatus type="PASSED">AUTO</Cells.TestStatus>);
+export default {
+  title: 'Cells',
+  component: Cells,
+} as ComponentMeta<typeof Cells>;
+
+export const Clickable = (args) => <Cells.Clickable {...args}>Clickable</Cells.Clickable>;
+Clickable.args = {
+  disabled: false,
+};
+
+export const Compound = (args) => <Cells.Compound {...args}>Compound</Cells.Compound>;
+Compound.args = {
+  cellName: 'compound',
+};
+
+export const Coverage = (args) => <Cells.Coverage {...args} />;
+Coverage.args = {
+  value: 50,
+};
+
+export const CoverageIsNull = (args) => <Cells.Coverage {...args} />;
+CoverageIsNull.args = {
+  value: 0,
+};
+
+export const CoverageProgress = (args) => <Cells.CoverageProgress {...args} />;
+CoverageProgress.args = {
+  value: 50,
+};
+
+export const Duration = (args) => <Cells.Duration {...args} />;
+Duration.args = {
+  value: 50,
+};
+
+export const Highlight = (args) => <Cells.Highlight {...args} />;
+Highlight.args = {
+  text: 'Highlight',
+  searchWords: ['high'],
+};
+
+export const TestStatus = (args) => <Cells.TestStatus {...args}>Status</Cells.TestStatus>;
+TestStatus.args = {
+  type: 'PASSED',
+};

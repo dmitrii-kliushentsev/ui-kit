@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import 'twin.macro';
 
@@ -7,24 +7,24 @@ import { Skeleton } from '../skeleton';
 import { Stub } from '../stub';
 import { Cells } from './cells';
 
-import { Table } from './table';
+import { VirtualizedTable } from './virtualized-table';
 
 export default {
-  component: Table,
-  title: 'Components/Table',
+  component: VirtualizedTable,
+  title: 'Components/VirtualizedTable',
 };
 
 const Template = (args: any) =>
   (
     <BrowserRouter>
-      <Table
+      <VirtualizedTable
         {...args}
         isLoading={false}
         data={Array.from({ length: 60 }, (_, i) => ({
           id: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]:AUTO-${i}`,
           type: 'AUTO',
           name: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]-${i}`,
-          coverage: ++i,
+          coverage: 50,
         }))}
         initialRowsCount={22}
       />
@@ -38,7 +38,8 @@ BuildsTable.args = {
   withSearch: true,
   isDefaulToggleSortBy: true,
   placeholder: 'Search packages by name',
-  renderHeader: ({ currentCount, totalCount }: { currentCount: number, totalCount: number }) => (
+  gridTemplateColumns: '2fr 1fr 1fr',
+  renderHeader: (currentCount: number, totalCount: number) => (
     <div tw="flex justify-between text-monochrome-default text-14 leading-24 pb-3">
       <div tw="uppercase font-bold">{`Current (${currentCount})`}</div>
       <div>{`Displaying ${currentCount} of ${totalCount}`}</div>

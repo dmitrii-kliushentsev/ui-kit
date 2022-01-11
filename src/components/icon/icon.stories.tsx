@@ -1,10 +1,20 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { storiesOf } from '@storybook/react';
+import { ComponentMeta, Meta, Story } from '@storybook/react';
 import { Icons } from './index';
 import 'twin.macro';
 
-export const IconsTable = () => {
+export default {
+  title: 'Icons',
+  component: Icons,
+  argTypes: {
+    width: { type: 'number' },
+    height: { type: 'number' },
+    rotate: { type: 'number' },
+  },
+} as ComponentMeta<typeof Icons>
+
+export const IconsTable: Story = (args) => {
   const StorybookIcons = Object.keys(Icons);
   return (
     <div>
@@ -33,7 +43,7 @@ export const IconsTable = () => {
           const Icon = Icons[key as keyof typeof Icons];
           return (
             <IconWrapper>
-              <div><Icon height={18} width={18} /></div>
+              <div><Icon height={18} width={18} {...args} /></div>
               <IconLabel>{key}</IconLabel>
               <IconStorySource>{`code: <Icons.${key} />`}</IconStorySource>
             </IconWrapper>
@@ -43,11 +53,6 @@ export const IconsTable = () => {
     </div>
   );
 };
-
-storiesOf('Icons', module)
-  .add('Table', () => (
-    <IconsTable />
-  ));
 
 const IconPropsWrapper = styled.div`
   display: grid;

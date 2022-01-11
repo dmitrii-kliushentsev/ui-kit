@@ -1,8 +1,24 @@
-import { storiesOf } from '@storybook/react';
+import React from 'react';
+import { Meta, Story } from '@storybook/react';
+import 'twin.macro';
+
 import { Spinner } from './spinner';
 
-storiesOf('Spinner', module).add('Spinner', () => (
-  <div>
-    <Spinner />
-  </div>
-));
+export default {
+  title: 'Spinner',
+  component: Spinner,
+} as Meta;
+
+const Template: Story = (args) => <Spinner {...args} />;
+export const Default = Template.bind({});
+
+export const Disabled = Template.bind({});
+Disabled.args = { disabled: true };
+Disabled.parameters = {
+  backgrounds: {
+    default: 'blue',
+    values: [
+      { name: 'blue', value: '#00f' },
+    ],
+  },
+}
