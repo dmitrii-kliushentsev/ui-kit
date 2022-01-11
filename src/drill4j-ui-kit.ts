@@ -63,6 +63,7 @@ export {
   Popover,
   Skeleton,
   PercentageBar,
+  CopyButton,
 } from './components';
 export {
   useClickOutside, useElementSize, useHover, usePreserveCaretPosition,

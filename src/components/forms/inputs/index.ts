@@ -10,7 +10,7 @@ import { Select } from './select';
 import { Radio } from './radio';
 
 export {
-  Button, LinkButton, CancelButton, NegativeActionButton,
+  Button, LinkButton, CancelButton, NegativeActionButton, CopyButton,
 } from './button';
 export { Checkbox } from './checkbox';
 export const Inputs = {

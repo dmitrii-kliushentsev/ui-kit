@@ -31,6 +31,7 @@ export {
   LinkButton,
   CancelButton,
   NegativeActionButton,
+  CopyButton,
   Checkbox,
   Fields,
   handleFieldErrors,
