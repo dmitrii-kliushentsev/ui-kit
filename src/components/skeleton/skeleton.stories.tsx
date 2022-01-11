@@ -1,11 +1,19 @@
-import { storiesOf } from '@storybook/react';
+import React from 'react';
+import { Meta, Story } from '@storybook/react';
+import 'twin.macro';
 
 import { Skeleton } from './skeleton';
 
-storiesOf('Skeleton', module).add('Skeleton', () => (
-  <div>
-    <Skeleton />
-    <Skeleton withIcon />
-    <Skeleton withIcon withSubLine />
-  </div>
-));
+export default {
+  title: 'Skeleton',
+  component: Skeleton,
+} as Meta;
+
+const Template: Story = (args) => <Skeleton {...args} />;
+export const Default = Template.bind({});
+
+export const WithIcon = Template.bind({});
+WithIcon.args = { withIcon: true };
+
+export const WithSubLine = Template.bind({});
+WithSubLine.args = { withSubLine: true };

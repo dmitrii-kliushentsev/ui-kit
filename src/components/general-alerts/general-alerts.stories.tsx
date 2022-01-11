@@ -1,31 +1,32 @@
-import { storiesOf } from '@storybook/react';
+import React from 'react';
+import { Meta, Story } from '@storybook/react';
+import 'twin.macro';
 
 import { GeneralAlerts } from './general-alerts';
 
-storiesOf('GeneralAlerts', module)
-  .add('SUCCESS', () => (
-    <GeneralAlerts type="SUCCESS">
-      Success message example. Something good happened!
-    </GeneralAlerts>
-  ))
-  .add('ERROR with WARNING', () => (
-    <>
-      <GeneralAlerts type="ERROR" data-test="general-alerts:error">
-        Error message example. Something bad happened.
-        Error message example. Something bad happened.
-      </GeneralAlerts>
-      <GeneralAlerts type="WARNING" data-test="general-alerts:warning">
-        Warning message example. Something affects product usage.
-      </GeneralAlerts>
-    </>
-  ))
-  .add('WARNING', () => (
-    <GeneralAlerts type="WARNING">
-      Warning message example. Something affects product usage.
-    </GeneralAlerts>
-  ))
-  .add('Info alert with component', () => (
-    <GeneralAlerts type="INFO">
-      please wait...
-    </GeneralAlerts>
-  ));
+export default {
+  title: 'GeneralAlerts',
+  component: GeneralAlerts,
+  argTypes: {
+    type: {
+      control: {
+        type: 'radio',
+      },
+      options: ['SUCCESS', 'ERROR', 'INFO', 'WARNING'],
+    },
+  },
+} as Meta;
+
+const Template: Story = (args) => <GeneralAlerts type="SUCCESS" {...args}>Alert</GeneralAlerts>;
+
+export const SUCCESS = Template.bind({});
+SUCCESS.args = { type: 'SUCCESS' };
+
+export const ERROR = Template.bind({});
+ERROR.args = { type: 'ERROR' };
+
+export const INFO = Template.bind({});
+INFO.args = { type: 'INFO' };
+
+export const WARNING = Template.bind({});
+WARNING.args = { type: 'WARNING' };

@@ -1,14 +1,23 @@
-import { storiesOf } from '@storybook/react';
+import React from 'react';
+import { ComponentMeta, Story } from '@storybook/react';
+import 'twin.macro';
 
 import { Textarea } from './textarea';
 
-storiesOf('Textarea', module).add('Textarea', () => (
-  <div style={{
-    margin: '40px', height: '200px', width: '400px',
-  }}
-  >
-    <Textarea value="Textarea" onChange={() => {}} />
-    <Textarea value="Textarea disabled" disabled onChange={() => {}} />
-    <Textarea value="Incorrect value" error onChange={() => {}} />
-  </div>
-));
+export default {
+  title: 'Textarea',
+  component: Textarea,
+  argTypes: {
+    touched: {type: 'boolean'},
+    error: {type: 'boolean'},
+    disabled: {type: 'boolean'},
+  },
+} as ComponentMeta<typeof Textarea>;
+
+const Template: Story = (args) => <Textarea {...args} />;
+
+export const Default = Template.bind({});
+Default.args = { disabled: false };
+
+export const Disabled = Template.bind({});
+Disabled.args = { disabled: true };
