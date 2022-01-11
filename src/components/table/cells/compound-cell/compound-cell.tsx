@@ -29,7 +29,7 @@ export const CompoundCell = ({
 }: Props) => (
   <div tw="flex gap-2 py-2 text-monochrome-black" {...rest}>
     <div tw="h-5 flex items-center">{icon}</div>
-    <div tw="text-ellipsis group">
+    <div className="text-ellipsis group">
       <div tw="flex gap-x-2 items-center">
         <Name
           data-test="compound-cell:name"
