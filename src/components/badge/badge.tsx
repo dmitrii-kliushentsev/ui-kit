@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const Badge = styled.span<Props>`
-  ${tw`px-2 pt-[1px] h-[20px] rounded-[16px] border text-12 leading-16`}
+  ${tw`px-2 pt-px h-5 rounded-2xl border text-12 leading-16`}
   ${({ bold }) => bold && tw`font-bold`}
   ${({ color }) => [
     color === 'gray' && tw`text-monochrome-default`,
