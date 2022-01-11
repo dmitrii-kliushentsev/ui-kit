@@ -34,7 +34,7 @@ export const CompoundCell = ({
         <Name
           data-test="compound-cell:name"
           title={cellName}
-          bold={!!cellAdditionalInfo}
+          bold={Boolean(cellAdditionalInfo)}
         >
           {children || cellName}
         </Name>
