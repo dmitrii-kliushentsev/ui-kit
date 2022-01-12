@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Args, Meta, Story } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import 'twin.macro';
 
 import { Panel } from './panel';
@@ -12,12 +12,17 @@ export default {
 const Template: Story = (args) => (
   <Panel {...args}>
     <Panel.Content>
-      <div tw="px-6">
-        <h2>Modal content</h2>
+      <Panel.Header>
+        <h2>Modal header</h2>
+      </Panel.Header>
+      <Panel.Body>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus, iure magni quia excepturi aliquid quas nostrum?</p>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas nisi corrupti dolorem incidunt quisquam.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti ullam praesentium laudantium delectus...</p>
-      </div>
+      </Panel.Body>
+      <Panel.Footer>
+        Modal Footer
+      </Panel.Footer>
     </Panel.Content>
   </Panel>
 );

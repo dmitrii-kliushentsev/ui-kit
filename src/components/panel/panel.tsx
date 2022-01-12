@@ -19,12 +19,13 @@ interface PanelProps {
 const Panel = ({
   children,
   isDisableFadeClick,
+  ...rest,
 }: PanelProps) => {
   const [isOpen, setIsOpen] = useState(true);
   return (
     <PopupContext.Provider value={{ isOpen, setIsOpen }}>
       <Portal rootElementId="panel" displayContent={isOpen}>
-        <div tw="flex w-full h-full justify-center items-center">
+        <div tw="flex w-full h-full justify-center items-center" {...rest}>
           {children}
           <PanelFade onClick={() => !isDisableFadeClick && setIsOpen(false)} data-test="modal:fade" />
         </div>
@@ -35,10 +36,11 @@ const Panel = ({
 
 const PanelContent: FC = ({
   children,
+  ...rest,
 }) => {
   const { setIsOpen } = useContext(PopupContext);
   return (
-    <div tw="w-97 absolute top-0 right-0 h-full z-[100] bg-monochrome-white shadow-[-4px 0 0 0 #007fff, -20px 0 40px 0 rgba(15, 36, 52, 0.15)]">
+    <div tw="w-97 absolute flex flex-col top-0 right-0 h-full z-[100] bg-monochrome-white shadow-[-4px 0 0 0 #007fff, -20px 0 40px 0 rgba(15, 36, 52, 0.15)]" {...rest}>
       <CloseButtonPanel onClick={() => setIsOpen(false)} data-test="modal:close-button" />
       {children}
     </div>
@@ -56,6 +58,24 @@ const CloseButtonPanel:FC<PanelCloseButtonProps> = (rest) => (
   </div>
 );
 
+const PanelHeader: FC = ({ children }) => (
+  <div tw="px-6 py-4 border-b border-monochrome-medium-tint">
+    {children}
+  </div>
+)
+
+const PanelFooter: FC = ({ children }) => (
+  <div tw="px-6 py-4 bg-monochrome-light-tint">
+    {children}
+  </div>
+)
+
+const PanelBody: FC = ({ children }) => (
+  <div tw="px-6 flex-grow">
+    {children}
+  </div>
+)
+
 const PanelFade = styled.div`
   ${tw`absolute w-full h-full top-0 left-0 bg-monochrome-white`};
   opacity: 0.75;
@@ -63,5 +83,8 @@ const PanelFade = styled.div`
 `;
 
 Panel.Content = PanelContent;
+Panel.Header = PanelHeader;
+Panel.Footer = PanelFooter;
+Panel.Body = PanelBody;
 
 export { Panel };
