@@ -15,7 +15,7 @@ export {
   Tab,
   Menu,
   MessagePanel,
-  Modal,
+  Panel,
   GeneralAlerts,
   Portal,
   MainProgressBar,

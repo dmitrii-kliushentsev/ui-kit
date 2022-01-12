@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
-import { Modal } from './modal';
+import { Panel } from './panel';
 import { getByDataTest } from '../../../test-utils';
 
 const onToggle = jest.fn();
@@ -14,21 +14,21 @@ beforeEach(() => {
 
 describe('Modal', () => {
   it('should render modal with children when has "isOpen=true" props', () => {
-    render(<Modal onToggle={onToggle} isOpen>{children}</Modal>, {
+    render(<Panel onToggle={onToggle} isOpen>{children}</Panel>, {
       container: document.body.appendChild(portalRootElement),
     });
     expect(screen.getByText('children')).toBeInTheDocument();
   });
 
   it('should not render modal with children when has "isOpen=false" props', () => {
-    render(<Modal onToggle={onToggle} isOpen={false}>{children}</Modal>, {
+    render(<Panel onToggle={onToggle} isOpen={false}>{children}</Panel>, {
       container: document.body.appendChild(portalRootElement),
     });
     expect(screen.queryByText('children')).toBe(null);
   });
 
   it('should call "onToggle" function after the close button is clicked with false value as first argument', () => {
-    const { container } = render(<Modal onToggle={onToggle} isOpen>{children}</Modal>, {
+    const { container } = render(<Panel onToggle={onToggle} isOpen>{children}</Panel>, {
       container: document.body.appendChild(portalRootElement),
     });
     fireEvent.click(getByDataTest(container, 'modal:close-button'));
@@ -38,7 +38,7 @@ describe('Modal', () => {
 
   it('should call "onToggle" function with false value as first argument after the fade block is clicked ' +
       'and if "isDisableFadeClick" is equal false', () => {
-    const { container } = render(<Modal onToggle={onToggle} isOpen isDisableFadeClick={false}>{children}</Modal>, {
+    const { container } = render(<Panel onToggle={onToggle} isOpen isDisableFadeClick={false}>{children}</Panel>, {
       container: document.body.appendChild(portalRootElement),
     });
     fireEvent.click(getByDataTest(container, 'modal:fade'));
@@ -47,7 +47,7 @@ describe('Modal', () => {
   });
 
   it('should not call "onToggle" function after the fade block is clicked and if "isDisableFadeClick" is equal true', () => {
-    const { container } = render(<Modal onToggle={onToggle} isOpen isDisableFadeClick>{children}</Modal>, {
+    const { container } = render(<Panel onToggle={onToggle} isOpen isDisableFadeClick>{children}</Panel>, {
       container: document.body.appendChild(portalRootElement),
     });
     fireEvent.click(getByDataTest(container, 'modal:fade'));

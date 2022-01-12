@@ -10,7 +10,7 @@ interface Props {
   isDisableFadeClick?: boolean;
 }
 
-export const Modal = ({
+export const Panel = ({
   children, onToggle, isOpen, isDisableFadeClick,
 }: Props) => (
   <Portal rootElementId="modal" displayContent={isOpen}>
