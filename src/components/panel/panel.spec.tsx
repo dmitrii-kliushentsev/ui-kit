@@ -12,15 +12,15 @@ beforeEach(() => {
   onToggle.mockRestore();
 });
 
-describe('Modal', () => {
-  it('should render modal with children when has "isOpen=true" props', () => {
+describe('Panel', () => {
+  it('should render panel with children when has "isOpen=true" props', () => {
     render(<Panel onToggle={onToggle} isOpen>{children}</Panel>, {
       container: document.body.appendChild(portalRootElement),
     });
     expect(screen.getByText('children')).toBeInTheDocument();
   });
 
-  it('should not render modal with children when has "isOpen=false" props', () => {
+  it('should not render panel with children when has "isOpen=false" props', () => {
     render(<Panel onToggle={onToggle} isOpen={false}>{children}</Panel>, {
       container: document.body.appendChild(portalRootElement),
     });
