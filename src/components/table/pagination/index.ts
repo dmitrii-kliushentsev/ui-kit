@@ -1,1 +1,1 @@
-export { Pagination } from './pagination';
+export { Pagination, MAX_LEFT_OR_RIGHT_PAGES_COUNT, MAX_PAGES_WITH_ELLIPSIS_COUNT, FIRST_OR_LAST_NUMBER_WITH_ELIPSIS } from './pagination';
