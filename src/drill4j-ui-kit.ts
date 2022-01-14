@@ -9,7 +9,7 @@ export {
 export {
   Badge,
   Icons,
-  Popup,
+  Modal,
   Spinner,
   Tooltip,
   Tab,

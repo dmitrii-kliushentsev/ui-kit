@@ -5,21 +5,22 @@ import tw, { styled } from 'twin.macro';
 import { Icons } from '../icon';
 import { Portal } from '../portal';
 
-type State = {isOpen: boolean; setIsOpen: (value: boolean) => void};
+type State = {isOpen: boolean; setIsOpen: (value: boolean) => void; onClose: () => void};
 type Children = React.ReactChild | React.ReactChild[] | React.FC<State> | React.ReactNode;
-const defaultState: State = { isOpen: false, setIsOpen: () => {} };
+const defaultState: State = { isOpen: false, setIsOpen: () => {}, onClose: () => {} };
 
 const PanelContext = createContext<State>(defaultState);
 
 interface PanelProps {
   children: Children;
+  onClose?: () => void;
 }
 
-const Panel = ({ children }: PanelProps) => {
+const Panel = ({ children, onClose = () => {} }: PanelProps) => {
   const [isOpen, setIsOpen] = useState(true);
   return (
-    <PanelContext.Provider value={{ isOpen, setIsOpen }}>
-      {typeof children === 'function' ? children({ setIsOpen, isOpen }) : children}
+    <PanelContext.Provider value={{ isOpen, setIsOpen, onClose }}>
+      {typeof children === 'function' ? children({ setIsOpen, isOpen, onClose }) : children}
     </PanelContext.Provider>
   );
 };
@@ -34,40 +35,48 @@ const PanelContent: FC<PanelContentProps> = ({
   isDisableFadeClick,
   ...rest
 }) => {
-  const { isOpen, setIsOpen } = useContext(PanelContext);
+  const { isOpen, setIsOpen, onClose } = useContext(PanelContext);
+  const closeHandler = () => {
+    setIsOpen(false);
+    onClose();
+  };
   return (
     <Portal rootElementId="panel" displayContent={isOpen}>
       <div tw="flex w-full h-full justify-center items-center" {...rest}>
-        <div tw="w-97 absolute flex flex-col top-0 right-0 h-full z-[100] bg-monochrome-white shadow-[-4px 0 0 0 #007fff, -20px 0 40px 0 rgba(15, 36, 52, 0.15)]">
+        <div tw="
+        w-97 absolute flex flex-col top-0 right-0 h-full z-[100] bg-monochrome-white
+        shadow-[-4px 0 0 0 #007fff, -20px 0 40px 0 rgba(15, 36, 52, 0.15)]"
+        >
           <div
-            tw="cursor-pointer absolute -left-12 flex items-center justify-center h-12 w-12 rounded-tl-3xl rounded-bl-3xl bg-blue-default text-monochrome-white"
-            onClick={() => setIsOpen(false)}
+            tw="cursor-pointer absolute -left-12 flex items-center
+            justify-center h-12 w-12 rounded-tl-3xl rounded-bl-3xl bg-blue-default text-monochrome-white"
+            onClick={() => closeHandler()}
             data-test="panel:close-button"
           >
             <Icons.Close />
           </div>
           {children}
         </div>
-        <PanelFade onClick={() => !isDisableFadeClick && setIsOpen(false)} data-test="panel:fade" />
+        <PanelFade onClick={() => !isDisableFadeClick && closeHandler()} data-test="panel:fade" />
       </div>
     </Portal>
   );
 };
 
-const PanelHeader: FC = ({ children }) => (
-  <div tw="px-6 py-4 border-b border-monochrome-medium-tint">
+const PanelHeader: FC = ({ children, ...rest }) => (
+  <div tw="px-6 py-4 border-b border-monochrome-medium-tint" {...rest}>
     {children}
   </div>
 );
 
-const PanelFooter: FC = ({ children }) => (
-  <div tw="px-6 py-4 bg-monochrome-light-tint">
+const PanelFooter: FC = ({ children, ...rest }) => (
+  <div tw="px-6 py-4 bg-monochrome-light-tint" {...rest}>
     {children}
   </div>
 );
 
-const PanelBody: FC = ({ children }) => (
-  <div tw="px-6 flex-grow">
+const PanelBody: FC = ({ children, ...rest }) => (
+  <div tw="flex-grow" {...rest}>
     {children}
   </div>
 );

@@ -2,12 +2,12 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import 'twin.macro';
 
-import { Popup, PanelProps } from './popup';
+import { Modal, PanelProps } from './modal';
 import { Button } from '../forms';
 
 export default {
-  title: 'Popup',
-  component: Popup,
+  title: 'Modal',
+  component: Modal,
   argTypes: {
     type: {
       control: {
@@ -26,28 +26,28 @@ export default {
 
 const Template = ({ closeOnFadeClick, type }: PanelProps) => (
   <div tw="justify-center w-[368px] h-[368px]">
-    <Popup>
+    <Modal>
       {({ setIsOpen, isOpen }) => (
         <>
           <Button primary size="large" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? 'Close' : 'Open'}
           </Button>
-          <Popup.Panel type={type} closeOnFadeClick={closeOnFadeClick}>
-            <Popup.Header>Header</Popup.Header>
+          <Modal.Panel type={type} closeOnFadeClick={closeOnFadeClick}>
+            <Modal.Header>Header</Modal.Header>
             <div tw="px-6">
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti ullam praesentium laudantium delectus...</p>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus, iure magni quia excepturi aliquid quas nostrum?</p>
               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas nisi corrupti dolorem incidunt quisquam.</p>
             </div>
-            <Popup.Footer>
+            <Modal.Footer>
               <Button primary size="large" onClick={() => setIsOpen(false)}>
                 Close
               </Button>
-            </Popup.Footer>
-          </Popup.Panel>
+            </Modal.Footer>
+          </Modal.Panel>
         </>
       )}
-    </Popup>
+    </Modal>
   </div>
 );
 export const Default = Template.bind({});

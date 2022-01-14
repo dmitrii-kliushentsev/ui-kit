@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
-import { Popup } from './popup';
+import { Modal } from './modal';
 import { getByDataTest } from '../../../test-utils';
 
 const onToggle = jest.fn();
@@ -15,7 +15,7 @@ beforeEach(() => {
 
 describe('Popup', () => {
   it('should render popup with children and header when has "isOpen=true" props', () => {
-    render(<Popup onToggle={onToggle} isOpen header={HEADER}>{CHILDREN}</Popup>, {
+    render(<Modal onToggle={onToggle} isOpen header={HEADER}>{CHILDREN}</Modal>, {
       container: document.body.appendChild(portalRootElement),
     });
     expect(screen.getByText('CHILDREN')).toBeInTheDocument();
@@ -23,7 +23,7 @@ describe('Popup', () => {
   });
 
   it('should not render popup with children and header when has "isOpen=false" props', () => {
-    render(<Popup onToggle={onToggle} header={HEADER} isOpen={false}>{CHILDREN}</Popup>, {
+    render(<Modal onToggle={onToggle} header={HEADER} isOpen={false}>{CHILDREN}</Modal>, {
       container: document.body.appendChild(portalRootElement),
     });
     expect(screen.queryByText('CHILDREN')).toBe(null);
@@ -31,7 +31,7 @@ describe('Popup', () => {
   });
 
   it('should call "onToggle" function after the close button is clicked with false value as first argument', () => {
-    const { container } = render(<Popup header={HEADER} onToggle={onToggle} isOpen>{CHILDREN}</Popup>, {
+    const { container } = render(<Modal header={HEADER} onToggle={onToggle} isOpen>{CHILDREN}</Modal>, {
       container: document.body.appendChild(portalRootElement),
     });
     fireEvent.click(getByDataTest(container, 'popup:close-button'));
@@ -41,7 +41,7 @@ describe('Popup', () => {
 
   it('should call "onToggle" function with false value as first argument and after the fade block is clicked ' +
       'if "closeOnFadeClick" is equal true', () => {
-    const { container } = render(<Popup header={HEADER} onToggle={onToggle} isOpen closeOnFadeClick>{CHILDREN}</Popup>, {
+    const { container } = render(<Modal header={HEADER} onToggle={onToggle} isOpen closeOnFadeClick>{CHILDREN}</Modal>, {
       container: document.body.appendChild(portalRootElement),
     });
     fireEvent.click(getByDataTest(container, 'popup:fade'));
@@ -50,7 +50,7 @@ describe('Popup', () => {
   });
 
   it('should not call "onToggle" function after the fade block is clicked and if "closeOnFadeClick" is equal false', () => {
-    const { container } = render(<Popup header={HEADER} onToggle={onToggle} isOpen closeOnFadeClick={false}>{CHILDREN}</Popup>, {
+    const { container } = render(<Modal header={HEADER} onToggle={onToggle} isOpen closeOnFadeClick={false}>{CHILDREN}</Modal>, {
       container: document.body.appendChild(portalRootElement),
     });
     fireEvent.click(getByDataTest(container, 'popup:fade'));

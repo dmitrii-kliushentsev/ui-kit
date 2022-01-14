@@ -1,6 +1,6 @@
 export { Badge } from './badge';
 export { Icons } from './icon';
-export { Popup } from './popup';
+export { Modal } from './modal';
 export { Spinner } from './spinner';
 export { Tooltip } from './tooltip';
 export { Tab } from './tab';
