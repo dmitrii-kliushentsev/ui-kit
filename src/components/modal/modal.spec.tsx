@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { render, screen } from '@testing-library/react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { Modal } from './modal';
 import { Button } from '../forms';
 import { queryByDataTest } from '../../../test-utils';
@@ -16,7 +15,9 @@ interface TemplateProps {
 }
 
 const Template: FC<TemplateProps> = ({
-  children, type, onClose, closeOnFadeClick, ...rest
+  type,
+  onClose,
+  closeOnFadeClick,
 }) => (
   <Modal onClose={onClose}>
     <Modal.Content type={type} closeOnFadeClick={closeOnFadeClick}>

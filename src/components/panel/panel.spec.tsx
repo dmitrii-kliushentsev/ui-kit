@@ -1,56 +1,47 @@
-import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import React, { FC } from 'react';
+import { render } from '@testing-library/react';
 import { Panel } from './panel';
-import { getByDataTest } from '../../../test-utils';
+import { queryByDataTest } from '../../../test-utils';
+import { Button } from '../forms';
 
 const onToggle = jest.fn();
-const children = <div>children</div>;
 const portalRootElement = document.createElement('div');
-portalRootElement.setAttribute('id', 'modal');
+portalRootElement.setAttribute('id', 'panel');
 
 beforeEach(() => {
   onToggle.mockRestore();
 });
 
+interface TemplateProps {
+  onClose?: () => void;
+  isDisableFadeClick?: boolean;
+}
+
+const Template: FC<TemplateProps> = ({ onClose, isDisableFadeClick }) => (
+  <Panel onClose={onClose}>
+    <Panel.Content isDisableFadeClick={isDisableFadeClick}>
+      <Panel.Header data-test="panel:header">
+        <h2>Panel header</h2>
+      </Panel.Header>
+      <Panel.Body tw="px-4" data-test="panel:body">
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus, iure magni quia excepturi aliquid quas nostrum?</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas nisi corrupti dolorem incidunt quisquam.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti ullam praesentium laudantium delectus...</p>
+      </Panel.Body>
+      <Panel.Footer data-test="panel:footer">
+        Panel Footer
+      </Panel.Footer>
+    </Panel.Content>
+  </Panel>
+);
+
 describe('Panel', () => {
-  it('should render panel with children when has "isOpen=true" props', () => {
-    render(<Panel onToggle={onToggle} isOpen>{children}</Panel>, {
+  it('should render panel with header, body and footer', () => {
+    const { container } = render(<Template />, {
       container: document.body.appendChild(portalRootElement),
     });
-    expect(screen.getByText('children')).toBeInTheDocument();
-  });
-
-  it('should not render panel with children when has "isOpen=false" props', () => {
-    render(<Panel onToggle={onToggle} isOpen={false}>{children}</Panel>, {
-      container: document.body.appendChild(portalRootElement),
-    });
-    expect(screen.queryByText('children')).toBe(null);
-  });
-
-  it('should call "onToggle" function after the close button is clicked with false value as first argument', () => {
-    const { container } = render(<Panel onToggle={onToggle} isOpen>{children}</Panel>, {
-      container: document.body.appendChild(portalRootElement),
-    });
-    fireEvent.click(getByDataTest(container, 'modal:close-button'));
-    expect(onToggle).toBeCalledTimes(1);
-    expect(onToggle.mock.calls[0][0]).toBe(false);
-  });
-
-  it('should call "onToggle" function with false value as first argument after the fade block is clicked ' +
-      'and if "isDisableFadeClick" is equal false', () => {
-    const { container } = render(<Panel onToggle={onToggle} isOpen isDisableFadeClick={false}>{children}</Panel>, {
-      container: document.body.appendChild(portalRootElement),
-    });
-    fireEvent.click(getByDataTest(container, 'modal:fade'));
-    expect(onToggle).toBeCalledTimes(1);
-    expect(onToggle.mock.calls[0][0]).toBe(false);
-  });
-
-  it('should not call "onToggle" function after the fade block is clicked and if "isDisableFadeClick" is equal true', () => {
-    const { container } = render(<Panel onToggle={onToggle} isOpen isDisableFadeClick>{children}</Panel>, {
-      container: document.body.appendChild(portalRootElement),
-    });
-    fireEvent.click(getByDataTest(container, 'modal:fade'));
-    expect(onToggle).toBeCalledTimes(0);
+    expect(queryByDataTest(container, 'panel:header')).toBeInTheDocument();
+    expect(queryByDataTest(container, 'panel:body')).toBeInTheDocument();
+    expect(queryByDataTest(container, 'panel:footer')).toBeInTheDocument();
   });
 });

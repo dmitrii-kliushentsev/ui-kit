@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import 'twin.macro';
 
-import { Modal, PanelProps } from './modal';
+import { Modal } from './modal';
 import { Button } from '../forms';
 
 export default {
@@ -10,7 +10,7 @@ export default {
   component: Modal,
 } as Meta;
 
-const Template = ({ closeOnFadeClick, type }: PanelProps) => (
+const Template: Story = () => (
   <div tw="justify-center w-[368px] h-[368px]">
     <Modal>
       {({ setIsOpen, isOpen }) => (
@@ -18,7 +18,7 @@ const Template = ({ closeOnFadeClick, type }: PanelProps) => (
           <Button primary size="large" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? 'Close' : 'Open'}
           </Button>
-          <Modal.Content type={type} closeOnFadeClick={closeOnFadeClick}>
+          <Modal.Content>
             <Modal.Header>Header</Modal.Header>
             <Modal.Body>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti ullam praesentium laudantium delectus...</p>
@@ -49,8 +49,8 @@ Default.parameters = {
         '          <Modal.Content type={type} closeOnFadeClick={closeOnFadeClick}>\n' +
         '            <Modal.Header>Header</Modal.Header>\n' +
         '            <Modal.Body>\n' +
-        '              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti ullam praesentium laudantium delectus...</p>\n' +
-        '              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus, iure magni quia excepturi aliquid quas nostrum?</p>\n' +
+        '              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti ullam praesentium laudantium delectus.</p>\n' +
+        '              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus, iure magni quia exce quas nostrum?</p>\n' +
         '              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas nisi corrupti dolorem incidunt quisquam.</p>\n' +
         '            </Modal.Body>\n' +
         '            <Modal.Footer>\n' +
