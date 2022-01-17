@@ -7,17 +7,18 @@ import { Portal } from '../portal';
 
 type State = {isOpen: boolean; setIsOpen: (value: boolean) => void; onClose: () => void};
 type Children = React.ReactChild | React.ReactChild[] | React.FC<State> | React.ReactNode;
-const defaultState: State = { isOpen: false, setIsOpen: () => {}, onClose: () => {} };
+const defaultContextState: State = { isOpen: false, setIsOpen: () => {}, onClose: () => {} };
 
-const PanelContext = createContext<State>(defaultState);
+const PanelContext = createContext<State>(defaultContextState);
 
 interface PanelProps {
   children: Children;
   onClose?: () => void;
+  defaultState?: boolean;
 }
 
-const Panel = ({ children, onClose = () => {} }: PanelProps) => {
-  const [isOpen, setIsOpen] = useState(true);
+const Panel = ({ children, defaultState = true, onClose = () => {} }: PanelProps) => {
+  const [isOpen, setIsOpen] = useState(defaultState);
   return (
     <PanelContext.Provider value={{ isOpen, setIsOpen, onClose }}>
       {typeof children === 'function' ? children({ setIsOpen, isOpen, onClose }) : children}
@@ -50,7 +51,7 @@ const PanelContent: FC<PanelContentProps> = ({
           <div
             tw="cursor-pointer absolute -left-12 flex items-center
             justify-center h-12 w-12 rounded-tl-3xl rounded-bl-3xl bg-blue-default text-monochrome-white"
-            onClick={() => closeHandler()}
+            onClick={closeHandler}
             data-test="panel:close-button"
           >
             <Icons.Close />

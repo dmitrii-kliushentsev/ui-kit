@@ -8,17 +8,18 @@ import { Icons } from '../icon';
 
 type State = {isOpen: boolean; setIsOpen: (value: boolean) => void; onClose: () => void};
 type Children = React.ReactChild | React.ReactChild[] | React.FC<State>;
-const defaultState: State = { isOpen: false, setIsOpen: () => {}, onClose: () => {} };
+const defaultContextState: State = { isOpen: false, setIsOpen: () => {}, onClose: () => {} };
 
-const ModalContext = createContext<State>(defaultState);
+const ModalContext = createContext<State>(defaultContextState);
 
 interface ModalProps {
   children: Children;
   onClose?: () => void;
+  isOpen?: boolean;
 }
 
-export const Modal = ({ children, onClose = () => {} }: ModalProps) => {
-  const [isOpen, setIsOpen] = useState(true);
+export const Modal = ({ children, isOpen: defaultState = true, onClose = () => {} }: ModalProps) => {
+  const [isOpen, setIsOpen] = useState(defaultState);
 
   return (
     <ModalContext.Provider value={{ isOpen, setIsOpen, onClose }}>
