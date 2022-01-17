@@ -45,7 +45,7 @@ const ModalContent: React.FC<PanelProps> = ({
     <Portal rootElementId="modal" displayContent={isOpen}>
       <>
         <Content type={type} {...rest}>{children}</Content>
-        <Fade onClick={() => closeOnFadeClick && closeHandler()} data-test="popup:fade" />
+        <Fade onClick={() => closeOnFadeClick && closeHandler()} data-test="modal:fade" />
       </>
     </Portal>
   );
@@ -80,7 +80,7 @@ const Header: React.FC = ({ children, ...rest }) => {
       {...rest}
     >
       {children}
-      <Icons.Close tw="cursor-pointer" onClick={() => closeHandler()} data-test="popup:close-button" />
+      <Icons.Close tw="cursor-pointer" onClick={() => closeHandler()} data-test="modal:close-button" />
     </div>
   );
 };
