@@ -53,3 +53,4 @@ export { Popover } from './popover';
 export { Skeleton } from './skeleton';
 export { PercentageBar } from './percentage-bar';
 export { SystemAlert } from './system-alert';
+export { ContentAlert } from './content-alert';

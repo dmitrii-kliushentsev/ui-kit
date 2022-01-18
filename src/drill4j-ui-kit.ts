@@ -65,6 +65,7 @@ export {
   PercentageBar,
   CopyButton,
   SystemAlert,
+  ContentAlert,
 } from './components';
 export {
   useClickOutside, useElementSize, useHover, usePreserveCaretPosition,
