@@ -9,13 +9,20 @@ import { getIcon } from '../getIcon';
 interface SystemAlertProps {
   title: string;
   type: AlertType;
+<<<<<<< HEAD
   onClose: () => void;
+=======
+>>>>>>> 04ff84b (refactor: content and system alerts)
   children?: ReactChildren | ReactNode;
   action?: ReactElement;
 }
 
 export const SystemAlert = ({
+<<<<<<< HEAD
   title, type, action, children, onClose,
+=======
+  title, type, action, children,
+>>>>>>> 04ff84b (refactor: content and system alerts)
 }: SystemAlertProps) => (
   <Content type={type} tw="w-[600px] flex gap-x-2 py-1 px-4">
     <div tw="mt-2">
@@ -28,7 +35,11 @@ export const SystemAlert = ({
       <div tw="text-14 leading-20">{children}</div>
     </div>
     {action}
+<<<<<<< HEAD
     <CloseButton tw="flex justify-center items-center w-6 h-6 mt-1" onClick={onClose}>
+=======
+    <CloseButton tw="flex justify-center items-center w-6 h-6 mt-1">
+>>>>>>> 04ff84b (refactor: content and system alerts)
       <Icons.Close width={12} height={12} />
     </CloseButton>
   </Content>
@@ -42,10 +53,17 @@ const Content = styled.div<ContentProps>`
   ${tw`rounded-lg text-monochrome-white overflow-hidden`};
 
   ${({ type }) => [
+<<<<<<< HEAD
     type === 'INFO' && tw`bg-blue-primary`,
     type === 'SUCCESS' && tw`bg-green-success`,
     type === 'WARNING' && tw`bg-orange-warning`,
     type === 'ERROR' && tw`bg-red-medium-tint`,
+=======
+    type === 'info' && tw`bg-blue-primary`,
+    type === 'success' && tw`bg-green-success`,
+    type === 'warning' && tw`bg-orange-warning`,
+    type === 'error' && tw`bg-red-medium-tint`,
+>>>>>>> 04ff84b (refactor: content and system alerts)
   ]}
 `;
 
