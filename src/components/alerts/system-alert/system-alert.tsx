@@ -2,9 +2,9 @@ import React, {
   ReactChildren, ReactElement, ReactNode,
 } from 'react';
 import tw, { styled } from 'twin.macro';
-import { Icons } from '../../drill4j-ui-kit';
-
-type AlertType = 'info' | 'success' | 'warning' | 'error';
+import { Icons } from '../../icon/index';
+import { AlertType } from '../../../types/alert';
+import { getIcon } from '../getIcon';
 
 interface SystemAlertProps {
   title: string;
@@ -50,7 +50,7 @@ const Content = styled.div<ContentProps>`
 
 const Action = styled.div`
   ${tw`self-start mt-1 px-2`}
-  ${tw` text-16 leading-24 text-monochrome-white uppercase font-bold rounded-2xl cursor-pointer
+  ${tw`text-16 leading-24 text-monochrome-white uppercase font-bold rounded-2xl cursor-pointer
   hover:bg-[rgba(256, 256, 256, 0.1)] active:(text-monochrome-dark-tint bg-transparent) disabled:opacity-40`}
 `;
 
@@ -58,15 +58,5 @@ const CloseButton = styled.div`
   ${tw`rounded-full hover:bg-[rgba(256, 256, 256, 0.1)] active:(text-monochrome-dark-tint bg-transparent) 
   disabled:opacity-40  cursor-pointer`}
 `;
-
-function getIcon(type: AlertType) {
-  switch (type) {
-    case 'error': return <Icons.ErrorFilled />;
-    case 'info': return <Icons.InfoFilled />;
-    case 'success': return <Icons.SuccessFilled />;
-    case 'warning': return <Icons.WarningFilled />;
-    default: return null;
-  }
-}
 
 SystemAlert.Action = Action;

@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 import tw, { styled } from 'twin.macro';
-import { Icons } from '../icon/index';
-
-type AlertType = 'info' | 'success' | 'warning' | 'error';
+import { AlertType } from '../../../types/alert';
+import { getIcon } from '../getIcon';
 
 interface ContentAlertProps {
   message: string;
@@ -12,7 +11,9 @@ interface ContentAlertProps {
 export const ContentAlert: FC<ContentAlertProps> = ({ message, type }) => (
   <Body type={type} tw="flex gap-x-3 px-4 py-2">
     <div tw="mt-1">
-      {getIcon(type)}
+      <ColorWrapper type={type}>
+        {getIcon(type)}
+      </ColorWrapper>
     </div>
     <Message>
       {message}
@@ -35,12 +36,11 @@ const Message = styled.div`
   ${tw`text-14 leading-24`}
 `;
 
-function getIcon(type: AlertType) {
-  switch (type) {
-    case 'error': return <div tw="text-red-medium-tint"><Icons.ErrorFilled /></div>;
-    case 'info': return <div tw="text-blue-primary"><Icons.InfoFilled /></div>;
-    case 'success': return <div tw="text-green-success"><Icons.SuccessFilled /></div>;
-    case 'warning': return <div tw="text-orange-warning"><Icons.WarningFilled /></div>;
-    default: return null;
-  }
-}
+const ColorWrapper = styled.div<{type: AlertType}>`
+  ${({ type }) => [
+    type === 'info' && tw`text-blue-primary`,
+    type === 'success' && tw`text-green-success`,
+    type === 'warning' && tw`text-orange-warning`,
+    type === 'error' && tw`text-red-medium-tint`,
+  ]}
+`;
