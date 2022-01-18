@@ -9,7 +9,7 @@ export default {
   component: SystemAlert,
 } as Meta;
 
-const Action: FC = () => <SystemAlert.Action onClick={() => console.log('Run Action')}>Action</SystemAlert.Action>
+const Action: FC = () => <SystemAlert.Action onClick={() => alert('Run Action')}>Action</SystemAlert.Action>;
 const Template:Story = (args) => (<SystemAlert title="Title" type="info" action={<Action />} {...args}>Title</SystemAlert>);
 
 export const Info = Template.bind({});
