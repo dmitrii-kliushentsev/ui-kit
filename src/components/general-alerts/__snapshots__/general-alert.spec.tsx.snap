@@ -15,7 +15,7 @@ exports[`GeneralAlerts should match snapshot with type is ERROR 1`] = `
       type="ERROR"
     >
       <div
-        className="generic-icon__GenericIcon-sc-1g5t9jj-0 itQDKI"
+        className="generic-icon__GenericIcon-sc-1g5t9jj-0 eQSQuM"
       >
         <svg
           fillRule="evenodd"
@@ -55,7 +55,7 @@ exports[`GeneralAlerts should match snapshot with type is INFO 1`] = `
       type="INFO"
     >
       <div
-        className="generic-icon__GenericIcon-sc-1g5t9jj-0 itQDKI"
+        className="generic-icon__GenericIcon-sc-1g5t9jj-0 eQSQuM"
       >
         <svg
           fillRule="evenodd"
@@ -95,7 +95,7 @@ exports[`GeneralAlerts should match snapshot with type is SUCCESS 1`] = `
       type="SUCCESS"
     >
       <div
-        className="generic-icon__GenericIcon-sc-1g5t9jj-0 itQDKI"
+        className="generic-icon__GenericIcon-sc-1g5t9jj-0 eQSQuM"
       >
         <svg
           fillRule="evenodd"
@@ -135,7 +135,7 @@ exports[`GeneralAlerts should match snapshot with type is WARNING 1`] = `
       type="WARNING"
     >
       <div
-        className="generic-icon__GenericIcon-sc-1g5t9jj-0 itQDKI"
+        className="generic-icon__GenericIcon-sc-1g5t9jj-0 eQSQuM"
       >
         <svg
           fillRule="evenodd"

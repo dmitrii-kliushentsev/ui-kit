@@ -20,7 +20,7 @@ const Template = (args: any) =>
       <Table
         {...args}
         isLoading={false}
-        data={Array.from({ length: 60 }, (_, i) => ({
+        data={Array.from({ length: 50 }, (_, i) => ({
           id: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]:AUTO-${i}`,
           type: 'AUTO',
           name: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]-${i}`,

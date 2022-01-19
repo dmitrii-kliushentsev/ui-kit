@@ -2,10 +2,10 @@
 
 exports[`Stub should match snapshot 1`] = `
 <div
-  className="stub__Content-sc-13jc0yd-0 dWrpdP"
+  className="stub__Content-sc-13jc0yd-0 hkA-dlj"
 >
   <div
-    className="generic-icon__GenericIcon-sc-1g5t9jj-0 itQDKI"
+    className="generic-icon__GenericIcon-sc-1g5t9jj-0 eQSQuM"
   >
     <svg
       fillRule="evenodd"
