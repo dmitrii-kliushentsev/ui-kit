@@ -25,10 +25,10 @@ const Body = styled.div<{type: AlertType}>`
   ${tw`rounded-lg overflow-hidden border`};
 
   ${({ type }) => [
-    type === 'info' && tw`border-blue-primary`,
-    type === 'success' && tw`border-green-success`,
-    type === 'warning' && tw`border-orange-warning`,
-    type === 'error' && tw`border-red-medium-tint`,
+    type === 'INFO' && tw`border-blue-primary`,
+    type === 'SUCCESS' && tw`border-green-success`,
+    type === 'WARNING' && tw`border-orange-warning`,
+    type === 'ERROR' && tw`border-red-medium-tint`,
   ]}
 `;
 
@@ -38,9 +38,9 @@ const Message = styled.div`
 
 const ColorWrapper = styled.div<{type: AlertType}>`
   ${({ type }) => [
-    type === 'info' && tw`text-blue-primary`,
-    type === 'success' && tw`text-green-success`,
-    type === 'warning' && tw`text-orange-warning`,
-    type === 'error' && tw`text-red-medium-tint`,
+    type === 'INFO' && tw`text-blue-primary`,
+    type === 'SUCCESS' && tw`text-green-success`,
+    type === 'WARNING' && tw`text-orange-warning`,
+    type === 'ERROR' && tw`text-red-medium-tint`,
   ]}
 `;

@@ -4,10 +4,10 @@ import { AlertType } from '../../types/alert';
 
 export const getIcon = (type: AlertType): JSX.Element | null => {
   switch (type) {
-    case 'error': return <Icons.ErrorFilled />;
-    case 'info': return <Icons.InfoFilled />;
-    case 'success': return <Icons.SuccessFilled />;
-    case 'warning': return <Icons.WarningFilled />;
+    case 'ERROR': return <Icons.ErrorFilled />;
+    case 'INFO': return <Icons.InfoFilled />;
+    case 'SUCCESS': return <Icons.SuccessFilled />;
+    case 'WARNING': return <Icons.WarningFilled />;
     default: return null;
   }
 };
