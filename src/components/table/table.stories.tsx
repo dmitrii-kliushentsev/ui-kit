@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import 'twin.macro';
 
@@ -22,8 +22,8 @@ const Template = (args: any) =>
         isLoading={false}
         data={Array.from({ length: 50 }, (_, i) => ({
           id: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]:AUTO-${i}`,
-          type: 'AUTO',
-          name: `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]-${i}`,
+          type: i % 2 === 0 ? 'AUTO' : 'auto',
+          name: i % 2 === 0 ? `[engine:junit-jupiter]/[class:api.standalone.StandaloneApiTest]/[method:junit5IgnoredTest()]-${i}` : '0.1.0',
           coverage: ++i,
         }))}
         initialRowsCount={22}
@@ -67,6 +67,7 @@ BuildsTable.args = {
       accessor: 'type',
       textAlign: 'left',
       width: '100%',
+      filterable: true,
       Cell: ({ value = '' }: any) => (value ? (
         <Cells.Compound
           cellName={value}

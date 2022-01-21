@@ -30,6 +30,7 @@ import { DefaultTableHeaderColumn } from './default-table-header-column';
 import { DefaultRow, SkeletonRow } from './rows';
 import { addQueryParamsToPath, removeQueryParamsFromPath } from '../../utils';
 import { useQueryParams } from '../../hooks';
+import { alphanumeric } from './sorting/alphanumeric';
 
 type CustomColumn = Column &
 { textAlign?: string; width?: string; notSortable?: boolean; disableEllipsis?: boolean, filterable?: boolean; isCustomCell?: boolean };
@@ -105,7 +106,7 @@ export const Table = withErrorBoundary(({
     state: { pageIndex, pageSize, filters },
   }: any = useTable(
     {
-      columns: useMemo(() => columns, [...columnsDependency]),
+      columns: useMemo(() => columns.map((col) => ({ ...col, sortType: alphanumeric })), [...columnsDependency]),
       data: useMemo(() => (!isLoading && data.length > 0 ? data : Array(initialRowsCount).fill(initialRowsCount)), [isLoading, data]),
       initialState: {
         pageSize: 25, sortBy: defaultSortBy, ...parsedTableState,
