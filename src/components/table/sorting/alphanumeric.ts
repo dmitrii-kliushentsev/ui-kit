@@ -42,7 +42,7 @@ export const alphanumeric = (rowA: Row, rowB: Row, columnId: string, desc: boole
 
     // One is a string, one is a number
     if (isNaN(combo[1])) {
-      return isNaN(an) ? 1 : -1; // in react-table source code isNaN(an) ? -1 : 1, it changed that number be less that string
+      return isNaN(an) ? 1 : -1; // in react-table source code isNaN(an) ? -1 : 1, i changed it so the number is less than the string
     }
 
     // Both are numbers
