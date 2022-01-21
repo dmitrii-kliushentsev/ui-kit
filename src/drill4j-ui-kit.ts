@@ -81,3 +81,4 @@ export const Modules = {
   ReactDOM,
 };
 export * from './utils';
+export { sendAlertEvent, IAlert } from './send-alert-event';
