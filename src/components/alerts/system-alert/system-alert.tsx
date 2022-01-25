@@ -29,7 +29,7 @@ export const SystemAlert = ({
     </div>
     {action}
     <CloseButton tw="flex justify-center items-center w-6 h-6 mt-1" onClick={onClose}>
-      <Icons.Close width={12} height={12} />
+      <Icons.CloseBold />
     </CloseButton>
   </Content>
 );
