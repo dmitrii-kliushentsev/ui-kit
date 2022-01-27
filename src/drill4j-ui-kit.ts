@@ -64,6 +64,8 @@ export {
   Skeleton,
   PercentageBar,
   CopyButton,
+  SystemAlert,
+  ContentAlert,
 } from './components';
 export {
   useClickOutside, useElementSize, useHover, usePreserveCaretPosition,
@@ -79,3 +81,4 @@ export const Modules = {
   ReactDOM,
 };
 export * from './utils';
+export { sendAlertEvent, IAlert } from './send-alert-event';

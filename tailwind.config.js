@@ -105,6 +105,7 @@ module.exports = {
       blue: {
         default: '#007fff',
         shade: '#006cd8',
+        primary: '#2196f3',
         'medium-tint': '#3399ff',
         'light-tint': '#e5f2ff',
         'ultralight-tint': '#e5f2ff',
@@ -124,6 +125,7 @@ module.exports = {
       green: {
         default: '#00b602',
         shade: '#009402',
+        success: '#46a748',
         'medium-tint': '#33c535',
         'light-tint': '#e5f7e5',
       },
@@ -143,6 +145,7 @@ module.exports = {
       orange: {
         default: '#f5a623',
         shade: '#dc931b',
+        warning: '#df7800',
         'medium-tint': '#f7b84f',
         'light-tint': '#fef6e9',
       },

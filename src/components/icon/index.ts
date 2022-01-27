@@ -82,6 +82,11 @@ import { path as openInNewTab } from './path/open-in-new-tab';
 import { path as plus } from './path/plus';
 import { path as noAgentsPlaceholder } from './path/no-agents-placeholder.path';
 import { path as regex } from './path/regex.path';
+import { path as errorFilled } from './path/error-filled.path';
+import { path as infoFilled } from './path/info-filled.path';
+import { path as successFilled } from './path/success-filled.path';
+import { path as warningFilled } from './path/warning-filled.path';
+import { path as closeBold } from './path/close-bold.path';
 
 export const Icons = {
   Arrow: declareIcon(arrowPath),
@@ -183,4 +188,9 @@ export const Icons = {
   Plus: declareIcon(plus),
   NoAgentsPlaceholder: declareIcon(noAgentsPlaceholder, { defaultWidth: 234, defaultHeight: 207, viewBox: '0 0 234 207' }),
   Regex: declareIcon(regex),
+  ErrorFilled: declareIcon(errorFilled, { defaultWidth: 16, defaultHeight: 16 }),
+  InfoFilled: declareIcon(infoFilled, { defaultWidth: 16, defaultHeight: 16 }),
+  SuccessFilled: declareIcon(successFilled, { defaultWidth: 16, defaultHeight: 16 }),
+  WarningFilled: declareIcon(warningFilled, { defaultWidth: 16, defaultHeight: 16 }),
+  CloseBold: declareIcon(closeBold, { defaultWidth: 12, defaultHeight: 12 }),
 };
