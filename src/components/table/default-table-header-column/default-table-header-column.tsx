@@ -23,18 +23,25 @@ export const DefaultTableHeaderColumn = ({ column }: any) => (
     data-test={`table-th-${column.id}`}
   >
     <TableElements.Label key={`table-label-${column.id}`}>
-      {!column.notSortable && (
-        <TableElements.SortArrow
-          active={column.isSorted}
-          {...column.getHeaderProps(column.getSortByToggleProps())}
-        >
-          <Icons.SortingArrow rotate={column.isSortedDesc ? 0 : 180} />
-        </TableElements.SortArrow>
+      {!column.notSortable ? ( // TODO remove this operator and compose header and sort arrow in one component
+        <>
+          <TableElements.SortArrow
+            active={column.isSorted}
+            {...column.getHeaderProps(column.getSortByToggleProps())}
+          >
+            <Icons.SortingArrow rotate={column.isSortedDesc ? 0 : 180} />
+          </TableElements.SortArrow>
+          <TableElements.HeaderText position={column.textAlign}>
+            <div {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render('Header')}</div>
+            {column.filterable ? column.render('Filter') : null}
+          </TableElements.HeaderText>
+        </>
+      ) : (
+        <TableElements.HeaderText position={column.textAlign}>
+          {column.render('Header')}
+          {column.filterable ? column.render('Filter') : null}
+        </TableElements.HeaderText>
       )}
-      <TableElements.HeaderText position={column.textAlign}>
-        {column.render('Header')}
-        {column.filterable ? column.render('Filter') : null}
-      </TableElements.HeaderText>
     </TableElements.Label>
   </TableElements.TH>
 );

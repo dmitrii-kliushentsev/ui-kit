@@ -17,7 +17,7 @@ import React, {
   useEffect, useMemo, useRef,
 } from 'react';
 import {
-  useTable, useExpanded, Column, useSortBy, usePagination, useFilters,
+  useTable, useExpanded, Column, useSortBy, usePagination, useFilters, Row,
 } from 'react-table';
 import { withErrorBoundary } from 'react-error-boundary';
 
