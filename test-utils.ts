@@ -16,6 +16,9 @@ const [
   getAllByDataTest,
   getByDataTest,
   findAllByDataTest,
+
+
+
   findByDataTest,
 ] = buildQueries(queryAllByDataTest, getMultipleError, getMissingError);
 
