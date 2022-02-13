@@ -98,6 +98,7 @@
     "eslint-config-prettier": "^7.0.0",
     "eslint-config-ts-important-stuff": "^1.1.0",
     "eslint-config-ts-react-important-stuff": "^3.0.0",
+    "eslint-formatter-github": "^1.0.11",
     "eslint-import-resolver-typescript": "^2.4.0",
     "eslint-plugin-drill4j": "0.0.2",
     "eslint-plugin-import": "^2.23.4",
