@@ -1,7 +1,8 @@
 name: Publish
 
 on:
-  push:
+  pull_request:
+    types: [opened, reopened]
     branches:
       - master
 
@@ -17,6 +18,3 @@ jobs:
       - run: npm install
       - run: eslint --format github test-utils.ts
       - run: npm run build
-      - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
