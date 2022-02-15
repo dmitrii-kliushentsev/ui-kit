@@ -6,7 +6,7 @@ import 'jest-styled-components';
 describe('Stub', () => {
   it('should render blue border when tab is active', () => {
     render(<Tab active>Tab</Tab>);
-    expect(screen.getByText('Tab')).toHaveStyleRule('background-color', 'rgba(0,127,255,var(--tw-bg-opacity))', {
+    expect(screen.getByText('Tab')).toHaveStyleRule('backround-color', 'rgba(0,127,255,var(--tw-bg-opacity))', {
       modifier: ':after',
     });
   });
