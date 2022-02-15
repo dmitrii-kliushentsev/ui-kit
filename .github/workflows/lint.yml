@@ -1,4 +1,4 @@
-name: Publish
+name: ESLint
 
 on: [pull_request]
 
@@ -10,6 +10,6 @@ jobs:
     - uses: bradennapier/eslint-plus-action@v3.4.2
       env:
         NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-      with: 
+      with:
         issueSummaryType: full
         reportIgnoredFiles: true

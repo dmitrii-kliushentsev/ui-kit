@@ -13,17 +13,9 @@ const getMissingError = (c, dataTestValue) =>
 
 const [
   queryByDataTest,
-
   getAllByDataTest,
   getByDataTest,
-
-
-
-
   findAllByDataTest,
-
-
-
   findByDataTest,
 ] = buildQueries(queryAllByDataTest, getMultipleError, getMissingError);
 
